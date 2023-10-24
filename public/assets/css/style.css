@@ -1,0 +1,75 @@
+
+/* header */
+header{
+    background-color: var(--while-color);
+    position: fixed;
+    height: 140px;
+    width: 100%;
+    padding-left: 120px;
+    padding-right: 120px;
+    padding-top: 6px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+header .header-logo{
+    float: left;
+    width: 200px;
+    height: auto;
+}
+
+
+header .search-product{
+    width: 80%;
+    margin-left: 20px;
+    border-radius: 10px 0 0 10px;
+    padding-left: 20px;
+}
+
+header .search-btn{
+    background-color: var(--primary-color);
+    border-radius: 0 10px 10px 0;
+    font-weight: 800;
+}
+
+nav{
+    margin-left: 120px;
+    margin-right: 120px;
+    padding-right: 40px;
+}
+
+nav ul{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding-top: 140px;
+    margin-bottom: 0;
+}
+
+nav a{
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+nav .nav-categories{
+    background-color: var(--primary-color);
+    padding: 5px 120px 5px 10px;
+    border-radius: 5px;
+}
+
+nav .nav-categories a{
+    color: var(--while-color);
+}
+
+
+/* section */
+section{
+    z-index: 1;
+    padding: var(--header-height);
+    background-color: var(--grey-color);
+    height: 2000px;
+}

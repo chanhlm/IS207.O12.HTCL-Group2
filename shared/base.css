@@ -1,0 +1,38 @@
+/* Reset CSS */
+html, body{
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+/* Global CSS */
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    font-size: 15px;
+}
+
+:root{
+    --while-color: #fff;
+    --black-color: #000;
+    --grey-color: #F5F5F5;
+    --primary-color: #CD020B;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --text-color: #333;
+    --text-muted-color: #6c757d;
+
+    --header-height: 140px;
+}
+
+
+.btn{
+    display: inline-block;
+    font-weight: 400;  
+}
