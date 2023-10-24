@@ -8,11 +8,10 @@ html, body{
 /* Global CSS */
 body{
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.5;
     color: #333;
     background-color: #fff;
-    font-size: 15px;
 }
 
 :root{
@@ -28,11 +27,38 @@ body{
     --text-color: #333;
     --text-muted-color: #6c757d;
 
-    --header-height: 140px;
+    --header-height: 100px;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.align-center{
+    text-align: center;
+}
+
+.align-left{
+    text-align: left;
 }
 
 
 .btn{
     display: inline-block;
     font-weight: 400;  
+    font-size: 14px;
+}
+
+.flexbox-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flexbox-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.pad-b-6{
+    padding-bottom: 6px;
 }

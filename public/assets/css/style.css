@@ -3,7 +3,8 @@
 header{
     background-color: var(--while-color);
     position: fixed;
-    height: 140px;
+    box-sizing: border-box;
+    height: var(--header-height);
     width: 100%;
     padding-left: 120px;
     padding-right: 120px;
@@ -11,6 +12,7 @@ header{
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-size: 14px!important;
 }
 
 header .header-logo{
@@ -18,7 +20,6 @@ header .header-logo{
     width: 200px;
     height: auto;
 }
-
 
 header .search-product{
     width: 80%;
@@ -31,21 +32,20 @@ header .search-btn{
     background-color: var(--primary-color);
     border-radius: 0 10px 10px 0;
     font-weight: 800;
+    color: var(--while-color);
 }
 
+/* nav */
 nav{
-    margin-left: 120px;
-    margin-right: 120px;
-    padding-right: 40px;
+    padding-left: 120px;
+    padding-right: 120px;
+    /* padding-right: 40px; */
 }
 
-nav ul{
+nav ul{ 
     
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     list-style: none;
-    padding-top: 140px;
+    padding-top: var(--header-height);
     margin-bottom: 0;
 }
 
@@ -57,7 +57,8 @@ nav a{
 
 nav .nav-categories{
     background-color: var(--primary-color);
-    padding: 5px 120px 5px 10px;
+    padding: 5px 100px 5px 10px;
+    width: 300px;
     border-radius: 5px;
 }
 
@@ -69,7 +70,61 @@ nav .nav-categories a{
 /* section */
 section{
     z-index: 1;
-    padding: var(--header-height);
     background-color: var(--grey-color);
     height: 2000px;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+section .categories-list{
+    /* display: none; */
+    position: absolute;
+    top: 32px;
+    left: 0px;
+    display: flex;
+    padding-top: 0;
+    padding-left: 0;
+    /* margin-right: 40px; */
+    flex-direction: column;
+    color: var(--text-color);
+    /* background-color: var(--primary-color); */
+    border-radius: 5px;
+    /* z-index: 1; */
+
+}
+
+section .nav-categories-list li{
+    color: var(--text-color);
+    padding: 5px;
+    border-radius: 5px;
+    width: 340px;
+    text-align: left;
+    padding-left: 40px;
+    list-style: none;
+}
+
+section .nav-categories-list a{
+    color: var(--text-color);
+    /* text-align: left; */
+    font-weight: normal;
+    text-decoration: none;
+    padding-left: 20px;
+}
+
+section .banner{
+    width: 50%;
+    height: auto;
+    padding-left: 20px;
+}
+
+/* section */
+
+
+
+/* footer */
+footer{
+    background-color: var(--while-color);
+    padding: 10px;
+    text-align: center;
+    font: var(--text-color);
 }

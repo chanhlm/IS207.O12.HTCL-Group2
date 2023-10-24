@@ -15,31 +15,58 @@
 
 <body>
     <header class="row">
-        <img src="./shared/img/logo.png" class="header-logo col-2" alt="Logo" />
+        <img src="./shared/img/logo.png" class="header-logo col-2" alt="Logo"  />
         <form action="search.php" method="post" class="col-4">
             <div class="input-group">
                 <input type="text" class="search-product" placeholder="Sản phẩm..." />
                 <span class="input-group-text search-btn btn"><i class="ti-search"></i></span>
             </div>
         </form>
-        <div class="search-order-btn btn col-2">Tra cứu đơn hàng</div>
-        <div class="login-btn btn col-2">Đăng kí<br />Đăng nhập</div>
-        <div class="cart-btn btn col-2">
+        <div class="search-order-btn btn col-2 align-left">Tra cứu đơn hàng</div>
+        <div class="login-btn btn col-2 align-center">Đăng kí<br />Đăng nhập</div>
+        <div class="cart-btn btn col-2 align-right">
             Giỏ hàng <i class="ti-shopping-cart"></i>
         </div>
     </header>
+
     <nav>
-        <ul class="header-nav">
-            <li class="nav-categories"><a href="#"><i class="ti-menu"></i> DANH MỤC SẢN PHẨM</a></li>
-            <li><a href="#">HOT DEAL</a></li>
-            <li><a href="#">KHUYẾN MÃI</a></li>
-            <li><a href="#">HOTLINE: 1900xxxx- 1900xxxx</a></li>
+        <ul class="header-nav row">
+            <li class="nav-categories col-3"><a href="#"><i class="ti-menu"></i> DANH MỤC SẢN PHẨM</a> </li>
+            <li class="col align-center"><a href="#">HOT DEAL</a></li>
+            <li class="col align-center"><a href="#">KHUYẾN MÃI</a></li>
+            <li class="col align-right"><a href="#">HOTLINE: 1900xxxx - 1900xxxx</a></li>
         </ul>
     </nav>
 
     <section>
-        
+        <div class="row">
+            <ul class="nav-categories-list col-3">
+                <li><a href="#">Điện lạnh</a></li>
+                <li><a href="#">Điện gia dụng</a></li>
+                <li><a href="#">Điện thoại - Máy tính bảng</a></li>
+                <li><a href="#">Laptop - Thiết bị IT</a></li>
+                <li><a href="#">Máy ảnh - Quay phim</a></li>
+                <li><a href="#">Điện tử - Điện máy khác</a></li>
+                <li><a href="#">Điện tử - Điện máy khác</a></li>
+                <li><a href="#">Điện tử - Điện máy khác</a></li>
+                <li><a href="#">Điện tử - Điện máy khác</a></li>
+                <li><a href="#">Xem thêm</a></li>
+            </ul>
+
+            <img class="banner col" src="./public/assets/img/banner1.png" alt="">
+            <div class="col">
+                <img class="row pad-b-6" src="./public/assets/img/ads2.png" alt="ads1"> 
+                <img class="row" src="./public/assets/img/ads2.png" alt="ads2">
+            </div>
+        </div>
     </section>
+
+
+
+    <footer>
+        <p>Công ty Điện máy ..., Tòa nhà E, Đường Hàng Thuyên, Phường Linh Trung, TP. Thủ Đức, TP Hồ Chí Minh
+        <br>Giấy phép ĐKKD số 0102030405 Sở KHĐT TP. Bình Dương cấp ngày 20/11/2023</p>
+    </footer>
 </body>
 
 </html>
