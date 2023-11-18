@@ -1,8 +1,154 @@
 /* Reset CSS */
 html, body{
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
+*{
+    padding-left: 0;
+}
+
+/* set dafault css */
+body{
+    margin-left: 120px!important;
+    margin-right: 110px!important;
+}
+
+section{
+    padding-bottom: 100px;
+    z-index: 1;
+}
+
+/* header */
+header{
+    background-color: var(--while-color);
+    position: fixed;
+    box-sizing: border-box;
+    height: var(--header-height);
+    width: 100%;
+    padding-right: 120px;
+    padding-top: 6px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px!important;
+    z-index: 999;
+}
+
+header .header-logo{
+    z-index: -1;
+    width: 40%;
+    height: auto;
+}
+
+header .search-product{
+    width: 80%;
+    /* margin-left: 20px; */
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    /* padding-left: 20px; */
+    font-size: var(--font-16);
+    height: 100%;
+    padding: 8px 12px;
+    position: relative;
+}
+
+header .search-btn{
+    background-color: var(--primary-color);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    font-weight: 800;
+    color: var(--while-color);
+    font-size: var(--font-16);  
+    position: absolute;
+}
+
+header .search-bar{
+    height: 40px;
+}
+
+header .search-order-btn:hover,
+header .login-btn:hover,
+header .cart-btn:hover{
+    background-color: var(--primary-color);
+    color: var(--while-color);
+}
+
+/* footer */
+footer{
+    /* background-color: var(--backgound-color); */
+    background-color: var(--while-color);
+    padding-top: 40px;
+}
+
+footer .service{
+    padding: 16px 120px;
+    /* border-bottom: 1px solid var(--grey-color);
+    border-top: 1px solid var(--grey-color); */
+}
+
+footer .service-title{
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+footer .service-content{
+    font-size: 14px;
+    color: var(--text-muted-color);
+    margin-bottom: 0;
+}
+
+
+footer .infor{
+    margin-top: 50px;
+    height: 300px;
+    padding: 10px;
+}
+
+footer .infor .infor-logo-img{
+    width: 100%;
+    height: auto;
+}
+
+
+
+/* đoạn này để thay đổi */
+
+.block-1, .block-2, .block-3, .block-4{
+    height: 100%;
+}
+
+.block-5{
+    height: 122px;
+}
+
+footer .infor .block-5,
+footer .infor .block-2,
+footer .infor .block-3,
+footer .infor .block-4
+{
+    margin: 10px;
+    background-color: #ccc;
+}
+
+
+/* end đoạn */
+
+footer .license{
+    margin-top: 16px;
+    background-color: var(--grey-color);
+    padding: 10px;
+    text-align: center;
+    font: var(--text-color);
+    position: absolute;
+    width: 100%;
+    left: 0;
+}
+
+footer .license p{
+    margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------------------- */
 /* Global CSS */
 body{
     font-family: 'Roboto', sans-serif;
@@ -62,11 +208,15 @@ body{
     flex-direction: column;
 }
 
-.pb-12{
-    padding-bottom: 12px;
+.pb-8{
+    padding-bottom: 8px;
 }
 
 hr{
     margin: 0;
+}
+
+.checked {
+    color: #fafe16;
 }
 
