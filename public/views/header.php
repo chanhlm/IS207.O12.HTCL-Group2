@@ -10,8 +10,8 @@
             </form>
         </div>
         <div class="header-function col-lg-5 col-md-7">
-            <div class="search-order-btn btn align-center text-break">Tra cứu đơn hàng</div>
-            <div class="login-btn btn align-center">Đăng kí<br />Đăng nhập</div>
+            <div class="search-order-btn btn text-center text-break">Tra cứu đơn hàng</div>
+            <div class="login-btn btn text-center"><a href="./authentication">Đăng kí<br />Đăng nhập</a></div>
             <div class="cart-btn btn align-right col">Giỏ hàng <i class="ti-shopping-cart"></i></div>
         </div>
 </header>

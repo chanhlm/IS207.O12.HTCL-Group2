@@ -11,8 +11,8 @@
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/3.0.7/metisMenu.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-  <link rel="stylesheet" href="../../shared/base.css" />
-  <link rel="stylesheet" href="../../shared/fonts/themify-icons/themify-icons.css" />
+  <link rel="stylesheet" href="../assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/fonts/themify-icons/themify-icons.css" />
   <link rel="stylesheet" href="../assets/css/cart.css" />
   <link href="../../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon" />
 
@@ -62,7 +62,7 @@
                         </button>
 
                         <input id="quantity-form" min="0" name="quantity" value="1" type="number"
-                          class="form-control form-control-sm align-center" />
+                          class="form-control form-control-sm text-center" />
 
                         <button class="btn btn-link px-2"
                           onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -98,7 +98,7 @@
                         </button>
 
                         <input id="quantity-form" min="0" name="quantity" value="1" type="number"
-                          class="form-control form-control-sm align-center" />
+                          class="form-control form-control-sm text-center" />
 
                         <button class="btn btn-link px-2"
                           onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -134,7 +134,7 @@
                         </button>
 
                         <input id="quantity-form" min="0" name="quantity" value="1" type="number"
-                          class="form-control form-control-sm align-center" />
+                          class="form-control form-control-sm text-center" />
 
                         <button class="btn btn-link px-2"
                           onclick="this.parentNode.querySelector('input[type=number]').stepUp()">

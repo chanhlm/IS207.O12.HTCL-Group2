@@ -2,6 +2,7 @@
 html, body{
     box-sizing: border-box;
     scroll-behavior: smooth;
+    display: block;
 }
 
 *{
@@ -65,10 +66,19 @@ header .search-bar{
     height: 40px;
 }
 
+header .login-btn a{
+    text-decoration: none;
+    color: var(--text-color);
+}
+
 header .search-order-btn:hover,
 header .login-btn:hover,
 header .cart-btn:hover{
     background-color: var(--primary-color);
+    color: var(--while-color);
+}
+
+header .login-btn:hover a{
     color: var(--while-color);
 }
 
