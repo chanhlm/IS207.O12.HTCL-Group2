@@ -1,4 +1,3 @@
-
 /*
 Template Name: Rukada Free Admin
 Author: codervent
@@ -35,7 +34,7 @@ a {
 	background: #fff;
 	border-right: 0 solid #e4e4e4;
 	z-index: 11;
-	box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12)!important;
+	box-shadow: 0 .3rem .8rem rgba(0, 0, 0, .12) !important;
 	transition: all .2s ease-out
 }
 
@@ -47,7 +46,8 @@ a {
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	padding: 0 15px;
+	padding-left: 30px;
+	padding-right:15px;
 	z-index: 5;
 	background: #fff;
 	background-clip: padding-box;
@@ -81,14 +81,14 @@ a {
 	background: #fff;
 	border-bottom: 1px solid rgb(228 228 228 / 0%);
 	z-index: 10;
-	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important
+	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important
 }
 
 .topbar .navbar {
 	width: 100%;
 	height: 60px;
 	padding-left: 1.5rem;
-    padding-right: 1.5rem;
+	padding-right: 1.5rem;
 }
 
 .page-wrapper {
@@ -254,37 +254,47 @@ a {
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .sidebar-header .logo-text {
 		display: none
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper {
 		width: 70px
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .sidebar-header {
 		width: 70px
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .sidebar-header .toggle-icon {
 		display: none
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .sidebar-header {
 		justify-content: center
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .sidebar-header {
 		width: 70px
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu a {
 		justify-content: center
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu .menu-title {
 		display: none
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu li ul {
 		display: none
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu li.menu-label {
 		display: none
 	}
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu .has-arrow:after {
 		display: none
 	}
-	
+
 }
 
 
@@ -338,7 +348,7 @@ a {
 }
 
 .border-light-2 {
-    border-color: rgb(255 255 255 / 12%)!important;
+	border-color: rgb(255 255 255 / 12%) !important;
 }
 
 .review-list {
@@ -347,40 +357,40 @@ a {
 }
 
 .recent-product-img {
-    width: 40px;
-    height: 40px;
-    background-color: #fbfbfb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    border: 1px solid #e6e6e6;
+	width: 40px;
+	height: 40px;
+	background-color: #fbfbfb;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	border: 1px solid #e6e6e6;
 }
 
 .recent-product-img img {
-    width: 40px;
-    height: 40px;
-    padding: 6px;
+	width: 40px;
+	height: 40px;
+	padding: 6px;
 }
 
 .order-actions a {
-    font-size: 18px;
-    width: 34px;
-    height: 34px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f1f1f1;
-    border: 1px solid #eeecec;
-    text-align: center;
-    border-radius: 20%;
-    color: #2b2a2a;
+	font-size: 18px;
+	width: 34px;
+	height: 34px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f1f1f1;
+	border: 1px solid #eeecec;
+	text-align: center;
+	border-radius: 20%;
+	color: #2b2a2a;
 }
 
 /* Utilities */
 
 .right-15 {
-	right: 15px!important
+	right: 15px !important
 }
 
 .font-13 {
@@ -439,81 +449,80 @@ a {
 .cursor-pointer {
 
 	cursor: pointer
-
 }
 
 
 .bg-light-primary {
-	background-color: rgb(13 110 253 / .11)!important
+	background-color: rgb(13 110 253 / .11) !important
 }
 
 .bg-light-success {
-	background-color: rgb(23 160 14 / .11)!important
+	background-color: rgb(23 160 14 / .11) !important
 }
 
 .bg-light-danger {
-	background-color: rgb(244 17 39 / .11)!important
+	background-color: rgb(244 17 39 / .11) !important
 }
 
 .bg-light-warning {
-	background-color: rgb(255 193 7 / .11)!important
+	background-color: rgb(255 193 7 / .11) !important
 }
 
 .bg-light-info {
-	background-color: rgb(13 202 240 / 18%)!important
+	background-color: rgb(13 202 240 / 18%) !important
 }
 
 .bg-light-transparent {
-	background-color: rgb(0 0 0 / 15%)!important
+	background-color: rgb(0 0 0 / 15%) !important
 }
 
 .bg-white-transparent {
-	background-color: rgba(255, 255, 255, 0.25)!important
+	background-color: rgba(255, 255, 255, 0.25) !important
 }
 
 .bg-facebook {
-	background-color: #3b5998!important
+	background-color: #3b5998 !important
 }
 
 .bg-twitter {
-	background-color: #55acee!important
+	background-color: #55acee !important
 }
 
 .bg-google {
-	background-color: #e52d27!important
+	background-color: #e52d27 !important
 }
 
 
 
 /* Text Color */
 
-.text-facebook{
-	color: #3b5998!important
- }
- 
- .text-twitter{
-	 color: #55acee!important
-  }
- 
-  .text-youtube{
-	 color: #e52d27!important
-  }
+.text-facebook {
+	color: #3b5998 !important
+}
+
+.text-twitter {
+	color: #55acee !important
+}
+
+.text-youtube {
+	color: #e52d27 !important
+}
 
 .text-sky-light {
-    color: #b4d2ff;
+	color: #b4d2ff;
 }
 
 
 /* Social Buttons */
 
-.btn-social{
+.btn-social {
 	width: 42px;
 	height: 42px;
 	font-size: 20px;
 	line-height: 42px;
 	display: inline-block;
 	border: 1px solid transparent;
-	background:#ddd;
+	background: #ddd;
 	color: #fff;
 	text-align: center;
 	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
@@ -521,46 +530,46 @@ a {
 	-o-transition: all .3s;
 	-moz-transition: all .3s;
 	-webkit-transition: all .3s;
-	-ms-transition: all .3s; 
+	-ms-transition: all .3s;
 	transition: all .3s;
-	
+
 }
 
-.btn-social:hover{
+.btn-social:hover {
 	color: #fff;
 }
 
 
 .btn-facebook:hover,
 .btn-facebook:focus,
-.btn-facebook { 
+.btn-facebook {
 	box-shadow: 0 2px 2px 0 rgba(59, 89, 152, 0.14), 0 3px 1px -2px rgba(59, 89, 152, 0.2), 0 1px 5px 0 rgba(59, 89, 152, 0.12);
 	background-color: #3b5998;
 	border-color: #3b5998;
 	color: #fff;
- }
+}
 
 .btn-twitter:hover,
 .btn-twitter:focus,
-.btn-twitter { 
-	box-shadow: 0 2px 2px 0 rgba(85, 172, 238, 0.14), 0 3px 1px -2px rgba(85, 172, 238, 0.2), 0 1px 5px 0       rgba(85, 172, 238, 0.12);
+.btn-twitter {
+	box-shadow: 0 2px 2px 0 rgba(85, 172, 238, 0.14), 0 3px 1px -2px rgba(85, 172, 238, 0.2), 0 1px 5px 0 rgba(85, 172, 238, 0.12);
 	background-color: #55acee;
-	border-color: #55acee; 
+	border-color: #55acee;
 	color: #fff;
-	}
+}
 
 
 
 .btn-google-plus:hover,
-.btn-google-plus:focus,	
-.btn-google-plus { 
+.btn-google-plus:focus,
+.btn-google-plus {
 	box-shadow: 0 2px 2px 0 rgba(221, 75, 57, 0.14), 0 3px 1px -2px rgba(221, 75, 57, 0.2), 0 1px 5px 0 rgba(221, 75, 57, 0.12);
-	background-color: #dd4b39; 
-	border-color: #dd4b39; 
+	background-color: #dd4b39;
+	border-color: #dd4b39;
 	color: #fff;
-	}
+}
 
-	
+
 
 .section-authentication-signin {
 	height: 100vh
@@ -596,7 +605,7 @@ a {
 	text-align: center;
 	border-radius: 50%;
 	margin: 5px;
-	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important
+	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important
 }
 
 .bg-login {
@@ -641,25 +650,25 @@ a {
 }
 
 .chart-js-container1 {
-    position: relative;
-    height: 300px;
+	position: relative;
+	height: 300px;
 }
 
 .chart-js-container3 {
-    position: relative;
-    height: 380px;
+	position: relative;
+	height: 380px;
 }
 
 .options {
-    font-size: 24px;
-    color: #4c5258;
-    cursor: pointer;
+	font-size: 24px;
+	color: #4c5258;
+	cursor: pointer;
 }
 
 
 input::placeholder {
-	color: #000!important;
-	opacity: .3!important
+	color: #000 !important;
+	opacity: .3 !important
 }
 
 .card-group {
@@ -679,7 +688,7 @@ input::placeholder {
 .search-control-2 {
 	color: #fff;
 	background-color: #212529;
-	border: 1px solid rgb(255 255 255 / 12%)!important;
+	border: 1px solid rgb(255 255 255 / 12%) !important;
 	padding-right: 2.5rem
 }
 
@@ -691,8 +700,8 @@ input::placeholder {
 }
 
 input.search-control-2::placeholder {
-	color: #fff!important;
-	opacity: .5!important
+	color: #fff !important;
+	opacity: .5 !important
 }
 
 .search-show {
@@ -700,9 +709,14 @@ input.search-control-2::placeholder {
 	right: 15px
 }
 
+.search-show:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+
 .search-close {
 	font-size: 24px;
-    right: 10px;
+	right: 10px;
 	cursor: pointer;
 	display: none
 }
@@ -885,7 +899,7 @@ input.search-control-2::placeholder {
 	position: relative;
 	height: 360px;
 	overflow-y: scroll;
-	
+
 }
 
 .header-notifications-list {
@@ -945,6 +959,7 @@ input.search-control-2::placeholder {
 		transform: translate3d(0, 6px, 0);
 		opacity: 0
 	}
+
 	to {
 		-webkit-transform: translate3d(0, 0, 0);
 		transform: translate3d(0, 0, 0);
@@ -958,6 +973,7 @@ input.search-control-2::placeholder {
 		transform: translate3d(0, 6px, 0);
 		opacity: 0
 	}
+
 	to {
 		-webkit-transform: translate3d(0, 0, 0);
 		transform: translate3d(0, 0, 0);
@@ -978,27 +994,34 @@ input.search-control-2::placeholder {
 
 @media screen and (max-width:1024px) {
 	.topbar {
-		left: 0!important
+		left: 0 !important
 	}
+
 	.mobile-search-icon {
 		display: block
 	}
+
 	.mobile-toggle-menu {
 		display: block
 	}
+
 	.sidebar-wrapper {
 		left: -300px;
 		box-shadow: none
 	}
+
 	.page-wrapper {
 		margin-left: 0
 	}
+
 	.page-footer {
 		left: 0
 	}
+
 	.search-bar {
 		display: none
 	}
+
 	.full-search-bar {
 		display: flex;
 		align-items: center;
@@ -1010,33 +1033,41 @@ input.search-control-2::placeholder {
 		height: 60px;
 		padding: 0 1.4rem
 	}
+
 	.search-bar-box {
 		width: 100%
 	}
+
 	.search-close {
 		display: block
 	}
+
 	.search-show {
 		left: 15px;
 		right: auto
 	}
+
 	.search-control {
 		background-color: #fff;
 		border: 1px solid #f2efef00;
 		padding-left: 2.5rem
 	}
+
 	.search-control-2 {
 		color: #fff;
 		background-color: #212529;
-		border: 1px solid rgb(255 255 255 / 12%)!important;
+		border: 1px solid rgb(255 255 255 / 12%) !important;
 		padding-left: 2.5rem
 	}
+
 	.wrapper.toggled .sidebar-wrapper {
 		left: 0
 	}
+
 	.wrapper.toggled .page-wrapper {
 		margin-left: 0
 	}
+
 	.wrapper.toggled .overlay {
 		position: fixed;
 		top: 0;
@@ -1050,6 +1081,7 @@ input.search-control-2::placeholder {
 		cursor: move;
 		transition: all .2s ease-out
 	}
+
 	.error-404 {
 		height: auto;
 		padding: 6rem 1rem
@@ -1063,10 +1095,12 @@ input.search-control-2::placeholder {
 		margin-top: 6rem;
 		margin-bottom: 2rem
 	}
+
 	.authentication-reset-password {
 		height: auto;
 		padding: 2rem 1rem
 	}
+
 	.authentication-lock-screen {
 		height: auto;
 		padding: 2rem 1rem
@@ -1077,6 +1111,7 @@ input.search-control-2::placeholder {
 	.user-box .user-info {
 		display: none
 	}
+
 	.authentication-forgot {
 		height: auto;
 		padding: 2.5rem 1rem
@@ -1087,11 +1122,12 @@ input.search-control-2::placeholder {
 	.topbar .navbar .dropdown-menu::after {
 		display: none
 	}
+
 	.topbar .navbar .dropdown {
-		position: static!important
+		position: static !important
 	}
+
 	.topbar .navbar .dropdown-menu {
-		width: 100%!important
+		width: 100% !important
 	}
 }
-
