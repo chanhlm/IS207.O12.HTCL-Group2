@@ -24,7 +24,7 @@
 </head>
 
 <body>  
-    <?php include "./header.php"?>
+    <?php include "../components/header.php"?>
 
     <nav>
         <ul class="header-nav row">
@@ -113,7 +113,7 @@
         <hr>
     </footer>
 
-    <?php include "./footer.php" ?>
+    <?php include "../components/footer.php" ?>
     
 </body>
 

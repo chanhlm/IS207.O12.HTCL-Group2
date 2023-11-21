@@ -17,15 +17,15 @@
   <link href="../../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon" />
 
   <?php
-        $pageTitle = "Giỏ hàng";
-    ?>
+  $pageTitle = "Giỏ hàng";
+  ?>
   <title>
     <?php echo $pageTitle ?>
   </title>
 </head>
 
 <body>
-  <?php include "./header.php"?>
+  <?php include "../components/header.php" ?>
 
   <!-- cart has product -->
   <!-- <section>
@@ -204,14 +204,13 @@
     </div>
   </section> -->
 
-  
+
   <!-- null cart -->
   <?php include "./empty-cart.php" ?>
 
-  <?php include "./footer.php"?>
+  <?php include "../components/footer.php" ?>
 </body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </html>

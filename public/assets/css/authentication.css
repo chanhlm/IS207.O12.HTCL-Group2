@@ -13,7 +13,6 @@ form{
 }
 
 .p-conf, .n-conf{
-    width: calc(100% - 22px);
     border: 2px solid green;
     border-radius: 4px;
     padding: 8px 10px;

@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <?php include "./header.php"?>
+    <?php include "../components/header.php"?>
 
     <section style="clear: both;">
         <ul class="breadcrumb">
@@ -284,7 +284,7 @@
         <div class="details--box"></div>
     </section>
 
-    <?php include "./footer.php" ?>
+    <?php include "../components/footer.php" ?>
 
 </body>
 

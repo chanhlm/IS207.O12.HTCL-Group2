@@ -66,6 +66,7 @@ header .search-bar{
     height: 40px;
 }
 
+header .search-order-btn a,
 header .login-btn a{
     text-decoration: none;
     color: var(--text-color);
@@ -78,6 +79,7 @@ header .cart-btn:hover{
     color: var(--while-color);
 }
 
+header .search-order-btn:hover a,
 header .login-btn:hover a{
     color: var(--while-color);
 }

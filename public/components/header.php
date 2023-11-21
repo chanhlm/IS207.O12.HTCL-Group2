@@ -1,6 +1,6 @@
 <header class="row header">
         <div class="web-logo col-lg-3 col-md-2">
-            <img src="../assets/img/logo.png" class="header-logo" alt="Logo" />
+            <a href="../views/index.php"><img src="../assets/img/logo.png" class="header-logo" alt="Logo" /></a>
         </div>
         <div class="search-bar col-lg-4 col-md-3">
             <form action="search.php" method="post">
@@ -10,8 +10,8 @@
             </form>
         </div>
         <div class="header-function col-lg-5 col-md-7">
-            <div class="search-order-btn btn text-center text-break">Tra cứu đơn hàng</div>
-            <div class="login-btn btn text-center"><a href="./authentication">Đăng kí<br />Đăng nhập</a></div>
+            <div class="search-order-btn btn text-center text-break"><a href="../views/authentication.php">Tra cứu đơn hàng</a></div>
+            <div class="login-btn btn text-center"><a href="../views/authentication.php">Đăng kí<br />Đăng nhập</a></div>
             <div class="cart-btn btn align-right col">Giỏ hàng <i class="ti-shopping-cart"></i></div>
         </div>
 </header>
