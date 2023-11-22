@@ -992,6 +992,10 @@ input.search-control-2::placeholder {
 	cursor: pointer
 }
 
+.width-20 {
+	width: 20px
+}
+
 @media screen and (max-width:1024px) {
 	.topbar {
 		left: 0 !important

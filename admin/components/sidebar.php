@@ -21,9 +21,10 @@
             <ul>
                 <li> <a href="./categories.php"><i class="bx bx-list-ul"></i>Danh sách</a></li>
                 <li> <a href="./categories-insert.php"><i class="bx bx-add-to-queue"></i>Thêm danh mục</a></li>
+                <li> <a href="./categories-update.php"><i class="bx bx-add-to-queue"></i>Sửa danh mục</a></li>
             </ul>
         </li>
-        <li>
+        <li>    
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-package"></i></div>
                 <div class="menu-title">Sản phẩm</div>
