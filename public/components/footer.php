@@ -1,5 +1,5 @@
-<footer>
-        <div class="infor row justify-content-between">
+<footer id="info">
+        <div class="info row justify-content-between">
             <div class="block-1 col-lg-3">
                 <img class="infor-logo-img" src="../assets/img/logo.png" alt="">
                 <h6 class="infor-name text-center"><b>Công ty Điện máy ElectroTech</b></h6>

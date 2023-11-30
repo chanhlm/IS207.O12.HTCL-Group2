@@ -1,7 +1,3 @@
-<?php
-    session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,85 +14,104 @@
     <link href="../../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon">
 
     <?php
-        $pageTitle = "ecoTech - Trang chủ";
+
+    $pageTitle = "ecoTech - Trang chủ";
     ?>
     <title><?php echo $pageTitle ?></title>
 </head>
 
-<body>  
-    <?php include "../components/header.php"?>
-
+<body>
+    <?php include "../components/header.php"; ?>
+    <?php include "../../libraries/connectDB.php"; ?>
     <nav>
         <ul class="header-nav row">
             <li class="nav-categories col-lg-3 col-md-3"><a href="#"><i class="ti-menu"></i> DANH MỤC SẢN PHẨM</a> </li>
-            <li class="col-lg-2 col-md-2 align-right"><a href="#">HOT DEAL</a></li>
-            <li class="col-lg-3 col-md-2 align-right"><a href="#">KHUYẾN MÃI</a></li>
-            <li class="col-lg-4 col-md-5 align-right"><a href="#">HOTLINE: 1900xxxx - 1900xxxx</a></li>
+            <li class="col-lg-2 col-md-2 align-right"><a href="#" onclick="scrollToTarget('hot-deal')">HOT DEAL</a></li>
+            <li class="col-lg-3 col-md-2 align-right"><a href="#" onclick="scrollToTarget('sale')">KHUYẾN MÃI</a></li>
+            <li class="col-lg-4 col-md-5 align-right"><a href="#" onclick="scrollToTarget('info')">HOTLINE: 1900xxxx - 1900xxxx</a></li>
         </ul>
     </nav>
 
     <section>
-    <div class="row">
-        <ul class="nav-categories-list col-lg-2 col-md-2">
-            <li><a href="#">Điện lạnh</a></li>
-            <li><a href="#">Điện gia dụng</a></li>
-            <li><a href="#">Điện thoại - Máy tính bảng</a></li>
-            <li><a href="#">Laptop - Thiết bị IT</a></li>
-            <li><a href="#">Máy ảnh - Quay phim</a></li>
-            <li><a href="#">Điện tử - Điện máy khác</a></li>
-            <li><a href="#">Điện tử - Điện máy khác</a></li>
-            <li><a href="#">Điện tử - Điện máy khác</a></li>
-            <li><a href="#">Điện tử - Điện máy khác</a></li>
-            <li><a href="#">Xem thêm</a></li>
-        </ul>
+        <div class="row">
+            <ul class="pt-3 nav-categories-list col-lg-2 col-md-2">
 
-        <div class="banner col-lg-6 col-md-6">
-            <img class="" src="../assets/img/banner1.png" alt="">
-        </div>
-        <div class="ads col-lg col-md">
-            <img class=" pb-8" src="../assets/img/ads1.png" alt="ads1">
-            <img class=" " src="../assets/img/ads2.png" alt="ads2">
-        </div>
-    </div>
+                <?php
+                include "../../libraries/connectDB.php";
 
-    <div class="hot-deal">
-        <h3>HOT DEAL</h3>
-        <div class="hot-deal-content">
-            <i class="ti-angle-double-left slide-btn pre-btn btn"></i>
-            <div class="product col"></div>
-            <div class="product col"></div>
-            <div class="product col"></div>
-            <div class="product col"></div>
-            <div class="product col"></div>
-            <i class="ti-angle-double-right slide-btn next-btn btn"></i>
+                $sql = "SELECT * FROM categories";
+                $result = mysqli_query($connect, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $count = 0;
+                    while ($row1 = mysqli_fetch_assoc($result)) {
+                        // Lấy một bản ghi tiếp theo
+                        $row2 = mysqli_fetch_assoc($result);
+
+                        // Hiển thị 10 mục đầu tiên dưới dạng <li> với hai tên danh mục khác nhau
+                        if ( $row2 !== null) {
+                            echo "<li><a href='#'>" . $row1["CATEGORY_NAME"] . "</a>, <a href='#'>" . $row2["CATEGORY_NAME"] . "</a></li>";
+                        } else {
+                            // Nếu vượt quá 10 mục hoặc không còn đủ bản ghi, đưa dữ liệu vào mục xem thêm
+                            echo "<div id='xemthem' style='display: none;'><li><a href='#'>" . $row1["CATEGORY_NAME"] . "</a><a href='#'>" . $row2["CATEGORY_NAME"] . "</a></li></div>";
+                        }
+
+                        $count += 2; // Tăng count lên 2 vì mỗi lần lặp hiển thị 2 tên danh mục
+                    }
+
+                    // if ($count > 10) {
+                    //     echo "<button onclick='showMore()'>Xem thêm</button>";
+                    // }
+                }
+                ?>
+            </ul>
+
+            <div class="banner col-lg-6 col-md-6">
+                <img class="" src="../assets/img/banner1.png" alt="">
+            </div>
+            <div class="ads col-lg col-md">
+                <img class=" pb-8" src="../assets/img/ads1.png" alt="ads1">
+                <img class=" " src="../assets/img/ads2.png" alt="ads2">
+            </div>
         </div>
 
-        <div class="see-all-btn">
-            <a href="#">XEM TẤT CẢ</a>
-        </div>
-    </div>
+        <div class="hot-deal" id="hot-deal">
+            <h3>HOT DEAL</h3>
+            <div class="hot-deal-content">
+                <i class="ti-angle-double-left slide-btn pre-btn btn"></i>
+                <div class="product col"></div>
+                <div class="product col"></div>
+                <div class="product col"></div>
+                <div class="product col"></div>
+                <div class="product col"></div>
+                <i class="ti-angle-double-right slide-btn next-btn btn"></i>
+            </div>
 
-    <div class="top-product">
-        <h3>SẢN PHẨM BÁN CHẠY</h3>
-        <div class="top-product-content">
-            <i class="ti-angle-double-left slide-btn pre-btn btn"></i>
-            <div class="product"></div>
-            <div class="product"></div>
-            <div class="product"></div>
-            <div class="product"></div>
-            <div class="product"></div>
-            <i class="ti-angle-double-right slide-btn next-btn btn"></i>
+            <div class="see-all-btn">
+                <a href="#">XEM TẤT CẢ</a>
+            </div>
         </div>
-        <div class="see-all-btn">
-            <a href="#">XEM TẤT CẢ</a>
+
+        <div class="sale" id="sale">
+            <h3 >KHYẾN MÃI</h3>
+            <div class="sale-content">
+                <i class="ti-angle-double-left slide-btn pre-btn btn"></i>
+                <div class="product"></div>
+                <div class="product"></div>
+                <div class="product"></div>
+                <div class="product"></div>
+                <div class="product"></div>
+                <i class="ti-angle-double-right slide-btn next-btn btn"></i>
+            </div>
+            <div class="see-all-btn">
+                <a href="#">XEM TẤT CẢ</a>
+            </div>
         </div>
-    </div>
     </section>
 
 
     <footer>
-    <hr>
-        <div class="service row">  
+        <hr>
+        <div class="service row">
             <div class="col-lg-3">
                 <h6 class="service-title">VẬN CHUYỂN</h6>
                 <p class="service-content">MIỄN PHÍ 20KM</p>
@@ -114,7 +129,18 @@
     </footer>
 
     <?php include "../components/footer.php" ?>
-    
+
+    <script>
+        // Hàm để cuộc nhảy đến mục tiêu và chạy xuống chân mục tiêu
+        function scrollToTarget(targetId) {
+            var targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    </script>
+
 </body>
 
 </html>

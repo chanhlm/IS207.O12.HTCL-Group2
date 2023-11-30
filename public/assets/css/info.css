@@ -1,0 +1,16 @@
+section{
+    background-color: #F8F9FA
+}
+
+section{
+  /* margin-top: 20px; */
+  padding-top: 100px;
+  /* background-color: var(--backgound-color); */
+}
+
+.container{
+  padding-left: 100px;
+  width: 75%;
+}
+
+  

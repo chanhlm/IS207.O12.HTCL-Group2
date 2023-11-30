@@ -110,13 +110,13 @@ footer .service-content{
 }
 
 
-footer .infor{
+footer .info{
     /* margin-top: 50px; */
     height: 300px;
     padding: 10px;
 }
 
-footer .infor .infor-logo-img{
+footer .info .infor-logo-img{
     width: 100%;
     height: auto;
 }
@@ -133,10 +133,10 @@ footer .infor .infor-logo-img{
     height: 122px;
 }
 
-footer .infor .block-5,
-footer .infor .block-2,
-footer .infor .block-3,
-footer .infor .block-4
+footer .info .block-5,
+footer .info .block-2,
+footer .info .block-3,
+footer .info .block-4
 {
     margin: 10px;
     background-color: #ccc;
