@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="./public/assets/css/style.css" />
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/3.0.7/metisMenu.min.css">
-    <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/fonts/themify-icons/themify-icons.css" />
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link href="../../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon">
-
-    <?php
-
-    $pageTitle = "ecoTech - Trang chủ";
-    ?>
-    <title><?php echo $pageTitle ?></title>
-</head>
-
-<body>
-    <?php include "../components/header.php"; ?>
-    <?php include "../../libraries/connectDB.php"; ?>
-    <nav>
+<nav>
         <ul class="header-nav row">
             <li class="nav-categories col-lg-3 col-md-3"><a href="#"><i class="ti-menu"></i> DANH MỤC SẢN PHẨM</a> </li>
             <li class="col-lg-2 col-md-2 align-right"><a href="#" onclick="scrollToTarget('hot-deal')">HOT DEAL</a></li>
@@ -37,7 +14,6 @@
             <ul class="pt-3 nav-categories-list col-lg-2 col-md-2">
 
                 <?php
-                include "../../libraries/connectDB.php";
 
                 $sql = "SELECT * FROM categories";
                 $result = mysqli_query($connect, $sql);
@@ -66,11 +42,11 @@
             </ul>
 
             <div class="banner col-lg-6 col-md-6">
-                <img class="" src="../assets/img/banner1.png" alt="">
+                <img class="" src="./public/assets/img/banner1.png" alt="">
             </div>
             <div class="ads col-lg col-md">
-                <img class=" pb-8" src="../assets/img/ads1.png" alt="ads1">
-                <img class=" " src="../assets/img/ads2.png" alt="ads2">
+                <img class=" pb-8" src="./public./assets/img/ads1.png" alt="ads1">
+                <img class=" " src="./public/assets/img/ads2.png" alt="ads2">
             </div>
         </div>
 
@@ -127,20 +103,3 @@
         </div>
         <hr>
     </footer>
-
-    <?php include "../components/footer.php" ?>
-
-    <script>
-        // Hàm để cuộc nhảy đến mục tiêu và chạy xuống chân mục tiêu
-        function scrollToTarget(targetId) {
-            var targetElement = document.getElementById(targetId);
-
-            if (targetElement) {
-                targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-    </script>
-
-</body>
-
-</html>

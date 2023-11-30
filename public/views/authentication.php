@@ -1,75 +1,36 @@
-<?php
-session_start();
-ob_start();
+<link rel="stylesheet" href="./public/assets/css/authentication.css" />
 
-include_once "../../libraries/connectDB.php";
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/3.0.7/metisMenu.min.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-
-    <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/fonts/themify-icons/themify-icons.css" />
-    <link rel="stylesheet" href="../assets/css/authentication.css" />
-    <link href="../../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon" />
-
-    <?php
-    $pageTitle = "Đăng nhập - Tra cứu đơn hàng";
-    ?>
-    <title>
-        <?php echo $pageTitle ?>
-    </title>
-
-</head>
-
-<body>
-    <?php include "../components/header.php" ?>
-
-    <section>
-        <div class="row">
-            <div class="col-6 d-flex align-items-center justify-content-center flex-column">
-                <img src="../assets/img/login.png" alt="">
-            </div>
-            <div class="col-6 d-flex align-items-center justify-content-center flex-column ">
-                <div class="border border-light-subtle rounded-3 form">
-                    <form action="" method="post">
-                        <div id="sender" style="display: block;">
-                            <h4 class="w-100 text-center">Tra cứu thông tin đơn hàng</h4>
-                            <input class="w-100 p-2 px-3 mb-3 rounded-pill border border-danger-subtle" type="text" id="phone" placeholder="+(84) Nhập số điện thoại" required autofocus>
-                            <div class="w-100 mb-3" id="recaptcha-container"></div>
-                            <input class="btn btn-outline-success w-100" type="button" id="send" value="TIẾP TỤC" onClick="phoneAuth()">
-                        </div>
-                    </form>
-
-                    <div id="verifier" style="display: none;">
-                        <input type="text" id="verificationcode" class="p-2 mb-3 rounded-pill border border-danger-subtle" placeholder="Nhập mã OTP" required autofocus>
-                        <input type="button" id="verify" class="btn btn-outline-success" value="Xác nhận" onClick="codeverify()">
-                        <div class="p-conf w-100">Mã OTP hợp lệ!</div>
-                        <div class="n-conf">Mã OTP không hợp lệ!</div>
+<section>
+    <div class="row">
+        <div class="col-6 d-flex align-items-center justify-content-center flex-column">
+            <img src="./public/assets/img/login.png" alt="">
+        </div>
+        <div class="col-6 d-flex align-items-center justify-content-center flex-column ">
+            <div class="border border-light-subtle rounded-3 form">
+                <form action="" method="post">
+                    <div id="sender" style="display: block;">
+                        <h4 class="w-100 text-center">Tra cứu thông tin đơn hàng</h4>
+                        <input class="w-100 p-2 px-3 mb-3 rounded-pill border border-danger-subtle" type="text" id="phone" placeholder="+(84) Nhập số điện thoại" required autofocus>
+                        <div class="w-100 mb-3" id="recaptcha-container"></div>
+                        <input class="btn btn-outline-success w-100" type="button" id="send" value="TIẾP TỤC" onClick="phoneAuth()">
                     </div>
+                </form>
+
+                <div id="verifier" style="display: none;">
+                    <input type="text" id="verificationcode" class="p-2 mb-3 rounded-pill border border-danger-subtle" placeholder="Nhập mã OTP" required autofocus>
+                    <input type="button" id="verify" class="btn btn-outline-success" value="Xác nhận" onClick="codeverify()">
+                    <div class="p-conf w-100">Mã OTP hợp lệ!</div>
+                    <div class="n-conf">Mã OTP không hợp lệ!</div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <?php include "../components/footer.php" ?>
-</body>
+    </div>
+</section>
 
 <!-- Add firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.12.1/firebase-auth-compat.js"></script>
-<script src="../js/firebase-config.js"></script>
+<script src="./public/js/firebase-config.js"></script>
 
 
 <!-- Include jQuery library if not already included -->
@@ -133,20 +94,21 @@ include_once "../../libraries/connectDB.php";
     function redirectToPage(role) {
         switch (role) {
             case '1':
-                window.location.href = '../../admin/views/dashboard.php';
+                window.location.href = './admin/views/dashboard.php';
                 break;
             case '2':
-                window.location.href = '../views/index.php';
+                window.location.href = './index.php';
                 break;
             default:
-                window.location.href = '../views/index.php';
+                window.location.href = './index.php';
+
         }
     }
 
     function saveUserData() {
         $.ajax({
             type: 'POST',
-            url: '../backend/auth.php',
+            url: './public/backend/auth.php',
             data: {
                 phone: phone
             },
@@ -170,7 +132,3 @@ include_once "../../libraries/connectDB.php";
         });
     }
 </script>
-
-
-
-</html>
