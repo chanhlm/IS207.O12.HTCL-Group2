@@ -12,7 +12,7 @@
         <div class="header-function col-lg-5 col-md-7">
             <div class="search-order-btn btn text-center text-break"><a href="../views/authentication.php">Tra cứu đơn hàng</a></div>
             <div class="login-btn btn text-center"><a href="../views/authentication.php">Đăng kí<br />Đăng nhập</a></div>
-            <div class="cart-btn btn align-right col">Giỏ hàng <i class="ti-shopping-cart"></i></div>
+            <div class="cart-btn btn align-right col"><a href="../views/cart.php">Giỏ hàng<i class="ti-shopping-cart"></i></a></div>
         </div>
 </header>
 

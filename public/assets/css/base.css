@@ -67,7 +67,8 @@ header .search-bar{
 }
 
 header .search-order-btn a,
-header .login-btn a{
+header .login-btn a,
+header .cart-btn a{
     text-decoration: none;
     color: var(--text-color);
 }
@@ -80,7 +81,8 @@ header .cart-btn:hover{
 }
 
 header .search-order-btn:hover a,
-header .login-btn:hover a{
+header .login-btn:hover a,
+header .cart-btn:hover a{
     color: var(--while-color);
 }
 
