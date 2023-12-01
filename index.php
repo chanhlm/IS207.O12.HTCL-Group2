@@ -35,19 +35,19 @@
         }
         if ($tam=='authentication') {
             include('./public/views/authentication.php');}
-        // elseif($tam=='category'){
-        //     include('include/danhmuc.php');
-        // }elseif($tam=='chitietsp'){
-        //     include('include/chitietsp.php');
-        // }elseif($tam=='giohang') {
-        //     include('include/giohang.php');
-        // }elseif ($tam=='timkiem') {
-        //     include('include/timkiem.php');
-        // }elseif ($tam=='tintuc') {
-        //     include('include/tintuc.php');
-        // }elseif ($tam=='chitiettin') {
-        //     include('include/chitiettin.php');
-        // }elseif ($tam=='xemdonhang') {
+        elseif($tam=='category'){
+            include('include/category.php');}
+        // elseif($tam=='chitietsp'){
+        //     include('include/chitietsp.php');}
+        // elseif($tam=='giohang') {
+        //     include('include/giohang.php');}
+        elseif ($tam=='timkiem') {
+            include('include/timkiem.php');}
+        // elseif ($tam=='tintuc') {
+        //     include('include/tintuc.php');}
+        //elseif ($tam=='chitiettin') {
+        //     include('include/chitiettin.php');}
+        // elseif ($tam=='xemdonhang') {
         //     include('include/xemdonhang.php');}
         else{
             include('./public/views/home.php'); 

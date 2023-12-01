@@ -94,7 +94,7 @@
     function redirectToPage(role) {
         switch (role) {
             case '1':
-                window.location.href = './admin/views/dashboard.php';
+                window.location.href = './admin/views/index.php';
                 break;
             case '2':
                 window.location.href = './index.php';
