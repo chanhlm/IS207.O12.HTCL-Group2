@@ -100,6 +100,9 @@
 	<script src="./assets/js/index.js"></script>
 	<!--app JS-->
 	<script src="./assets/js/app.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+
 </body>
 
 </html>

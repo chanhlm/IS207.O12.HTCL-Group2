@@ -1,27 +1,39 @@
 <?php
-// Kết nối đến cơ sở dữ liệu
 include "../../libraries/connectDB.php";
 
-// Kiểm tra nếu có yêu cầu xóa danh mục
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['category_ids']) && is_array($_GET['category_ids'])) {
-    $categoryIds = $_GET['category_ids'];
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['category_ids'])) {
+    $categoryIds = explode(",", $_GET['category_ids']);
 
-    // Chuyển đổi giá trị từ mảng sang chuỗi để sử dụng trong câu truy vấn SQL
-    $categoryIdsString = implode(',', $categoryIds);
+    // Sanitize the category IDs to prevent SQL injection
+    $escapedCategoryIds = array_map(function ($categoryId) use ($connect) {
+        return "'" . mysqli_real_escape_string($connect, $categoryId) . "'";
+    }, $categoryIds);
 
-    // Thực hiện truy vấn xóa
-    $sql = "DELETE FROM CATEGORIES WHERE CATEGORY_ID IN ($categoryIdsString)";
-    $result = mysqli_query($connect, $sql);
+    // Convert the sanitized category IDs to a comma-separated string
+    $categoryIdsString = implode(',', $escapedCategoryIds);
 
-    if ($result) {
-        echo 'Xóa thành công'; // Trả về thông báo cho JavaScript
+    // Check if there are associated products before performing the delete operation
+    $checkProductsSql = "SELECT COUNT(*) FROM PRODUCTS WHERE CATEGORY_ID IN ($categoryIdsString)";
+    $productCountResult = mysqli_query($connect, $checkProductsSql);
+    $productCount = mysqli_fetch_row($productCountResult)[0];
+
+    if ($productCount > 0) {
+        echo 'Không thể xóa danh mục có sản phẩm.';
     } else {
-        echo 'Lỗi xóa: ' . mysqli_error($connect); // Trả về thông báo lỗi cho JavaScript
+        // Perform the delete operation if no associated products
+        $deleteSql = "DELETE FROM CATEGORIES WHERE CATEGORY_ID IN ($categoryIdsString)";
+        $deleteResult = mysqli_query($connect, $deleteSql);
+
+        // Check if the deletion was successful
+        if ($deleteResult) {
+            echo 'Xóa thành công';
+        } else {
+            echo 'Lỗi xóa: ' . mysqli_error($connect);
+        }
     }
 } else {
-    echo 'Yêu cầu không hợp lệ'; // Trả về thông báo cho JavaScript
+    echo 'Yêu cầu không hợp lệ';
 }
 
-// Đóng kết nối cơ sở dữ liệu
 mysqli_close($connect);
 ?>
