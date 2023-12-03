@@ -120,86 +120,92 @@ CREATE TABLE PRODUCTS(
     PRODUCT_ID VARCHAR(10) NOT NULL,
     PRODUCT_NAME VARCHAR(50) NOT NULL ,
     PRODUCT_DESCRIPTION VARCHAR(50) NOT NULL ,
-    PRODUCT_IMAGE VARCHAR(50) NOT NULL,
+    PRODUCT_IMAGE VARCHAR(200) NOT NULL,
     CATEGORY_ID VARCHAR(10) NOT NULL,
     BRAND_ID VARCHAR(10) NOT NULL,
+    PRODUCT_SALEPRICE INT NOT NULL,
     -- tính bằng tháng
     warranty_period int NOT NULL,
     PRODUCT_STATUS VARCHAR(50) NOT NULL,
+    IMAGE_SRC VARCHAR(500),
     PRIMARY KEY (PRODUCT_ID),
     FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORIES(CATEGORY_ID),
     FOREIGN KEY (BRAND_ID) REFERENCES BRANDS(BRAND_ID)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- TV1	Smart Tivi Samsung 4K Crystal UHD 65 inch UA65AU8100	Smart Tivi Samsung 4K Crystal UHD 65 inch UA65AU8100	https://cdn.tgdd.vn/Products/Images/1942/235794/led-4k-samsung-ua65au8100-2.jpg	TV	12	null
--- TV2	Smart Tivi QLED 4K 50 inch Samsung QA50Q65A	Smart Tivi QLED 4K 50 inch Samsung QA50Q65A	https://cdn.tgdd.vn/Products/Images/1942/235641/qled-4k-samsung-qa50q65a-2.jpg	TV	12	null
--- TV3	Smart Tivi Samsung 4K 43 inch UA43AU7002	Smart Tivi Samsung 4K 43 inch UA43AU7002	https://cdn.tgdd.vn/Products/Images/1942/279935/untitled-11.jpeg	TV	12	null
--- TV4	Smart Tivi Samsung 32 inch UA32T4300	Smart Tivi Samsung 32 inch UA32T4300	https://cdn.tgdd.vn/Products/Images/1942/219400/samsung-ua32t4300-2-1-org.jpg	TV	12	null
--- TV5	Smart Tivi Samsung 4K 55 inch UA55CU8000	Smart Tivi Samsung 4K 55 inch UA55CU8000	https://cdn.tgdd.vn/Products/Images/1942/303231/smart-tivi-samsung-4k-55-inch-ua55cu8000-1.jpg	TV	12	null
--- TV6	Smart Tivi QLED 4K 75 inch Samsung QA75Q80C	Smart Tivi QLED 4K 75 inch Samsung QA75Q80C	https://cdn.tgdd.vn/Products/Images/1942/303214/smart-tivi-qled-4k-75-inch-samsung-qa75q80c-01.jpg	TV	12	null
--- TV7	Smart Tivi Samsung 4K Crystal UHD 85 inch UA85BU8000	Smart Tivi Samsung 4K Crystal UHD 85 inch UA85BU8000	https://cdn.tgdd.vn/Products/Images/1942/273377/gu65bu8079uxzg_002_r-perspective_black.jpg	TV	12	null
--- TV8	Smart Tivi Neo QLED 4K 65 inch Samsung QA65QN90C	Smart Tivi Neo QLED 4K 65 inch Samsung QA65QN90C	https://cdn.tgdd.vn/Products/Images/1942/303172/smart-tivi-neo-qled-4k-65-inch-samsung-qa65qn90c-1.jpg	TV	12	null
--- TV9	Smart Tivi QLED 4K 85 inch Samsung QA85Q80B	Smart Tivi QLED 4K 85 inch Samsung QA85Q80B	https://cdn.tgdd.vn/Products/Images/1942/273410/smart-tivi-qled-4k-85-inch-samsung-qa85q80b-2.jpg	TV	12	null
--- TV10	Smart Tivi Neo QLED 4K 98 inch Samsung QA98QN90A	Smart Tivi Neo QLED 4K 98 inch Samsung QA98QN90A	https://cdn.tgdd.vn/Products/Images/1942/250263/3-org-org.jpg	TV	12	null
--- TV11	Smart Tivi OLED Samsung 4K 77 inch QA77S90CA	Smart Tivi OLED Samsung 4K 77 inch QA77S90CA	https://cdn.tgdd.vn/Products/Images/1942/304397/smart-tivi-oled-samsung-4k-77-inch-qa77s90ca-1.jpg	TV	12	null
--- TV12	Smart Tivi Neo QLED 8K 85 inch Samsung QA85QN900C	Smart Tivi Neo QLED 8K 85 inch Samsung QA85QN900C	https://cdn.tgdd.vn/Products/Images/1942/303159/smart-tivi-neo-qled-8k-85-inch-samsung-qa85qn900c-1.jpg	TV	12	null
--- TV13	Smart Tivi QLED 4K 98 inch Samsung QA98Q80C	Smart Tivi QLED 4K 98 inch Samsung QA98Q80C	https://cdn.tgdd.vn/Products/Images/1942/305837/smart-tivi-qled-4k-98-inch-samsung-qa98q80c-1.jpg	TV	12	null
--- TV14	Smart Tivi Samsung 4K Crystal UHD 50 inch UA50AU7200	Smart Tivi Samsung 4K Crystal UHD 50 inch UA50AU7200	https://cdn.tgdd.vn/Products/Images/1942/235800/led-4k-samsung-ua50au7200-1.jpg	TV	12	null
--- TV15	Google Tivi Sony 4K 55 inch KD-55X80K	Google Tivi Sony 4K 55 inch KD-55X80K	https://cdn.tgdd.vn/Products/Images/1942/274761/android-sony-4k-55-inch-kd-55x80k-1.jpg	TV	12	null
--- TV16	Google Tivi Sony 4K 43 inch KD-43X75K	Google Tivi Sony 4K 43 inch KD-43X75K	https://cdn.tgdd.vn/Products/Images/1942/275517/google-sony-4k-43-inch-kd-43x75k-1.jpg	TV	12	null
+
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS, IMAGE_SCR) 
+    VALUES ('TV1','Smart Tivi Samsung 4K Crystal UHD 65 inch UA65AU8100','Smart Tivi Samsung 4K Crystal UHD 65 inch UA65AU8100','https://cdn.tgdd.vn/Products/Images/1942/235794/led-4k-samsung-ua65au8100-2.jpg','TV','SS', 1800000 , 12, 'active', 
+    'https://cdn.tgdd.vn/Products/Images/1942/235794/Slider/led-4k-samsung-ua65au8100-280721-0455350.png ,https://cdn.tgdd.vn/Products/Images/1942/235794/Slider/led-4k-samsung-ua65au8100-280721-0456170.png ,https://cdn.tgdd.vn/Products/Images/1942/235794/Slider/vi-vn-led-4k-samsung-ua65au8100-011.jpg ,https://cdn.tgdd.vn/Products/Images/1942/235794/Slider/thumb2-1020x570.jpeg');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV2','Smart Tivi QLED 4K 50 inch Samsung QA50Q65A','Smart Tivi QLED 4K 50 inch Samsung QA50Q65A','https://cdn.tgdd.vn/Products/Images/1942/235641/qled-4k-samsung-qa50q65a-2.jpg','TV','SS', 2000000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV3','Smart Tivi Samsung 4K 43 inch UA43AU7002','Smart Tivi Samsung 4K 43 inch UA43AU7002','https://cdn.tgdd.vn/Products/Images/1942/279935/untitled-11.jpeg','TV','SS', 12000000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV4','Smart Tivi Samsung 32 inch UA32T4300','Smart Tivi Samsung 32 inch UA32T4300','https://cdn.tgdd.vn/Products/Images/1942/219400/samsung-ua32t4300-2-1-org.jpg','TV','SS', 1400000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV5','Smart Tivi Samsung 4K 55 inch UA55CU8000','Smart Tivi Samsung 4K 55 inch UA55CU8000','https://cdn.tgdd.vn/Products/Images/1942/303231/smart-tivi-samsung-4k-55-inch-ua55cu8000-1.jpg','TV','SS', 18500000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV6','Smart Tivi QLED 4K 75 inch Samsung QA75Q80C','Smart Tivi QLED 4K 75 inch Samsung QA75Q80C','https://cdn.tgdd.vn/Products/Images/1942/303214/smart-tivi-qled-4k-75-inch-samsung-qa75q80c-01.jpg','TV','SS', 12000000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV7','Smart Tivi Samsung 4K Crystal UHD 85 inch UA85BU8000','Smart Tivi Samsung 4K Crystal UHD 85 inch UA85BU8000','https://cdn.tgdd.vn/Products/Images/1942/273377/gu65bu8079uxzg_002_r-perspective_black.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV8','Smart Tivi Neo QLED 4K 65 inch Samsung QA65QN90C','Smart Tivi Neo QLED 4K 65 inch Samsung QA65QN90C','https://cdn.tgdd.vn/Products/Images/1942/303172/smart-tivi-neo-qled-4k-65-inch-samsung-qa65qn90c-1.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV9','Smart Tivi QLED 4K 85 inch Samsung QA85Q80B','Smart Tivi QLED 4K 85 inch Samsung QA85Q80B','https://cdn.tgdd.vn/Products/Images/1942/273410/smart-tivi-qled-4k-85-inch-samsung-qa85q80b-2.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV10','Smart Tivi Neo QLED 4K 98 inch Samsung QA98QN90A','Smart Tivi Neo QLED 4K 98 inch Samsung QA98QN90A','https://cdn.tgdd.vn/Products/Images/1942/250263/3-org-org.jpg','TV','SS', 1200000 , 12, 'active');  
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV11','Smart Tivi OLED Samsung 4K 77 inch QA77S90CA','Smart Tivi OLED Samsung 4K 77 inch QA77S90CA','https://cdn.tgdd.vn/Products/Images/1942/304397/smart-tivi-oled-samsung-4k-77-inch-qa77s90ca-1.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV12','Smart Tivi Neo QLED 8K 85 inch Samsung QA85QN900C','Smart Tivi Neo QLED 8K 85 inch Samsung QA85QN900C','https://cdn.tgdd.vn/Products/Images/1942/303159/smart-tivi-neo-qled-8k-85-inch-samsung-qa85qn900c-1.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV13','Smart Tivi QLED 4K 98 inch Samsung QA98Q80C','Smart Tivi QLED 4K 98 inch Samsung QA98Q80C','https://cdn.tgdd.vn/Products/Images/1942/305837/smart-tivi-qled-4k-98-inch-samsung-qa98q80c-1.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV14','Smart Tivi Samsung 4K Crystal UHD 50 inch UA50AU7200','Smart Tivi Samsung 4K Crystal UHD 50 inch UA50AU7200','https://cdn.tgdd.vn/Products/Images/1942/235800/led-4k-samsung-ua50au7200-1.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV15','Google Tivi Sony 4K 55 inch KD-55X80K','Google Tivi Sony 4K 55 inch KD-55X80K','https://cdn.tgdd.vn/Products/Images/1942/274761/android-sony-4k-55-inch-kd-55x80k-1.jpg','TV','SS', 1200000 , 12, 'active');
+INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE ,warranty_period, PRODUCT_STATUS) 
+    VALUES ('TV16','Google Tivi Sony 4K 43 inch KD-43X75K','Google Tivi Sony 4K 43 inch KD-43X75K','https://cdn.tgdd.vn/Products/Images/1942/275517/google-sony-4k-43-inch-kd-43x75k-1.jpg','TV','SS', 1200000 , 12, 'active');
 
 
+    
 
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS) 
-    VALUES ('TV1','Smart Tivi Samsung 4K Crystal UHD 65 inch UA65AU8100','Smart Tivi Samsung 4K Crystal UHD 65 inch UA65AU8100','https://cdn.tgdd.vn/Products/Images/1942/235794/led-4k-samsung-ua65au8100-2.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV2','Smart Tivi QLED 4K 50 inch Samsung QA50Q65A','Smart Tivi QLED 4K 50 inch Samsung QA50Q65A','https://cdn.tgdd.vn/Products/Images/1942/235641/qled-4k-samsung-qa50q65a-2.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV3','Smart Tivi Samsung 4K 43 inch UA43AU7002','Smart Tivi Samsung 4K 43 inch UA43AU7002','https://cdn.tgdd.vn/Products/Images/1942/279935/untitled-11.jpeg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV4','Smart Tivi Samsung 32 inch UA32T4300','Smart Tivi Samsung 32 inch UA32T4300','https://cdn.tgdd.vn/Products/Images/1942/219400/samsung-ua32t4300-2-1-org.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV5','Smart Tivi Samsung 4K 55 inch UA55CU8000','Smart Tivi Samsung 4K 55 inch UA55CU8000','https://cdn.tgdd.vn/Products/Images/1942/303231/smart-tivi-samsung-4k-55-inch-ua55cu8000-1.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV6','Smart Tivi QLED 4K 75 inch Samsung QA75Q80C','Smart Tivi QLED 4K 75 inch Samsung QA75Q80C','https://cdn.tgdd.vn/Products/Images/1942/303214/smart-tivi-qled-4k-75-inch-samsung-qa75q80c-01.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV7','Smart Tivi Samsung 4K Crystal UHD 85 inch UA85BU8000','Smart Tivi Samsung 4K Crystal UHD 85 inch UA85BU8000','https://cdn.tgdd.vn/Products/Images/1942/273377/gu65bu8079uxzg_002_r-perspective_black.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV8','Smart Tivi Neo QLED 4K 65 inch Samsung QA65QN90C','Smart Tivi Neo QLED 4K 65 inch Samsung QA65QN90C','https://cdn.tgdd.vn/Products/Images/1942/303172/smart-tivi-neo-qled-4k-65-inch-samsung-qa65qn90c-1.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV9','Smart Tivi QLED 4K 85 inch Samsung QA85Q80B','Smart Tivi QLED 4K 85 inch Samsung QA85Q80B','https://cdn.tgdd.vn/Products/Images/1942/273410/smart-tivi-qled-4k-85-inch-samsung-qa85q80b-2.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV10','Smart Tivi Neo QLED 4K 98 inch Samsung QA98QN90A','Smart Tivi Neo QLED 4K 98 inch Samsung QA98QN90A','https://cdn.tgdd.vn/Products/Images/1942/250263/3-org-org.jpg','TV','SS', 12, 'active');  
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV11','Smart Tivi OLED Samsung 4K 77 inch QA77S90CA','Smart Tivi OLED Samsung 4K 77 inch QA77S90CA','https://cdn.tgdd.vn/Products/Images/1942/304397/smart-tivi-oled-samsung-4k-77-inch-qa77s90ca-1.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV12','Smart Tivi Neo QLED 8K 85 inch Samsung QA85QN900C','Smart Tivi Neo QLED 8K 85 inch Samsung QA85QN900C','https://cdn.tgdd.vn/Products/Images/1942/303159/smart-tivi-neo-qled-8k-85-inch-samsung-qa85qn900c-1.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV13','Smart Tivi QLED 4K 98 inch Samsung QA98Q80C','Smart Tivi QLED 4K 98 inch Samsung QA98Q80C','https://cdn.tgdd.vn/Products/Images/1942/305837/smart-tivi-qled-4k-98-inch-samsung-qa98q80c-1.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV14','Smart Tivi Samsung 4K Crystal UHD 50 inch UA50AU7200','Smart Tivi Samsung 4K Crystal UHD 50 inch UA50AU7200','https://cdn.tgdd.vn/Products/Images/1942/235800/led-4k-samsung-ua50au7200-1.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV15','Google Tivi Sony 4K 55 inch KD-55X80K','Google Tivi Sony 4K 55 inch KD-55X80K','https://cdn.tgdd.vn/Products/Images/1942/274761/android-sony-4k-55-inch-kd-55x80k-1.jpg','TV','SS', 12, 'active');
-INSERT INTO PRODUCTS (PRODUCT_ID,PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_IMAGE, CATEGORY_ID, BRAND_ID, warranty_period, PRODUCT_STATUS)
-    VALUES ('TV16','Google Tivi Sony 4K 43 inch KD-43X75K','Google Tivi Sony 4K 43 inch KD-43X75K','https://cdn.tgdd.vn/Products/Images/1942/275517/google-sony-4k-43-inch-kd-43x75k-1.jpg','TV','SS', 12, 'active');
-
+CREATE TABLE CODE_DISCOUNT(
+    CODE_ID VARCHAR(10) NOT NULL,
+    CODE_NAME VARCHAR(50) NOT NULL ,
+    CODE_PERCENT INT NOT NULL,
+    CODE_DESCRIPTION VARCHAR(50) NOT NULL ,
+    PRIMARY KEY (CODE_ID)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO CODE_DISCOUNT (CODE_ID,CODE_NAME, CODE_PERCENT, CODE_DESCRIPTION) 
+    VALUES ('CODE1','Khai trương trang web', 15 , 'Mừng ngày khai trương trang web 2/12/2023');
 
 CREATE TABLE PROMOTION(
     PROMOTION_ID VARCHAR(10) NOT NULL,
-    PROMOTION_NAME VARCHAR(50) NOT NULL ,
     PROMOTION_CODE VARCHAR(50) NOT NULL,
     PROMOTION_STARTDATE DATE NOT NULL,
     PROMOTION_ENDDATE DATE NOT NULL,
-    PROMOTION_PERCENT INT NOT NULL,
-    PRIMARY KEY (PROMOTION_ID)
+    PRODUCT_ID VARCHAR(10),
+    PRIMARY KEY (PROMOTION_ID),
+    FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCTS(PRODUCT_ID),
+    FOREIGN KEY (PROMOTION_CODE) REFERENCES CODE_DISCOUNT(CODE_ID)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
+INSERT INTO PROMOTION (PROMOTION_ID,PROMOTION_CODE, PROMOTION_STARTDATE, PROMOTION_ENDDATE, PRODUCT_ID) 
+    VALUES ('PROMO1','CODE1', '2023-12-01', '2023-12-31', 'TV1');
+INSERT INTO PROMOTION (PROMOTION_ID,PROMOTION_CODE, PROMOTION_STARTDATE, PROMOTION_ENDDATE, PRODUCT_ID) 
+    VALUES ('PROMO2','CODE1', '2023-12-01', '2023-12-31', 'TV2');
+INSERT INTO PROMOTION (PROMOTION_ID,PROMOTION_CODE, PROMOTION_STARTDATE, PROMOTION_ENDDATE, PRODUCT_ID)
+    VALUES ('PROMO3','CODE1', '2023-12-01', '2023-12-31', 'TV3');
+INSERT INTO PROMOTION (PROMOTION_ID,PROMOTION_CODE, PROMOTION_STARTDATE, PROMOTION_ENDDATE, PRODUCT_ID)
+    VALUES ('PROMO4','CODE1', '2023-12-01', '2023-12-31', 'TV4');
+INSERT INTO PROMOTION (PROMOTION_ID,PROMOTION_CODE, PROMOTION_STARTDATE, PROMOTION_ENDDATE, PRODUCT_ID)
+    VALUES ('PROMO5','CODE1', '2023-12-01', '2023-12-31', 'TV5');
 
 CREATE TABLE WAREHOUSE(
     STOCK_ID VARCHAR(10) NOT NULL,
     PRODUCT_ID VARCHAR(10) NOT NULL,
     PRODUCT_QUANTITY INT NOT NULL,
-    PRODUCT_SALEPRICE INT NOT NULL,
     PRODUCT_IMPORTPRICE INT NOT NULL,
     PRODUCT_STATUS VARCHAR(50) NOT NULL,
     MFG DATE NOT NULL,
@@ -242,9 +248,12 @@ CREATE TABLE FEEDBACK(
     FEEDBACK_CONTENT VARCHAR(50) NOT NULL ,
     FEEDBACK_DATE DATE NOT NULL,
     FEEDBACK_STATUS VARCHAR(50) NOT NULL,
+    PRODUCT_ID VARCHAR(10) NOT NULL,
+    NUMBER_STAR INT NOT NULL,
     USER_ID VARCHAR(10) NOT NULL,
     PRIMARY KEY (FEEDBACK_ID),
-    FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID)
+    FOREIGN KEY (USER_ID) REFERENCES USERS(USER_ID),
+    FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCTS(PRODUCT_ID)
 )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE SITE_TRAFFIC(
@@ -292,6 +301,49 @@ BEGIN
 END;
 //
 
+-- Trigger to update the number of products in the CATEGORIES table after INSERT
+CREATE TRIGGER after_product_insert
+AFTER INSERT ON PRODUCTS
+FOR EACH ROW
+BEGIN
+    UPDATE CATEGORIES
+    SET NUMBER_PRODUCT = NUMBER_PRODUCT + 1
+    WHERE CATEGORY_ID = NEW.CATEGORY_ID;
+END;
+//
+
+-- Trigger to update the number of products in the CATEGORIES table after DELETE
+CREATE TRIGGER after_product_delete
+AFTER DELETE ON PRODUCTS
+FOR EACH ROW
+BEGIN
+    UPDATE CATEGORIES
+    SET NUMBER_PRODUCT = NUMBER_PRODUCT - 1
+    WHERE CATEGORY_ID = OLD.CATEGORY_ID;
+END;
+//
+-- Trigger to update the number of products in the BRANDS table after INSERT
+CREATE TRIGGER after_product_insert_brand
+AFTER INSERT ON PRODUCTS
+FOR EACH ROW
+BEGIN
+    UPDATE BRANDS
+    SET NUMBER_PRODUCT = NUMBER_PRODUCT + 1
+    WHERE BRAND_ID = NEW.BRAND_ID;
+END;
+//
+
+-- Trigger to update the number of products in the BRANDS table after DELETE
+CREATE TRIGGER after_product_delete_brand
+AFTER DELETE ON PRODUCTS
+FOR EACH ROW
+BEGIN
+    UPDATE BRANDS
+    SET NUMBER_PRODUCT = NUMBER_PRODUCT - 1
+    WHERE BRAND_ID = OLD.BRAND_ID;
+END;
+//
 DELIMITER ;
+
 
 

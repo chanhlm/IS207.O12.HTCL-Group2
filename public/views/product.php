@@ -1,47 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="./public/assets/css/product.css" />
+<link rel="stylesheet" href="./public/assets/css/magnify.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/3.0.7/metisMenu.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/base.css" />
-    <link rel="stylesheet" href="../assets/fonts/themify-icons/themify-icons.css" />
-    <link rel="stylesheet" href="../assets/css/product.css" />
-    <link href="../../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon">
+<?php
+if (isset($_GET['product'])) {
+    $id = trim($_GET['product']);
 
-    <?php
-        $pageTitle = "Smart Tivi QLED 4K 43 inch Samsung QA43Q65A";
-    ?>
-    <title><?php echo $pageTitle ?></title>
-</head>
+    // Câu truy vấn lấy thông tin sản phẩm
+    $sqlProduct = "SELECT
+        P.PRODUCT_NAME,
+        P.PRODUCT_DESCRIPTION,
+        P.PRODUCT_IMAGE,
+        P.IMAGE_SRC,
+        P.PRODUCT_SALEPRICE,
+        P.warranty_period,
+        P.PRODUCT_STATUS,
+        P.category_id,
+        B.BRAND_NAME,
+        C.CATEGORY_NAME
+    FROM PRODUCTS P JOIN BRANDS B ON P.BRAND_ID = B.BRAND_ID JOIN CATEGORIES C ON P.CATEGORY_ID = C.CATEGORY_ID
+    WHERE trim(P.PRODUCT_ID) = ?;";
 
-<body>
-    <?php include "../components/header.php"?>
+    $stmtProduct = mysqli_prepare($connect, $sqlProduct);
+    $resultProduct;
 
-    <section style="clear: both;">
-        <ul class="breadcrumb">
-            <li>
-                <a href="#"><i class="fas fa-house"></i>Trang chủ</a>
-            </li>
-            <li>
-                <span> > </span>
-                <a href="#">Tivi</a>
-            </li>
-            <li>
-                <span> > </span>
-                <a href="#">Sam Sung</a>
-            </li>
-            <li>
-                <span> > </span>
-                <a href="#"> Smart Tivi QLED 4K 43 inch Samsung QA43Q65A </a>
-            </li>
-        </ul>
-        <h1>SMART TVI QLED 4K 55 INCH SAMSUNG QA55Q65A</h1>
+    if ($stmtProduct) {
+        mysqli_stmt_bind_param($stmtProduct, "s", $id);
+        mysqli_stmt_execute($stmtProduct);
+        $resultProduct = mysqli_stmt_get_result($stmtProduct);
+
+        if ($resultProduct) {
+            $rowProduct = mysqli_fetch_assoc($resultProduct);
+
+            if ($rowProduct) {
+                $name = $rowProduct['PRODUCT_NAME'];
+                $description = $rowProduct['PRODUCT_DESCRIPTION'];
+                $image = $rowProduct['PRODUCT_IMAGE'];
+                $warranty = $rowProduct['warranty_period'];
+                $brand = $rowProduct['BRAND_NAME'];
+                $category_id = $rowProduct['category_id'];
+                $category = $rowProduct['CATEGORY_NAME'];
+
+                $salePrice = $rowProduct['PRODUCT_SALEPRICE'];
+                $formattedSalePrice = number_format($salePrice, 0, ',', '.');
+
+                $imageSrc = $rowProduct['IMAGE_SRC'];
+                $imageSrc = explode(",", $imageSrc);
+            }
+        }
+    }
+
+    // Câu truy vấn lấy thông tin khuyến mãi
+    $sqlPromotions = "SELECT 
+        P.PROMOTION_ID,
+        P.PROMOTION_CODE,
+        P.PROMOTION_STARTDATE,
+        P.PROMOTION_ENDDATE,
+        CD.CODE_NAME,
+        CD.CODE_PERCENT,
+        CD.CODE_DESCRIPTION
+    FROM PROMOTION P JOIN CODE_DISCOUNT CD ON P.PROMOTION_CODE = CD.CODE_ID 
+    WHERE P.PRODUCT_ID = ?;";
+
+    $stmtPromotions = mysqli_prepare($connect, $sqlPromotions);
+    $resultPromotions;
+
+    if ($stmtPromotions) {
+        mysqli_stmt_bind_param($stmtPromotions, "s", $id);
+        mysqli_stmt_execute($stmtPromotions);
+        $resultPromotions = mysqli_stmt_get_result($stmtPromotions);
+
+        $promotions = array(); // Mảng chứa thông tin về các khuyến mãi
+
+        while ($rowPromotion = mysqli_fetch_assoc($resultPromotions)) {
+            // Lấy thông tin khuyến mãi
+            $promotionId = $rowPromotion['PROMOTION_ID'];
+            $promotionCode = $rowPromotion['PROMOTION_CODE'];
+            $promotionStartDate = $rowPromotion['PROMOTION_STARTDATE'];
+            $promotionEndDate = $rowPromotion['PROMOTION_ENDDATE'];
+            $codeName = $rowPromotion['CODE_NAME'];
+            $codePercent = $rowPromotion['CODE_PERCENT'];
+            $codeDescription = $rowPromotion['CODE_DESCRIPTION'];
+
+            if ($promotionEndDate >= date('Y-m-d') && $promotionStartDate <= date('Y-m-d')) {
+                $discountedPrice = $salePrice * (1 - $codePercent / 100);
+                $formattedDiscountedPrice = number_format($discountedPrice, 0, ',', '.');
+            } else {
+                $discountedPrice = 0;
+            }
+
+            // Lưu thông tin vào mảng
+            $promotions[] = array(
+                'promotionId' => $promotionId,
+                'promotionCode' => $promotionCode,
+                'promotionStartDate' => $promotionStartDate,
+                'promotionEndDate' => $promotionEndDate,
+                'codeName' => $codeName,
+                'codePercent' => $codePercent,
+                'codeDescription' => $codeDescription,
+                'discountedPrice' => $discountedPrice,
+                'formattedDiscountedPrice' => $formattedDiscountedPrice,
+            );
+        }
+    }
+}
+?>
+
+
+<section style="clear: both;" class="">
+    <ul class="breadcrumb">
+        <li>
+            <a href="./index.php">Trang chủ</a>
+        </li>
+        <li>
+            <span> > </span>
+            <a href="./index.php?quanly=category&category=<?php echo $category_id; ?>"> <?php echo $category; ?> </a>
+        </li>
+        <li>
+            <span> > </span>
+            <a href="#"> <?php echo $brand; ?> </a>
+        </li>
+        <li>
+            <span> > </span>
+            <a href=""> <?php echo $name; ?> </a>
+        </li>
+
+
+    </ul>
+    <div class="row">
+        <div>
+            <h1> <?php echo $name ?></h1>
+        </div>
         <div class="rate--box">
             <div class="rate--box-left">
                 <div class="detail-rate">
@@ -60,140 +149,149 @@
                 </div>
             </div>
         </div>
-        <div class="main--box">
-            <div class="left-box">
-                <div class="main--img-box">
-                    <img src="../assets/img/product-picture.jpg" id="mainImage" class="main-image">
-                </div>
-                <div class="small--imgs">
-                    <div class="img-box"><img src="../assets/img/picture1.jpg" class="image"></div>
-                    <div class="img-box"><img src="../assets/img/picture2.jpg" class="image"></div>
-                    <div class="img-box"><img src="../assets/img/picture3.jpg" class="image"></div>
-                    <div class="img-box"><img src="../assets/img/picture4.jpg" class="image"></div>
-                </div>
-                <div class="rating--box">
-                    <div class="boxrate-topzone">
-                        <h2 class="boxrate-title"> Đánh giá Smart Tivi QLED 4K 55 inch Samsung QA55Q65A</h2>
-                        <div class="boxrate-top">
-                            <div class="boxrate-top-left">
-                                <div class="total-star">
-                                    <div class="point">
-                                        <span> 5.0/5 </span> <br>
-                                        <i class="fa-solid fa-star checked"></i>
-                                        <i class="fa-solid fa-star checked"></i>
-                                        <i class="fa-solid fa-star checked"></i>
-                                        <i class="fa-solid fa-star checked"></i>
-                                        <i class="fa-solid fa-star checked"></i>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="boxrate-top-right">
-                                <div class="box-star">
-                                    <div class="star-rating">
-                                        <div class="5-star">
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <span class="number-rating"> 1 </span>
-                                            <em> đánh giá </em>
-                                        </div>
-                                        <div class="4-star">
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <span class="number-rating"> 0 </span>
-                                            <em> đánh giá </em>
-                                        </div>
-                                        <div class="3-star">
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <span class="number-rating"> 0 </span>
-                                            <em> đánh giá </em>
-                                        </div>
-                                        <div class="2-star">
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <span class="number-rating"> 0 </span>
-                                            <em> đánh giá </em>
-                                        </div>
-                                        <div class="1-star">
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <i class="fa-solid fa-star "></i>
-                                            <span class="number-rating"> 0 </span>
-                                            <em> đánh giá </em>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rating-list">
-                        <div class="par">
-                            <div class="comment-list">
-                                <div class="comment-top">
-                                    <p class="name-user"> Lê Minh Chánh </p>
-                                </div>
-                                <div class="comment-star">
-                                    <div class="comment-top-star">
-                                    <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                            <i class="fa-solid fa-star checked"></i>
-                                    </div>
-                                </div>
-                                <div class="comment-content">
-                                    <p class="cmt-text">
-                                        Sản phẩm rất tốt, hình ảnh sắc nét, âm thanh rất hay
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="rating-write">
-                        <form onsubmit="" class="content-rating-write">
-                            <input id="skw" type="text" class="input-rating" placeholder="Viết đánh giá của bạn..."
-                                name="ratetext" autocomplete="off" maxlength="10000">
-                            <input type="submit" value="Gửi" id="submit-rating" onclick="">
-                        </form>
-                    </div>
-
-                </div>
+    </div>
+    <div class="main--box ">
+        <div class="left-box col-7 row">
+            <div class="main--img-box">
+                <img src="<?php echo $image ?>" id="mainImage" class="main-image zoom" data-magnify-src="<?php echo $image ?>">
             </div>
-            <div class="right-box">
-                <div class="pick-size-box">
+            <div class="small--imgs">
+                <?php
+                echo '<div class="img-box" onclick="changeMainImage(\'' . $image . '\')"><img src="' . $image . '" class="image" ></div>';
+                for ($i = 0; $i < count($imageSrc); $i++) {
+                    echo '<div class="img-box" onclick="changeMainImage(\'' . $imageSrc[$i] . '\')"><img src="' . $imageSrc[$i] . '" class="image"></div>';
+                }
+                ?>
+            </div>
+            <div class="rating--box row">
+                <div class="boxrate-topzone">
+                    <h2 class="boxrate-title"> Đánh giá <?php echo $name ?></h2>
+                    <div class="boxrate-top">
+                        <div class="boxrate-top-left">
+                            <div class="total-star">
+                                <div class="point">F
+                                    <span> 5.0/5 </span> <br>
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxrate-top-right">
+                            <div class="box-star">
+                                <div class="star-rating">
+                                    <div class="5-star">
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <span class="number-rating"> 1 </span>
+                                        <em> đánh giá </em>
+                                    </div>
+                                    <div class="4-star">
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <span class="number-rating"> 0 </span>
+                                        <em> đánh giá </em>
+                                    </div>
+                                    <div class="3-star">
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <span class="number-rating"> 0 </span>
+                                        <em> đánh giá </em>
+                                    </div>
+                                    <div class="2-star">
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <span class="number-rating"> 0 </span>
+                                        <em> đánh giá </em>
+                                    </div>
+                                    <div class="1-star">
+                                        <i class="fa-solid fa-star checked"></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <i class="fa-solid fa-star "></i>
+                                        <span class="number-rating"> 0 </span>
+                                        <em> đánh giá </em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rating-list">
+                    <div class="par">
+                        <div class="comment-list">
+                            <div class="comment-top">
+                                <p class="name-user"> Lê Minh Chánh </p>
+                            </div>
+                            <div class="comment-star">
+                                <div class="comment-top-star">
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+                                    <i class="fa-solid fa-star checked"></i>
+                                </div>
+                            </div>
+                            <div class="comment-content">
+                                <p class="cmt-text">
+                                    Sản phẩm rất tốt, hình ảnh sắc nét, âm thanh rất hay
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rating-write">
+                    <form onsubmit="" class="content-rating-write">
+                        <input id="skw" type="text" class="input-rating" placeholder="Viết đánh giá của bạn..." name="ratetext" autocomplete="off" maxlength="10000">
+                        <input type="submit" value="Gửi" id="submit-rating" onclick="">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="right-box col">
+            <!-- <div class="pick-size-box">
                     <a href="#" class="size-box"> 43 inch </a>
                     <a href="#" class="size-box"> 50 inch </a>
                     <a href="#" class="size-box"> 55 inch </a>
                     <a href="#" class="size-box"> 65 inch </a>
                     <a href="#" class="size-box"> 75 inch </a>
-                </div>
-                <div class="locate-price-box">
+                </div> -->
+            <!-- <div class="locate-price-box">
                     Giá tại
                     <a href="#" onclick=""> Hồ Chí Minh </a>
-                </div>
-                <div class="post--box">
-                    <div class="bs-title">
-                        <div class="bs-price">
-                            <strong> 9.900.000₫</strong>
-                            <em> 12.390.000₫ (-19%) </em>
+                </div> -->
+            <div class="post--box">
+                <div class="bs-title">
+                    <div class="bs-price">
+                        <?php
+                        if (count($promotions) > 0 && $promotions[0]['discountedPrice'] > 0) {
+                            echo '<strong>' . $promotions[0]['formattedDiscountedPrice'] . ' VNĐ </strong>';
+                            echo '<em>' . $formattedSalePrice . ' VNĐ</em> ' . '  (-' . $promotions[0]['codePercent'] . '%)';
+                        } else {
+                            echo '<strong>' . $formattedSalePrice . ' VNĐ</strong>';
+                        }
+                        ?>
 
-                        </div>
-                        <!-- <div class="bs-time">
+
+                    </div>
+                    <!-- <div class="bs-time">
                             <span> Kết thúc sau </span>
                             <div class="clock" id="clock-bb">
                                 <b>22</b>
@@ -206,73 +304,52 @@
                                 <b>10</b>
                             </div>
                         </div> -->
-                    </div>
-                    <div class="bs-content">
-                        <div class="promo-box">
-                            <div class="pr-top">
-                                <p class="pr-text-box">Khuyến mãi</p>
-                                <i class="pr-text">Giá và khuyến mãi có thể kết thúc sớm hơn dự kiến </i>
-                            </div>
-                            <div class="pr-content">
-                                <div class="pr-item">
-                                    <div class="content-pr-box">
-                                        <span class="nb">1</span>
-                                        <div class="content-pr">
-                                            <p> Tặng thêm Gói Gắn Kết truyền hình K+ (6 Tháng)
-                                                <a href="#">(Xem chi tiết tại đây) </a>
-                                            </p>
-                                        </div>
+                </div>
+                <div class="bs-content">
+                    <div class="promo-box">
+                        <div class="pr-top">
+                            <p class="pr-text-box">Khuyến mãi</p>
+                            <i class="pr-text">Giá và khuyến mãi có thể kết thúc sớm hơn dự kiến </i>
+                        </div>
+                        <div class="pr-content">
+                            <div class="pr-item">
+                                <div class="content-pr-box">
+                                    <?php
+                                    $stt = 1;
+                                    echo '<div class="content-pr">';
+                                    for ($i = 0; $i < count($promotions); $i++) {
+                                        echo '<p> <bold>' . $stt . '</bold> - ' . $promotions[$i]['codeName'] . ' <a href="#">(Xem chi tiết tại đây) </a> </p>';
+                                        $stt++;
+                                    }
+                                    echo '</div>';
+                                    ?>
+                                </div>
+
+                                <div class="content-pr-box">
+                                    <div class="content-pr">
+                                        <ul class="content-pr-box-li">
+                                            <li> Giao hàng nhanh chóng (tùy khu vực)</li>
+                                            <!-- <li> Mỗi số điện thoại chỉ mua 3 sản phẩm trong 1 tháng</li> -->
+                                            <li> Giá và khuyến mãi có thể kết thúc sớm </li>
+                                        </ul>
                                     </div>
-                                    <div class="content-pr-box">
-                                        <span class="nb">2</span>
-                                        <div class="content-pr">
-                                            <p> Tặng Bộ 5 ứng dụng giải trí
-                                                <a href="#">(Xem chi tiết tại đây) </a>
-                                            </p>
-                                        </div>
+                                </div>
+                                <div class="content-pr-box">
+                                    <!-- <div class="content-pr">
+                                        <p> Giao tới KTX Khu A, phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh
+                                            <a href="#">(Đổi) </a>
+                                        </p>
+                                    </div> -->
+                                </div>
+                                <div class="content-pr-box">
+                                    <div class="content-pr">
+                                        <p> Thời gian giao hàng trong ngày từ 8h - 20h</p>
                                     </div>
-                                    <div class="content-pr-box">
-                                        <span class="nb">3</span>
-                                        <div class="content-pr">
-                                            <p> Tặng 10 năm bảo hành không lưu ảnh
-                                                <a href="#">(Xem chi tiết) </a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="content-pr-box">
-                                        <div class="content-pr">
-                                            <p> + 49.950 điểm tích lũy Quà Tặng VIP
-                                                <a href="#">(Xem chi tiết tại đây) </a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="content-pr-box">
-                                        <div class="content-pr">
-                                            <ul class="content-pr-box-li">
-                                                <li> Giao hàng nhanh chóng (tùy khu vực)</li>
-                                                <li> Mỗi số điện thoại chỉ mua 3 sản phẩm trong 1 tháng</li>
-                                                <li> Giá và khuyến mãi có thể kết thúc sớm </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="content-pr-box">
-                                        <div class="content-pr">
-                                            <p> Giao tới KTX Khu A, phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh
-                                                <a href="#">(Đổi) </a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="content-pr-box">
-                                        <div class="content-pr">
-                                            <p> Giao hàng từ 20h00 - 22h00 hôn nay (25/10)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="content-pr-box">
-                                        <div class="content-pr">
-                                            <p> Miễn phí giao hàng
-                                            </p>
-                                        </div>
+                                </div>
+                                <div class="content-pr-box">
+                                    <div class="content-pr">
+                                        <p> Miễn phí giao hàng
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -281,11 +358,28 @@
                 </div>
             </div>
         </div>
-        <div class="details--box"></div>
-    </section>
+    </div>
+    <!-- <div class="details--box"></div> -->
+</section>
 
-    <?php include "../components/footer.php" ?>
+<script src="./public/assets/js/jquery.magnify.js" charset="UTF-8"></script>
 
-</body>
+<script>
+    function changeMainImage(newSrc) {
+        // Thay đổi thuộc tính src của ảnh lớn
+        $('#mainImage').attr('src', newSrc);
+        $('#mainImage').attr('data-magnify-src', newSrc);
 
-</html>
+        //cho ảnh nhỏ sau khi click
+        $(document).ready(function() {
+            $('.zoom').magnify();
+        });
+    }
+</script>
+
+<!-- Cho ảnh lớn đầu tiên -->
+<script>
+    $(document).ready(function() {
+        $('.zoom').magnify();
+    });
+</script>

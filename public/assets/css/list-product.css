@@ -16,12 +16,12 @@ section{
     display: block;
 }
 
-img {
+/* img {
     height: auto;
     max-width: 100%;
     display: block;
     vertical-align: middle;
-}
+} */
 
 a {
     color: inherit;
@@ -182,16 +182,6 @@ section#categoryPage {
     min-height: 700px;
 }
 
-section {
-    position: relative;
-    display: block;
-}
-
-section {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-}
 
 .box-sort {
     margin: 10px 0;
@@ -440,10 +430,6 @@ a {
     margin-bottom: 5px;
 }
 
-div {
-    display: block;
-}
-
 .listproduct .item-compare span {
     border: 1px solid #e0e0e0;
     border-radius: 2px;
@@ -502,7 +488,6 @@ div {
     background-position: -205px -60px;
     height: 12px;
     width: 13px;
-
 }
 
 .listproduct .item-rating p {
@@ -537,10 +522,6 @@ div {
     border: 1px solid #e0e0e0;
 }
 
-a {
-    text-decoration: none;
-    transition: .2s;
-}
 
 .view-more a::after {
     border-left: 5px solid transparent;
