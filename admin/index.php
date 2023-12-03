@@ -1,5 +1,5 @@
 <?php
-    include_once "../../libraries/connectDB.php"
+    include_once "../libraries/connectDB.php"
 ?>
 
 <!DOCTYPE html>
@@ -16,14 +16,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js"></script>
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="../assets/css/bootstrap-extended.css" rel="stylesheet">
+	<link href="./assets/css/bootstrap-extended.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-	<link href="../assets/css/app.css" rel="stylesheet">
-	<link href="../assets/css/icons.css" rel="stylesheet">
+	<link href="./assets/css/app.css" rel="stylesheet">
+	<link href="./assets/css/icons.css" rel="stylesheet">
 	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="../assets/css/semi-dark.css" />
+	<link rel="stylesheet" href="./assets/css/semi-dark.css" />
 
-	<link href="../../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon">
+	<link href="../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon">
 
 	<?php
 	$pageTitle = "ecoTech - Dashboard";
@@ -34,9 +34,9 @@
 <body>
 	<!--wrapper-->
 	<div class="wrapper">
-		<?php include_once "../components/sidebar.php" ?>
-
-		<?php include_once "../components/header.php" ?>
+		<?php include_once "./components/sidebar.php" ?>
+    
+		<?php include_once "./components/header.php" ?>
 
         <?php
             if(isset($_GET['quanly']))
@@ -47,31 +47,31 @@
             }
 
             if ($tam=='category') {
-                include('./category.php');
+                include('./views/category.php');
             }
             elseif ($tam=='category-insert') {
-                include('./category-insert.php');
+                include('./views/category-insert.php');
             }
             elseif ($tam=='category-update') {
-                include('./category-update.php');
+                include('./views/category-update.php');
             }
             elseif ($tam=='product') {
-                include('./products.php');
+                include('./views/products.php');
             }
             elseif ($tam=='order') {
-                include('./orders.php');
+                include('./views/order.php');
             }
             elseif ($tam=='customer') {
-                include('./customers.php');
+                include('./views/customer.php');
             }
             elseif ($tam=='employee') {
-                include('./employees.php');
+                include('./views/employee.php');
             }
             elseif ($tam=='supplier') {
-                include('./suppliers.php');
+                include('./supplier.php');
             }
             elseif ($tam=='warehouse') {
-                include('./warehouses.php');
+                include('./warehouse.php');
             }
             // elseif ($tam=='report') {
             //     include('./reports.php');
@@ -83,23 +83,23 @@
             //     include('./logout.php');
             // }
 
-            else include('./dashboard.php');
+            else include('./views/dashboard.php');
         ?>
 
 		
-		<?php include_once "../components/footer.php" ?>
+		<?php include_once "./components/footer.php" ?>
 	</div>
 	<!--end wrapper-->
 
 	<!-- Bootstrap JS -->
-	<script src="../assets/js/bootstrap.bundle.min.js"></script>
+	<script src="./assets/js/bootstrap.bundle.min.js"></script>
 	<!--plugins-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/metisMenu/3.0.7/metisMenu.min.js"></script>
-	<script src="../assets/plugins/chartjs/chart.min.js"></script>
-	<script src="../assets/js/index.js"></script>
+	<script src="./assets/plugins/chartjs/chart.min.js"></script>
+	<script src="./assets/js/index.js"></script>
 	<!--app JS-->
-	<script src="../assets/js/app.js"></script>
+	<script src="./assets/js/app.js"></script>
 </body>
 
 </html>

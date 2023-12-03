@@ -313,7 +313,7 @@
             <!-- user button -->
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="../assets/images/icons/user.png" class="user-img" alt="user avatar">
+                    <img src="./assets/images/icons/user.png" class="user-img" alt="user avatar">
                     <div class="user-info ps-3">
                         <p class="user-name mb-0">Tôi là admin nè!</p>
                         <p class="designattion mb-0">Admin</p>

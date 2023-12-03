@@ -1,6 +1,6 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header text-center">
-        <div><img src="../../shared/img/logo-icon.png" class="logo-icon px-20" alt="logo icon"></div>
+        <div><img src="../shared/img/logo-icon.png" class="logo-icon px-20" alt="logo icon"></div>
         <div><h4 class="logo-text">ecoTech</h4></div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i></div>
     </div>
@@ -106,7 +106,7 @@
         </li>
 
         <li>
-            <a href="../../index.php">
+            <a href="../index.php">
                 <div class="parent-icon"> <i class="bx bx-store"></i></div>
                 <div class="menu-title">Về cửa hàng</div>
             </a>
