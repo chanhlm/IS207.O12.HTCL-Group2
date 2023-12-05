@@ -64,6 +64,7 @@ if (isset($_GET['product'])) {
 
     $stmtPromotions = mysqli_prepare($connect, $sqlPromotions);
     $resultPromotions;
+    $discountedPrice = 0;
 
     if ($stmtPromotions) {
         mysqli_stmt_bind_param($stmtPromotions, "s", $id);
@@ -85,8 +86,6 @@ if (isset($_GET['product'])) {
             if ($promotionEndDate >= date('Y-m-d') && $promotionStartDate <= date('Y-m-d')) {
                 $discountedPrice = $salePrice * (1 - $codePercent / 100);
                 $formattedDiscountedPrice = number_format($discountedPrice, 0, ',', '.');
-            } else {
-                $discountedPrice = 0;
             }
 
             // Lưu thông tin vào mảng
@@ -307,13 +306,13 @@ if (isset($_GET['product'])) {
                 </div>
                 <div class="bs-content">
                     <div class="promo-box">
-                        <div class="pr-top" >
-                            <?php 
-                            if (count($promotions) > 0 )
+                        <div class="pr-top">
+                            <?php
+                            if (count($promotions) > 0)
                                 echo '<p class="pr-text-box">Khuyến mãi</p>
                                 <i class="pr-text">Giá và khuyến mãi có thể kết thúc sớm hơn dự kiến </i>';
                             ?>
-                            
+
                         </div>
                         <div class="pr-content">
                             <div class="pr-item">
@@ -363,17 +362,17 @@ if (isset($_GET['product'])) {
             </div>
 
             <div class="add-to-card">
-                <form action="?" method="post">
-                    <fieldset>
-                        <input type="hidden" name="product_id" value="<?php echo $id ?>">
-                        <input type="hidden" name="product_name" value="<?php echo $name ?>">
-                        <input type="hidden" name="product_price" value="<?php echo $salePrice ?>">
-                        <input type="hidden" name="product_image" value="<?php echo $image ?>">
-                        <input type="hidden" name="product_quantity" value="1">
-                        <input type="hidden" name="product_saleprice" value="<?php echo $salePrice ?>">
-                        <input type="submit" name="addcart-button" value="Thêm vào giỏ hàng" class="btn btn-warning opacity-75 mt-2 w-50  ">
-                    </fieldset>
-                </form>
+                <!-- <form action="?" method="post"> -->
+                <fieldset>
+                    <input type="hidden" name="productId" id="productId" value="<?php echo $id ?>">
+                    <input type="hidden" name="productName" id="productName" value="<?php echo $name ?>">
+                    <input type="hidden" name="productPrice" id="productPrice" value="<?php echo $salePrice ?>">
+                    <input type="hidden" name="productImage" id="productImage" value="<?php echo $image ?>">
+                    <input type="hidden" name="productQuantity" id="productQuantity" value="1">
+                    <input type="hidden" name="productDiscountedPrice" id="productDiscountedPrice" value="<?php echo $discountedPrice ?>">
+                    <input type="submit" name="addcart-button" value="Thêm vào giỏ hàng" class="btn btn-warning opacity-75 mt-2 w-50" onclick="addToCart()">
+                </fieldset>
+                <!-- </form> -->
             </div>
 
             <div class="product-detail">
@@ -407,4 +406,43 @@ if (isset($_GET['product'])) {
     $(document).ready(function() {
         $('.zoom').magnify();
     });
+</script>
+
+
+<script>
+    function addToCart() {
+        // Lấy thông tin sản phẩm từ các thẻ HTML
+        let productId = document.querySelector('#productId').value;
+        let productName = document.querySelector('#productName').value;
+        let productPrice = document.querySelector('#productPrice').value;
+        let productImage = document.querySelector('#productImage').value;
+        let productDiscountedPrice;
+        if (document.querySelector('#productDiscountedPrice').value == 0) {
+            productDiscountedPrice = 0;
+        } else
+        productDiscountedPrice = document.querySelector('#productDiscountedPrice').value;
+
+        let productQuantity = 1; // Số lượng mặc định là 1
+
+        // Lưu sản phẩm vào giỏ hàng trong local storage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let itemIndex = cart.findIndex(item => item.productId === productId);
+
+        if (itemIndex >= 0) {
+            // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng lên 1
+            cart[itemIndex].productQuantity++;
+        } else {
+            // Nếu sản phẩm chưa có trong giỏ hàng, thêm sản phẩm vào giỏ hàng
+            cart.push({
+                productId: productId,
+                productName: productName,
+                productPrice: productPrice,
+                productImage: productImage,
+                productQuantity: productQuantity,
+                productDiscountedPrice: productDiscountedPrice
+            });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 </script>
