@@ -13,29 +13,11 @@
                 <div class="p-3">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Giỏ hàng</h1>
-                    <h6 class="mb-0 text-muted"><span id="countProduct"></span> sản phẩm</h6>
+                    <h6 class="mb-0 text-muted"><span class="countProduct">0</span> sản phẩm</h6>
                   </div>
                   <hr class="my-4" />
 
                   <div id="cart">
-                    <section>
-                      <div class="container mt-100">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="card-body cart">
-                              <div class="col-sm-12 empty-cart-cls text-center">
-                                <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3" />
-                                <h3><strong>Giỏ hàng của bạn trống</strong></h3>
-                                <a href="./index.php" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Quay về trang chủ</a>
-                                <h6>
-                                  Khi cần trợ giúp vui lòng gọi 1800.1000 hoặc 028.3000.0000 (7h30 - 22h)
-                                </h6>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
                   </div>
 
                   <div class="pt-5">
@@ -51,8 +33,8 @@
                   <hr class="my-4" />
 
                   <div class="d-flex justify-content-between mb-4">
-                    <h5 class="text-uppercase">Sản phẩm 3</h5>
-                    <h5>đ 14.360.000</h5>
+                    <h5 class="text-uppercase">Sản phẩm: <span class="countProduct">0</span></h5>
+                    <h5><span class="totalPrice">0</span> VNĐ</h5>
                   </div>
 
                   <h5 class="text-uppercase mb-4">NHẬN HÀNG</h5>
@@ -68,7 +50,7 @@
 
                   <div class="mb-5">
                     <div class="form-outline">
-                      <input type="text" id="form3Examplea2" class="form-control" placeholder="Nhập mã giảm giá" />
+                      <input type="text" id="discountCode" class="form-control" placeholder="Nhập mã giảm giá" />
                     </div>
                   </div>
 
@@ -76,7 +58,7 @@
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Tổng tiền</h5>
-                    <h5>đ 14.410.000</h5>
+                    <h5><span class="finaltotalPrice">0</span> VNĐ</h5>
                   </div>
 
                   <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Đặt hàng</button>
@@ -98,15 +80,38 @@
     return num.toLocaleString('vi-VN');
   }
 
+  let productHtml;
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
+  if (cart.length == 0) {
+    productHtml = `
+        <div class = "pt-0">
+          <div class="container mt-100">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card-body cart">
+                  <div class="col-sm-12 empty-cart-cls text-center">
+                    <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3" />
+                    <h3><strong>Giỏ hàng của bạn trống</strong></h3>
+                    <a href="./index.php" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Quay về trang chủ</a>
+                    <h6>
+                      Khi cần trợ giúp vui lòng gọi 1800.1000 hoặc 028.3000.0000 (7h30 - 22h)
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+  } else {
+    productHtml = ``;
+  }
   // Duyệt qua mỗi sản phẩm trong giỏ hàng
   $.each(cart, function(index, product) {
     // console.log(formatNumber(parseInt(product.productPrice)));
 
     // Tạo ra thẻ HTML cho mỗi sản phẩm
-    let productHtml = `
-    <div class="row mb-4 d-flex justify-content-between align-items-center">
+    productHtml += `
+    <div class="row mb-4 d-flex justify-content-between align-items-center product-item-${index}" >
       <div class="col-md-2 col-lg-2 col-xl-2 ">
         <img src="${product.productImage}" class="img-fluid rounded-3" alt="${product.productName}" />
       </div>
@@ -141,15 +146,14 @@
       <div class="col-md-1 col-lg-1 col-xl-1 text-center">
         <a href="#!" class="text-muted" onclick="removeProduct(${index})"><i class="fas fa-times"></i></a>
       </div>
+      <hr class="my-4" />
     </div>
-    <hr class="my-4" />
    `;
-
     // Thêm thẻ HTML vào giỏ hàng
-    $('#countProduct').html(cart.length);
-    $('#cart').html('');
-    $('#cart').append(productHtml);
   });
+  $('.countProduct').html(cart.length);
+  $('#cart').html(productHtml);
+  calculateTotalOrder(cart)
 
   function updateQuantity(productId, change) {
     // Lấy danh sách sản phẩm từ localStorage (nếu có)
@@ -184,29 +188,35 @@
     } catch (e) {
       console.error(`Failed to save cart to local storage: ${e}`);
     }
-  }
-</script>
+    calculateTotalOrder(cart);
 
-<script>
+  }
+
   function removeProduct(index) {
     // Lấy danh sách sản phẩm từ localStorage (nếu có)
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Xóa sản phẩm khỏi giỏ hàng
+    // console.log(index);
     cart.splice(index, 1);
+    if (cart.length == 1) {
+      cart = [];
+    }
 
     // Lưu danh sách sản phẩm mới vào localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
+    calculateTotalOrder(cart);
+
 
     // Xóa sản phẩm khỏi giao diện người dùng
-    $(`#cart div:nth-child(${index + 1})`).remove();
+    $(`#cart .product-item-${index}`).empty().remove();
 
     // Cập nhật số lượng sản phẩm trên giao diện người dùng
-    $('#countProduct').html(cart.length);
-    
+    $('.countProduct').html(cart.length);
+
     if (cart.length == 0) {
       $('#cart').html(`
-        <section>
+        <section class="pt-0">
           <div class="container mt-100">
             <div class="row">
               <div class="col-md-12">
@@ -226,5 +236,25 @@
         </section>
       `);
     }
+  }
+
+  function calculateTotalOrder(cart) {
+    let total = 0;
+    let finalTotal = 0;
+
+    // Loop through each product in the cart
+    $.each(cart, function(index, product) {
+      // Multiply the product's price by its quantity
+      let productTotal = product.productPrice * product.productQuantity;
+      let productDiscountedTotal = product.productDiscountedPrice * product.productQuantity;
+
+      // Add the product's total to the order's total
+      total += productTotal;
+      finalTotal += productDiscountedTotal;
+    });
+
+    // Display the total on the page
+    $('.totalPrice').html(formatNumber(total));
+    $('.finalTotalPrice').html(formatNumber(finalTotal));
   }
 </script>

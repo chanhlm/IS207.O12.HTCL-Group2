@@ -113,7 +113,7 @@ if (isset($_GET['product'])) {
         </li>
         <li>
             <span> > </span>
-            <a href="./index.php?page=category&category=<?php echo $category_id; ?>"> <?php echo $category; ?> </a>
+            <a href="./index.php?quanly=category&category=<?php echo $category_id; ?>"> <?php echo $category; ?> </a>
         </li>
         <li>
             <span> > </span>

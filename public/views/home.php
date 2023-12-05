@@ -70,7 +70,7 @@
     </div>
 
     <div class="sale" id="sale">
-        <h3>KHYẾN MÃI</h3>
+        <h3>KHUYẾN MÃI</h3>
         <div class="sale-content">
             <i class="ti-angle-double-left slide-btn pre-btn btn"></i>
             <div class="product"></div>
