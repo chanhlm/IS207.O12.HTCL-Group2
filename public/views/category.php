@@ -194,7 +194,7 @@
                         }
 
                         echo "<li class='item __cate' data-index='1'>
-                                <a href='index.php?quanly=product&product=" . $row['PRODUCT_ID'] . "' data-s='TwoPrice' data-site='2' data-pro='3' data-name='" . $row['PRODUCT_NAME'] . "' class='main-contain'>
+                                <a href='index.php?page=product&product=" . $row['PRODUCT_ID'] . "' data-s='TwoPrice' data-site='2' data-pro='3' data-name='" . $row['PRODUCT_NAME'] . "' class='main-contain'>
                             <div class='item-img item-img'>
                                 <img class='thumb ls-is-cached lazyloaded' src='" . $row['PRODUCT_IMAGE'] . "'>
                             </div>

@@ -17,7 +17,26 @@
                   </div>
                   <hr class="my-4" />
 
-                  <div id="cart"></div>
+                  <div id="cart">
+                    <section>
+                      <div class="container mt-100">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="card-body cart">
+                              <div class="col-sm-12 empty-cart-cls text-center">
+                                <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3" />
+                                <h3><strong>Giỏ hàng của bạn trống</strong></h3>
+                                <a href="./index.php" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Quay về trang chủ</a>
+                                <h6>
+                                  Khi cần trợ giúp vui lòng gọi 1800.1000 hoặc 028.3000.0000 (7h30 - 22h)
+                                </h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
 
                   <div class="pt-5">
                     <h6 class="mb-0">
@@ -78,13 +97,8 @@
   function formatNumber(num) {
     return num.toLocaleString('vi-VN');
   }
-  // console.log(formatNumber(1000000)); 
 
-
-
-  // Lấy dữ liệu sản phẩm từ localStorage
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  // console.log(cart);
 
   // Duyệt qua mỗi sản phẩm trong giỏ hàng
   $.each(cart, function(index, product) {
@@ -133,6 +147,7 @@
 
     // Thêm thẻ HTML vào giỏ hàng
     $('#countProduct').html(cart.length);
+    $('#cart').html('');
     $('#cart').append(productHtml);
   });
 
@@ -168,6 +183,48 @@
       localStorage.setItem('cart', JSON.stringify(cart));
     } catch (e) {
       console.error(`Failed to save cart to local storage: ${e}`);
+    }
+  }
+</script>
+
+<script>
+  function removeProduct(index) {
+    // Lấy danh sách sản phẩm từ localStorage (nếu có)
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Xóa sản phẩm khỏi giỏ hàng
+    cart.splice(index, 1);
+
+    // Lưu danh sách sản phẩm mới vào localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Xóa sản phẩm khỏi giao diện người dùng
+    $(`#cart div:nth-child(${index + 1})`).remove();
+
+    // Cập nhật số lượng sản phẩm trên giao diện người dùng
+    $('#countProduct').html(cart.length);
+    
+    if (cart.length == 0) {
+      $('#cart').html(`
+        <section>
+          <div class="container mt-100">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card-body cart">
+                  <div class="col-sm-12 empty-cart-cls text-center">
+                    <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3" />
+                    <h3><strong>Giỏ hàng của bạn trống</strong></h3>
+                    <a href="./index.php" class="btn btn-primary cart-btn-transform m-3" data-abc="true">Quay về trang chủ</a>
+                    <h6>
+                      Khi cần trợ giúp vui lòng gọi 1800.1000 hoặc 028.3000.0000 (7h30 - 22h)
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      `);
     }
   }
 </script>

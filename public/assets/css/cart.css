@@ -4,7 +4,7 @@ section {
 }
 
 .container{
-    background-color: var(--backgound-color);
+    /* background-color: var(--backgound-color); */
     margin-top: 40px;
     padding-bottom: 10px;
     padding-top: 10px;

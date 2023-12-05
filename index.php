@@ -36,8 +36,8 @@ include_once "./libraries/connectDB.php";
     <?php include "./public/components/header.php"; ?>
 
     <?php
-    if (isset($_GET['quanly'])) {
-        $tam = $_GET['quanly'];
+    if (isset($_GET['page'])) {
+        $tam = $_GET['page'];
     } else {
         $tam = '';
     }

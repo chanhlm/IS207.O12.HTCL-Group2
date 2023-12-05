@@ -25,7 +25,7 @@
 
                     // Hiển thị 10 mục đầu tiên dưới dạng <li> với hai tên danh mục khác nhau
                     if ($row2 !== null) {
-                        echo "<li><a href='index.php?quanly=category&category=" . $row1["CATEGORY_ID"] . "'>" . $row1["CATEGORY_NAME"] . "</a>, <a href='index.php?quanly=category&category=" . $row2["CATEGORY_ID"] . "'>" . $row2["CATEGORY_NAME"] . "</a></li>";
+                        echo "<li><a href='index.php?page=category&category=" . $row1["CATEGORY_ID"] . "'>" . $row1["CATEGORY_NAME"] . "</a>, <a href='index.php?page=category&category=" . $row2["CATEGORY_ID"] . "'>" . $row2["CATEGORY_NAME"] . "</a></li>";
                     }
 
                     // else {

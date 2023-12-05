@@ -10,9 +10,9 @@
             </form>
         </div>
         <div class="header-function col-lg-5 col-md-7">
-            <div class="search-order-btn btn text-center text-break"><a href="./index.php?quanly=authentication">Tra cứu đơn hàng</a></div>
-            <div class="login-btn btn text-center"><a href="./index.php?quanly=authentication">Đăng kí<br />Đăng nhập</a></div>
-            <div class="cart-btn btn align-right col"><a href="./index.php?quanly=cart">Giỏ hàng <i class="ti-shopping-cart"></i></a></div>
+            <div class="search-order-btn btn text-center text-break"><a href="./index.php?page=authentication">Tra cứu đơn hàng</a></div>
+            <div class="login-btn btn text-center"><a href="./index.php?page=authentication">Đăng kí<br />Đăng nhập</a></div>
+            <div class="cart-btn btn align-right col"><a href="./index.php?page=cart">Giỏ hàng <i class="ti-shopping-cart"></i></a></div>
         </div>
 </header>
 
