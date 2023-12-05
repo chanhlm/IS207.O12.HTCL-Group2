@@ -47,11 +47,11 @@ include_once "./libraries/connectDB.php";
     } elseif ($tam == 'product') {
         include('./public/views/product.php');
     }
-    // elseif($tam=='giohang') {
-    //     include('include/giohang.php');}
-    elseif ($tam == 'timkiem') {
-        include('include/timkiem.php');
-    }
+    elseif($tam=='cart') {
+        include('./public/views/cart.php');}
+    // elseif ($tam == 'timkiem') {
+    //     include('include/timkiem.php');
+    // }
     // elseif ($tam=='tintuc') {
     //     include('include/tintuc.php');}
     //elseif ($tam=='chitiettin') {

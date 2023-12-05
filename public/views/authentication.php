@@ -96,21 +96,24 @@ session_start();
     }
 
     // Tăng cường chức năng chuyển hướng
-    function redirectToPage(role) {
-        switch (role) {
-            case '1':
-                <?php $_SESSION['role'] = 'admin'; ?>
-                window.location.href = './admin/index.php';
-                break;
-            case '2':
-                <?php $_SESSION['role'] = 'user'; ?>
-                window.location.href = './index.php';
-                break;
-            default:
-                <?php $_SESSION['role'] = 'user'; ?>
-                window.location.href = './index.php';
-        }
-    }           
+    function redirectToPage(role, phone) {
+        $.ajax({
+            type: 'POST',
+            url: './public/backend/redirect.php',
+            data: {
+                role: role,
+                phone: phone
+            },
+            success: function(response) {
+                window.location.href = response;
+            },
+            error: function(error) {
+                console.log("Error: " + error.responseText);
+            }
+        });
+    }
+
+
 
 
     function saveUserData() {
@@ -130,7 +133,7 @@ session_start();
                 // Check if 'role' is present in the response
                 if (data && data.role) {
                     // Redirect based on the user's role
-                    redirectToPage(data.role);
+                    redirectToPage(data.role, phone);
                 } else {
                     console.log("Role not found in the response.");
                 }

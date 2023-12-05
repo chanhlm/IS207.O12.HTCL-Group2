@@ -307,9 +307,13 @@ if (isset($_GET['product'])) {
                 </div>
                 <div class="bs-content">
                     <div class="promo-box">
-                        <div class="pr-top">
-                            <p class="pr-text-box">Khuyến mãi</p>
-                            <i class="pr-text">Giá và khuyến mãi có thể kết thúc sớm hơn dự kiến </i>
+                        <div class="pr-top" >
+                            <?php 
+                            if (count($promotions) > 0 )
+                                echo '<p class="pr-text-box">Khuyến mãi</p>
+                                <i class="pr-text">Giá và khuyến mãi có thể kết thúc sớm hơn dự kiến </i>';
+                            ?>
+                            
                         </div>
                         <div class="pr-content">
                             <div class="pr-item">
@@ -357,6 +361,21 @@ if (isset($_GET['product'])) {
                     </div>
                 </div>
             </div>
+
+            <div class="add-to-card">
+                <form action="?" method="post">
+                    <fieldset>
+                        <input type="hidden" name="product_id" value="<?php echo $id ?>">
+                        <input type="hidden" name="product_name" value="<?php echo $name ?>">
+                        <input type="hidden" name="product_price" value="<?php echo $salePrice ?>">
+                        <input type="hidden" name="product_image" value="<?php echo $image ?>">
+                        <input type="hidden" name="product_quantity" value="1">
+                        <input type="hidden" name="product_saleprice" value="<?php echo $salePrice ?>">
+                        <input type="submit" name="addcart-button" value="Thêm vào giỏ hàng" class="btn btn-warning opacity-75 mt-2 w-50  ">
+                    </fieldset>
+                </form>
+            </div>
+
             <div class="product-detail">
                 <div class="card p-3 mt-5">
                     <h5>THÔNG TIN SẢN PHẨM:</h5>
