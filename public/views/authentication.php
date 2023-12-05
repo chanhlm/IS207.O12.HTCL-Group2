@@ -1,3 +1,8 @@
+<?php
+session_start();
+// ob_start();
+?>
+
 <link rel="stylesheet" href="./public/assets/css/authentication.css" />
 
 <section>
@@ -94,16 +99,19 @@
     function redirectToPage(role) {
         switch (role) {
             case '1':
+                <?php $_SESSION['role'] = 'admin'; ?>
                 window.location.href = './admin/index.php';
                 break;
             case '2':
+                <?php $_SESSION['role'] = 'user'; ?>
                 window.location.href = './index.php';
                 break;
             default:
+                <?php $_SESSION['role'] = 'user'; ?>
                 window.location.href = './index.php';
-
         }
-    }
+    }           
+
 
     function saveUserData() {
         $.ajax({
@@ -117,6 +125,7 @@
 
                 // Parse JSON response (if applicable)
                 var data = JSON.parse(response);
+                console.log(data);
 
                 // Check if 'role' is present in the response
                 if (data && data.role) {

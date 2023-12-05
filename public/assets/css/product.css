@@ -136,7 +136,11 @@ section h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
 
+.name-product{
+    display: inline-block;
+    width: 80%;
 }
 
 .image {

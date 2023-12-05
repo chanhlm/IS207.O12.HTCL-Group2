@@ -127,8 +127,8 @@ if (isset($_GET['product'])) {
 
 
     </ul>
-    <div class="row">
-        <div>
+    <div class="f-flex">
+        <div class="name-product">
             <h1> <?php echo $name ?></h1>
         </div>
         <div class="rate--box">
@@ -355,6 +355,12 @@ if (isset($_GET['product'])) {
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="product-detail">
+                <div class="card p-3 mt-5">
+                    <h5>THÔNG TIN SẢN PHẨM:</h5>
+                    <?php echo  $description ?>
                 </div>
             </div>
         </div>
