@@ -42,10 +42,11 @@ session_start();
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-    var phone; // Declare the phone variable at the global level
-
+    firebase.initializeApp(firebaseConfig);
     render();
-
+    
+    var phone; // Declare the phone variable at the global level
+    
     function render() {
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
         recaptchaVerifier.render();
@@ -105,6 +106,9 @@ session_start();
                 phone: phone
             },
             success: function(response) {
+                console.log(response);
+
+                // Redirect to the page returned in the response
                 window.location.href = response;
             },
             error: function(error) {

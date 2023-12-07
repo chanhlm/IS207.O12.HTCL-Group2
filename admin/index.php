@@ -1,9 +1,11 @@
 <?php
 include_once "../libraries/connectDB.php";
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header('location: ../index.php');
-}
+
+// if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') 
+// {
+//     header('location: ../index.php');
+// }
 ?>
 
 <!DOCTYPE html>

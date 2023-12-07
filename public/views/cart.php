@@ -34,7 +34,7 @@
 
                   <div class="d-flex justify-content-between mb-4">
                     <h5 class="text-uppercase">Sản phẩm: <span class="countProduct">0</span></h5>
-                    <h5><span class="totalPrice">0</span> VNĐ</h5>
+                    <h6><span class="totalPrice">0</span> VNĐ</h6>
                   </div>
 
                   <h5 class="text-uppercase mb-4">NHẬN HÀNG</h5>
@@ -58,7 +58,7 @@
 
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase">Tổng tiền</h5>
-                    <h5><span class="finaltotalPrice">0</span> VNĐ</h5>
+                    <h5><span class="finalTotal">0</span> VNĐ</h5>
                   </div>
 
                   <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Đặt hàng</button>
@@ -198,10 +198,10 @@
 
     // Xóa sản phẩm khỏi giỏ hàng
     // console.log(index);
-    cart.splice(index, 1);
     if (cart.length == 1) {
       cart = [];
     }
+    cart.splice(index, 1);
 
     // Lưu danh sách sản phẩm mới vào localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -254,7 +254,7 @@
     });
 
     // Display the total on the page
-    $('.totalPrice').html(formatNumber(total));
-    $('.finalTotalPrice').html(formatNumber(finalTotal));
+    $('.finalTotal').html(formatNumber(finalTotal));
+    $('.totalPrice').html(formatNumber(total));  
   }
 </script>
