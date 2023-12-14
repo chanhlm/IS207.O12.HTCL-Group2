@@ -133,11 +133,11 @@ session_start();
                 phone: phone
             },
             success: function(response) {
-                console.log(response);
+                // console.log(response);
 
                 // Parse JSON response (if applicable)
                 var data = JSON.parse(response);
-                console.log(data);
+                // console.log(data);
 
                 // Check if 'role' is present in the response
                 if (data && data.role) {

@@ -6,7 +6,7 @@ if (isset($_POST['role']) && isset($_POST['phone'])) {
     $_SESSION['phone'] = $_POST['phone'];
     if ($_SESSION['role'] == 1) {
         echo './admin/index.php';
-    } else {
+    } else if ($_SESSION['role'] == 2){
         echo './index.php';
     }
 }

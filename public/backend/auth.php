@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($phoneExistsResult->num_rows > 0) {
         // Nếu số điện thoại đã tồn tại, chuyển hướng người dùng dựa trên vai trò (role)
         $user = $phoneExistsResult->fetch_assoc();
-        $role = $user['USER_ROLE']; // Corrected column name
+        $role = $user['USER_ROLE']; 
 
         // Gửi phản hồi JSON với vai trò
         echo json_encode(['role' => $role]);
