@@ -125,10 +125,6 @@ session_start();
         // }
     }
 
-
-
-
-
     function saveUserData() {
         $.ajax({
             type: 'POST',

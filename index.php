@@ -41,18 +41,22 @@ include_once "./libraries/connectDB.php";
     } else {
         $tam = '';
     }
+
     if ($tam == 'authentication') {
         include('./public/views/authentication.php');
-    } elseif ($tam == 'category') {
+    } 
+    elseif ($tam == 'category') {
         include('./public/views/category.php');
-    } elseif ($tam == 'product') {
+    } 
+    elseif ($tam == 'product') {
         include('./public/views/product.php');
     }
     elseif($tam=='cart') {
-        include('./public/views/cart.php');}
-    // elseif ($tam == 'timkiem') {
-    //     include('include/timkiem.php');
-    // }
+        include('./public/views/cart.php');
+    }
+    elseif ($tam == 'purchase-history') {
+        include('./public/views/purchase-history.php');
+    }
     // elseif ($tam=='tintuc') {
     //     include('include/tintuc.php');}
     //elseif ($tam=='chitiettin') {

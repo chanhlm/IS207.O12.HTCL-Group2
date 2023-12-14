@@ -315,8 +315,33 @@
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="./assets/images/icons/user.png" class="user-img" alt="user avatar">
                     <div class="user-info ps-3">
-                        <p class="user-name mb-0">Tôi là admin nè!</p>
-                        <p class="designattion mb-0">Admin</p>
+                        <?php
+                        if (!isset($_SESSION)) {
+                            session_start();
+                        }
+                        if (isset($_SESSION['phone'])) {
+                            $sql = "SELECT * FROM `users` 
+                                    JOIN `roles` ON `users`.`user_role` = `roles`.`role_id` 
+                                    WHERE `USER_PHONE` = '" . $_SESSION['phone'] . "'";
+
+                            $result = mysqli_query($connect, $sql);
+
+                            if (!$result) {
+                                die("Error in SQL query: " . mysqli_error($connect));
+                            }
+
+                            $row = mysqli_fetch_array($result);
+
+                            if ($row) {
+                                echo "<p class=\"user-name mb-0\">" . $row['USER_NAME'] . "</p>";
+                                echo "<p class=\"designation mb-0\">" . $row['ROLE_NAME'] . "</p>";
+                            } else {
+                                echo "No user found for the given phone number.";
+                            }
+
+                            mysqli_free_result($result);
+                        }
+                        ?>
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -330,7 +355,7 @@
                         <div class="dropdown-divider mb-0"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+                        <a class="dropdown-item" href="./backend/logout.php"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
                     </li>
                 </ul>
             </div>

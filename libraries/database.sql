@@ -211,8 +211,8 @@ DELIMITER ;
 
 -- Insert data
 -- ROLES
-insert into ROLES(ROLE_NAME) values('admin');
-insert into ROLES(ROLE_NAME) values('user');
+insert into ROLES(ROLE_NAME) values('Admin');
+insert into ROLES(ROLE_NAME) values('User');
 
 -- USERS
 insert into USERS(USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE, USER_ROLE, USER_STATE, CREATE_DATE, LAST_LOGIN) 
