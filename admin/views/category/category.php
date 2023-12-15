@@ -33,7 +33,7 @@
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
 						<thead>
 							<tr class="text-center">
-								<th>Chọn <input type="checkbox" id="selectAllCheckbox"></th>
+								<th>Chọn <br> <input type="checkbox" id="selectAllCheckbox"></th>
 								<th>Mã danh mục</th>
 								<th>Tên danh mục</th>
 								<th>Số sản phẩm</th>
