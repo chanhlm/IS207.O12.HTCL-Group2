@@ -59,7 +59,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1)
             } elseif ($tam == 'category-insert') {
                 include('./views/category/category-insert.php');
             } elseif ($tam == 'category-update') {
-                include('./views/category-update.php');
+                include('./views/category/category-update.php');
             } elseif ($tam == 'product') {
                 include('./views/product/product.php');
             } elseif ($tam == 'product-insert') {

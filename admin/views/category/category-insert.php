@@ -71,7 +71,7 @@ if (isset($_POST['insert'])) {
 	$sql_insert = mysqli_query($connect, "INSERT INTO CATEGORIES (CATEGORY_ID, CATEGORY_NAME, CATEGORY_IMAGE, CATEGORY_DESCRIPTION) VALUES ('$category_id', '$category_name', '$category_picture', '$category_description')");
 	if ($sql_insert) {
 		echo '<script>alert("Thêm thành công!")</script>';
-		// echo '<script>window.location.href="./index.php?page=category"</script>';
+		echo '<script>window.location.href="./index.php?page=category-insert"</script>';
 	} else {
 		echo '<script>alert("Thêm thất bại!")</script>';
 	}

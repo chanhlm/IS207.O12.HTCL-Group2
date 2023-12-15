@@ -7,21 +7,23 @@ $sql_product = "SELECT
 		    W.PRODUCT_QUANTITY,
 			P.PRODUCT_SALEPRICE,
 		    P.PRODUCT_IMAGE,
-		    P.PRODUCT_DESCRIPTION
+		    P.PRODUCT_DESCRIPTION,
+			p.PRODUCT_STATUS
 		FROM PRODUCTS P
 		JOIN CATEGORIES C ON P.CATEGORY_ID = C.CATEGORY_ID
 		JOIN BRANDS B ON P.BRAND_ID = B.BRAND_ID
 		JOIN WAREHOUSE W ON P.PRODUCT_ID = W.PRODUCT_ID
-		WHERE P.PRODUCT_STATUS = 'active'
-		ORDER BY P.CATEGORY_ID ASC ;
-		";
+		ORDER BY P.CATEGORY_ID ASC, P.PRODUCT_ID ;";
+
 $result_product = mysqli_query($connect, $sql_product);
 $count_product = mysqli_num_rows($result_product);
+
 ?>
 
 <style>
-	/* Xử lý dữ liệu quá cột tự động xuống dòng */
-	tr,th ,td {
+	tr,
+	th,
+	td {
 		white-space: wrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -45,7 +47,7 @@ $count_product = mysqli_num_rows($result_product);
 				<div>
 					<a href="./index.php?page=product-insert" class="ms-2 me-2 btn btn-success">Thêm</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToUpdatePage()"> Sửa </a>
-					<a href="" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
+					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
 				</div>
 			</div>
 		</div>
@@ -57,8 +59,8 @@ $count_product = mysqli_num_rows($result_product);
 				<div class="table-responsive">
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
 						<thead>
-							<tr class="text-center">
-								<th scope="col">Chọn</th>
+							<tr class="text-center align-middle">
+								<th scope="col">Chọn <input type="checkbox" id="selectAllCheckbox"></th>
 								<th scope="col">Mã sản phẩm</th>
 								<th scope="col">Tên sản phẩm</th>
 								<th scope="col">Danh mục</th>
@@ -73,10 +75,16 @@ $count_product = mysqli_num_rows($result_product);
 							<?php
 							while ($row_product = mysqli_fetch_array($result_product)) {
 							?>
-								<tr class="align-middle">
+								<tr class="align-middle 
+								<?php 
+								if ($row_product['PRODUCT_STATUS'] !== 'active') {
+									echo "table-danger text-decoration-line-through";
+								}
+								?>
+								">
 									<td class="text-center"><input type="checkbox" name="selected_products[]" value="<?php echo $row_product['PRODUCT_ID']; ?>"></td>
 									<td class="text-center"><?php echo $row_product['PRODUCT_ID'] ?></td>
-									<td><?php echo $row_product['PRODUCT_NAME'] ?></td>
+									<td> <?php echo $row_product['PRODUCT_NAME']; ?> </td>
 									<td class="text-center"><?php echo $row_product['CATEGORY_NAME'] ?></td>
 									<td class="text-center"><?php echo $row_product['BRAND_NAME'] ?></td>
 									<td class="text-center"><?php echo $row_product['PRODUCT_SALEPRICE'] ?></td>
@@ -90,7 +98,7 @@ $count_product = mysqli_num_rows($result_product);
 						</tbody>
 
 						<tfoot>
-							<tr class="text-center">
+							<tr class="text-center align-middle">
 								<th>Chọn</th>
 								<th>Mã sản phẩm</th>
 								<th>Tên sản phẩm</th>
@@ -128,17 +136,18 @@ $count_product = mysqli_num_rows($result_product);
 		var confirmDelete = confirm("Bạn có chắc muốn xóa các sản phẩm đã chọn?");
 		if (confirmDelete) {
 			var productIds = Array.from(selectedProducts).map(function(checkbox) {
+				
 				return checkbox.value;
 			});
 
 			var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function() {
+			xhr.onreadystatechange = function() {	
 				if (xhr.readyState === 4) {
 					if (xhr.status === 200) {
 						// Successful response from the server
 						alert(xhr.responseText); // Display success message or handle accordingly
 						// You may want to reload or update the table after successful deletion
-						location.reload();
+						location.reload();	
 					} else {
 						// Error handling
 						alert('Lỗi xóa: ' + xhr.statusText);
@@ -176,4 +185,28 @@ $count_product = mysqli_num_rows($result_product);
 			alert("Vui lòng chỉ chọn một sản phẩm để sửa.");
 		}
 	}
+</script>
+
+<script>
+	// button chọn tất cả
+    document.addEventListener("DOMContentLoaded", function () {
+        var selectAllCheckbox = document.getElementById("selectAllCheckbox");
+        var productCheckboxes = document.querySelectorAll("#example tbody td:first-child input[type='checkbox']");
+
+        selectAllCheckbox.addEventListener("change", function () {
+            // Khi checkbox "Chọn Tất Cả" thay đổi trạng thái, cập nhật trạng thái của các checkbox sản phẩm
+            productCheckboxes.forEach(function (checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        });
+
+        // Sự kiện để kiểm tra trạng thái của các checkbox sản phẩm và cập nhật checkbox "Chọn Tất Cả"
+        productCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                selectAllCheckbox.checked = [...productCheckboxes].every(function (checkbox) {
+                    return checkbox.checked;
+                });
+            });
+        });
+    });
 </script>

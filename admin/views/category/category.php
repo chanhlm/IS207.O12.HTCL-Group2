@@ -33,7 +33,7 @@
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
 						<thead>
 							<tr class="text-center">
-								<th>Chọn</th>
+								<th>Chọn <input type="checkbox" id="selectAllCheckbox"></th>
 								<th>Mã danh mục</th>
 								<th>Tên danh mục</th>
 								<th>Số sản phẩm</th>
@@ -142,5 +142,29 @@
             alert("Vui lòng chỉ chọn một danh mục để sửa.");
         }
     }
+</script>
+
+<script>
+	// button chọn tất cả
+    document.addEventListener("DOMContentLoaded", function () {
+        var selectAllCheckbox = document.getElementById("selectAllCheckbox");
+        var productCheckboxes = document.querySelectorAll("#example tbody td:first-child input[type='checkbox']");
+
+        selectAllCheckbox.addEventListener("change", function () {
+            // Khi checkbox "Chọn Tất Cả" thay đổi trạng thái, cập nhật trạng thái của các checkbox sản phẩm
+            productCheckboxes.forEach(function (checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        });
+
+        // Sự kiện để kiểm tra trạng thái của các checkbox sản phẩm và cập nhật checkbox "Chọn Tất Cả"
+        productCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function () {
+                selectAllCheckbox.checked = [...productCheckboxes].every(function (checkbox) {
+                    return checkbox.checked;
+                });
+            });
+        });
+    });
 </script>
 

@@ -51,6 +51,7 @@ $sql_brand = mysqli_query($connect, "SELECT * FROM BRANDS");
                                 <select class="form-control" id="categorySelect" name="category">
                                     <?php
                                     // Hiển thị danh sách danh mục trong combobox
+                                    echo '<option value="null">Chọn danh mục</option>';
                                     if ($sql_category->num_rows > 0) {
                                         while ($row = $sql_category->fetch_assoc()) {
                                             echo '<option value="' . $row['CATEGORY_ID'] . '">' . $row['CATEGORY_NAME'] . '</option>';
@@ -63,9 +64,10 @@ $sql_brand = mysqli_query($connect, "SELECT * FROM BRANDS");
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="brandSelect" class="form-label">Hãng</label>
-                                <select class="form-control" id="brandSelect" name="category">
+                                <select class="form-control" id="brandSelect" name="brand">
                                     <?php
                                     // Hiển thị danh sách danh mục trong combobox
+                                    echo '<option value="null">Chọn hãng</option>';
                                     if ($sql_brand->num_rows > 0) {
                                         while ($row = $sql_brand->fetch_assoc()) {
                                             echo '<option value="' . $row['BRAND_ID'] . '">' . $row['BRAND_NAME'] . '</option>';
@@ -108,7 +110,7 @@ $sql_brand = mysqli_query($connect, "SELECT * FROM BRANDS");
                     <div class="col-md-12">
                         <div class="mb-3">
                             <label for="product-picture_detail" class="form-label">Hình ảnh chi tiết</label>
-                            <input type="text" class="form-control" id="product-picture_detail" name="product-picture_detail" placeholder="Hình ảnh chi tiết, mỗi ảnh cách nhau bởi một dấu phẩy. Giới hạn: 5" required>
+                            <input type="text" class="form-control" id="product-picture_detail" name="product-picture_detail" placeholder="Hình ảnh chi tiết, mỗi ảnh cách nhau bởi một dấu phẩy. Giới hạn: 5">
                         </div>
                     </div>
 
@@ -131,6 +133,11 @@ $sql_brand = mysqli_query($connect, "SELECT * FROM BRANDS");
 if (isset($_POST['insert'])) {
     $product_id = $_POST['product-id'];
     $product_name = $_POST['name'];
+    
+    if ($_POST['category'] == 'null' || $_POST['brand'] == 'null') {
+        echo '<script>alert("Vui lòng chọn danh mục và hãng!")</script>';
+        exit;
+    }
     $product_category = $_POST['category'];
     $product_brand = $_POST['brand'];
     $product_price = $_POST['price'];
@@ -140,10 +147,11 @@ if (isset($_POST['insert'])) {
     $product_picture_detail = $_POST['product-picture_detail'];
 
     $sql_insert = mysqli_query($connect, "INSERT INTO PRODUCTS (PRODUCT_ID, PRODUCT_NAME, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE, WARRANTY_PERIOD, PRODUCT_IMAGE, PRODUCT_DESCRIPTION, PRODUCT_STATUS, IMAGE_SRC) 
-    VALUES ('$product_id', '$product_name', '$product_category', '$product_brand', '$product_price', '$product_warranty_period', '$product_picture', '$product_description', 'active', '$product_picture_detail')");
+    VALUES ('$product_id', '$product_name', '$product_category', '$product_brand', $product_price, $product_warranty_period, '$product_picture', '$product_description', 'active', '$product_picture_detail')");
 
     if ($sql_insert) {
         echo '<script>alert("Thêm sản phẩm thành công!")</script>';
+        echo '<script>window.location.href="./index.php?page=product-insert"</script>';
     } else {
         echo '<script>alert("Thêm sản phẩm thất bại!")</script>';
     }
