@@ -18,7 +18,7 @@
 			</div>
 			<div class="ms-auto">
 				<div>
-					<a href="./index.php?quanly=category-insert" class="ms-2 me-2 btn btn-success">Thêm</a>
+					<a href="./index.php?page=category-insert" class="ms-2 me-2 btn btn-success">Thêm</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToUpdatePage()"> Sửa </a>
 					<a href="" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
 				</div>
@@ -30,7 +30,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table id="example" class="table table-striped table-bordered" style="width:100%">
+					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
 						<thead>
 							<tr class="text-center">
 								<th>Chọn</th>
@@ -137,7 +137,7 @@
         // Ensure that exactly one category is selected
         if (selectedCategories.length === 1) {
             var selectedCategoryId = selectedCategories[0].value;
-            window.location.href = './index.php?quanly=category-update&category_id=' + selectedCategoryId;
+            window.location.href = './index.php?page=category-update&category_id=' + selectedCategoryId;
         } else {
             alert("Vui lòng chỉ chọn một danh mục để sửa.");
         }

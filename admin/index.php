@@ -48,40 +48,25 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1)
             include_once "./components/header.php";
 
 
-            if (isset($_GET['quanly'])) {
-                $tam = $_GET['quanly'];
+            if (isset($_GET['page'])) {
+                $tam = $_GET['page'];
             } else {
                 $tam = '';
             }
 
             if ($tam == 'category') {
-                include('./views/category.php');
+                include('./views/category/category.php');
             } elseif ($tam == 'category-insert') {
-                include('./views/category-insert.php');
+                include('./views/category/category-insert.php');
             } elseif ($tam == 'category-update') {
                 include('./views/category-update.php');
             } elseif ($tam == 'product') {
-                include('./views/products.php');
-            } elseif ($tam == 'order') {
-                include('./views/order.php');
-            } elseif ($tam == 'customer') {
-                include('./views/customer.php');
-            } elseif ($tam == 'employee') {
-                include('./views/employee.php');
-            } elseif ($tam == 'supplier') {
-                include('./supplier.php');
-            } elseif ($tam == 'warehouse') {
-                include('./warehouse.php');
+                include('./views/product/product.php');
+            } elseif ($tam == 'product-insert') {
+                include('./views/product/product-insert.php');
+            } elseif ($tam == 'product-update') {
+                include('./views/product/product-update.php');
             }
-            // elseif ($tam=='report') {
-            //     include('./reports.php');
-            // }
-            // elseif ($tam=='setting') {
-            //     include('./settings.php');
-            // }
-            // elseif ($tam=='logout') {
-            //     include('./logout.php');
-            // }
 
             else include('./views/dashboard.php');
 

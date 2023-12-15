@@ -115,14 +115,6 @@ session_start();
                 console.log("Error: " + error.responseText);
             }
         });
-        // console.log(role);
-        // console.log(phone);
-        // if (role == 1) {
-        //     window.location.href = './admin/index.php';
-            
-        // } else {
-        //     window.location.href = './index.php';
-        // }
     }
 
     function saveUserData() {

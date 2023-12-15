@@ -53,7 +53,7 @@
 								<p class="mb-0 text-white">Đơn hàng</p>
 								<h4 class="text-white my-1">
 									<?php
-										$sql = "SELECT * FROM users";
+										$sql = "SELECT * FROM orders";
 										$result = mysqli_query($connect, $sql);
 										$count = mysqli_num_rows($result);
 										echo $count;

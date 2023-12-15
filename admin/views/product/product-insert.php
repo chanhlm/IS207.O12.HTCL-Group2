@@ -1,0 +1,151 @@
+<?php
+$sql_product = mysqli_query($connect, "SELECT * FROM PRODUCTS");
+$count_product = mysqli_num_rows($sql_product);
+
+$sql_category = mysqli_query($connect, "SELECT * FROM CATEGORIES");
+
+$sql_brand = mysqli_query($connect, "SELECT * FROM BRANDS");
+?>
+
+<!--start page wrapper -->
+<div class="page-wrapper">
+    <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="./index.php"><i class="bx bx-home-alt"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Sản phẩm </li>
+                        <li class="breadcrumb-item active" aria-current="page">Thêm sản phẩm </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+
+        <h6 class="mb-0 text-uppercase">Sản phẩm - <?php echo $count_product ?> sản phẩm</h6>
+        <hr />
+        <!-- insert form -->
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="product-id" class="form-label">Mã sản phẩm</label>
+                                <input type="text" class="form-control" id="product-id" name="product-id" placeholder="ID" required>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Tên sản phẩm</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên danh mục" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="categorySelect" class="form-label">Danh mục sản phẩm</label>
+                                <select class="form-control" id="categorySelect" name="category">
+                                    <?php
+                                    // Hiển thị danh sách danh mục trong combobox
+                                    if ($sql_category->num_rows > 0) {
+                                        while ($row = $sql_category->fetch_assoc()) {
+                                            echo '<option value="' . $row['CATEGORY_ID'] . '">' . $row['CATEGORY_NAME'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="brandSelect" class="form-label">Hãng</label>
+                                <select class="form-control" id="brandSelect" name="category">
+                                    <?php
+                                    // Hiển thị danh sách danh mục trong combobox
+                                    if ($sql_brand->num_rows > 0) {
+                                        while ($row = $sql_brand->fetch_assoc()) {
+                                            echo '<option value="' . $row['BRAND_ID'] . '">' . $row['BRAND_NAME'] . '</option>';
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="price" class="form-label">Giá bán</label>
+                                <input type="text" class="form-control" id="price" name="price" placeholder="Nhập giá bán" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="warranty_period" class="form-label">Thời gian bảo hành</label>
+                                <select type="text" class="form-control" id="warranty_period" name="warranty_period" placeholder="0" required >
+                                    <option value="0">Không bảo hành</option>
+                                    <option value="1">1 tháng</option>
+                                    <option value="3">3 tháng</option>
+                                    <option value="6">6 tháng</option>
+                                    <option value="12">12 tháng</option>
+                                    <option value="24">24 tháng</option>
+                                    <option value="36">36 tháng</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="product-picture" class="form-label">Hình ảnh</label>
+                            <input type="text" class="form-control" id="product-picture" name="product-picture" placeholder="Hình ảnh" required>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="product-picture_detail" class="form-label">Hình ảnh chi tiết</label>
+                            <input type="text" class="form-control" id="product-picture_detail" name="product-picture_detail" placeholder="Hình ảnh chi tiết, mỗi ảnh cách nhau bởi một dấu phẩy. Giới hạn: 5" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="product-description" class="form-label">Mô tả</label>
+                            <input type="text" class="form-control" id="product-description" name="product-description" placeholder="Mô tả chi tiết" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" name="insert" class="btn btn-success">Thêm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end page wrapper -->
+
+<?php
+if (isset($_POST['insert'])) {
+    $product_id = $_POST['product-id'];
+    $product_name = $_POST['name'];
+    $product_category = $_POST['category'];
+    $product_brand = $_POST['brand'];
+    $product_price = $_POST['price'];
+    $product_warranty_period = $_POST['warranty_period'];
+    $product_picture = $_POST['product-picture'];
+    $product_description = $_POST['product-description'];
+    $product_picture_detail = $_POST['product-picture_detail'];
+
+    $sql_insert = mysqli_query($connect, "INSERT INTO PRODUCTS (PRODUCT_ID, PRODUCT_NAME, CATEGORY_ID, BRAND_ID, PRODUCT_SALEPRICE, WARRANTY_PERIOD, PRODUCT_IMAGE, PRODUCT_DESCRIPTION, PRODUCT_STATUS, IMAGE_SRC) 
+    VALUES ('$product_id', '$product_name', '$product_category', '$product_brand', '$product_price', '$product_warranty_period', '$product_picture', '$product_description', 'active', '$product_picture_detail')");
+
+    if ($sql_insert) {
+        echo '<script>alert("Thêm sản phẩm thành công!")</script>';
+    } else {
+        echo '<script>alert("Thêm sản phẩm thất bại!")</script>';
+    }
+}
+?>
