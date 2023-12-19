@@ -15,8 +15,31 @@ $sql_product = "SELECT
 		JOIN WAREHOUSE W ON P.PRODUCT_ID = W.PRODUCT_ID
 		ORDER BY P.CATEGORY_ID ASC, P.PRODUCT_ID ;";
 
+if (isset($_GET['category_id'])) {
+	$category_id = $_GET['category_id'];
+	$sql_product = "SELECT 
+		    P.PRODUCT_ID,
+		    P.PRODUCT_NAME,
+		    C.CATEGORY_NAME,
+		    B.BRAND_NAME,
+		    W.PRODUCT_QUANTITY,
+			P.PRODUCT_SALEPRICE,
+		    P.PRODUCT_IMAGE,
+		    P.PRODUCT_DESCRIPTION,
+			p.PRODUCT_STATUS
+		FROM PRODUCTS P
+		JOIN CATEGORIES C ON P.CATEGORY_ID = C.CATEGORY_ID
+		JOIN BRANDS B ON P.BRAND_ID = B.BRAND_ID
+		JOIN WAREHOUSE W ON P.PRODUCT_ID = W.PRODUCT_ID
+		WHERE P.CATEGORY_ID = '$category_id'
+		ORDER BY P.CATEGORY_ID ASC, P.PRODUCT_ID ;";
+}
+
 $result_product = mysqli_query($connect, $sql_product);
-$count_product = mysqli_num_rows($result_product);
+
+if ($result_product)
+	$count_product = mysqli_num_rows($result_product);
+else $count_product = 0;
 
 ?>
 
@@ -73,7 +96,8 @@ $count_product = mysqli_num_rows($result_product);
 						</thead>
 						<tbody>
 							<?php
-							while ($row_product = mysqli_fetch_array($result_product)) {
+							if ($result_product)
+							while ($row_product = mysqli_fetch_assoc($result_product)) {
 							?>
 								<tr class="align-middle 
 								<?php 

@@ -18,9 +18,10 @@
 			</div>
 			<div class="ms-auto">
 				<div>
+					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-info" onclick="redirectToProductPage()">Xem sản phẩm</a>
 					<a href="./index.php?page=category-insert" class="ms-2 me-2 btn btn-success">Thêm</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToUpdatePage()"> Sửa </a>
-					<a href="" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
+					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
 				</div>
 			</div>
 		</div>	
@@ -168,3 +169,17 @@
     });
 </script>
 
+<script>
+	function redirectToProductPage() {
+		var selectedCategories = document.querySelectorAll('input[name="selected_categories[]"]:checked');
+
+        // Ensure that exactly one category is selected
+        if (selectedCategories.length === 1) {
+            var selectedCategoryId = selectedCategories[0].value;
+            window.location.href = './index.php?page=product&category_id=' + selectedCategoryId;
+        } else {
+            alert("Vui lòng chọn 1 danh mục!.");
+        }
+	}
+
+</script>
