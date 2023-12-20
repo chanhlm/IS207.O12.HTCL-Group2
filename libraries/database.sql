@@ -34,8 +34,8 @@ CREATE TABLE STORE(
 CREATE TABLE BRANDS(
     BRAND_ID VARCHAR(10) NOT NULL,
     BRAND_NAME VARCHAR(50) NOT NULL ,
-    CONTRY VARCHAR(50) NOT NULL ,
-    BRAND_IMAGE VARCHAR(50) NOT NULL,
+    COUNTRY VARCHAR(50) NOT NULL ,
+    BRAND_IMAGE VARCHAR(100) NOT NULL,
     NUMBER_PRODUCT INT NOT NULL,
     BRAND_DESCRIPTION VARCHAR(50) NOT NULL ,
     PRIMARY KEY (BRAND_ID)
@@ -225,53 +225,53 @@ insert into USERS(USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE, USER_ROLE, U
 -- insert into STORE(STORE_ID, STORE_NAME, STORE_ADDRESS, STORE_PHONE, STORE_EMAIL, STORE_DESCRIPTION, STORE_IMAGE)  
 
 -- BRANDS
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('SS','Samsung', 'Korea', 'https://images.samsung.com/is/image/samsung/assets/vn/about-us/brand/logo/pc/720_600_1.png?$720_N_PNG$', 0, 'Samsung');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('LG','LG', 'Korea', 'https://www.lg.com/content/dam/lge/global/our-brand/src/mocks/bs0002/brand-elements-logo-primary-d.svg', 0, 'LG');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('ELEC','Electrolux', 'Thailand', 'https://www.electrolux.vn/-/media/Images/Electrolux/Global/Brand-Logos/Electrolux-Logo-Black.png', 0, 'Electrolux');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('TOS','Toshiba', 'Japan', 'https://www.toshiba.com.vn/images/logo.png', 0, 'Toshiba');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('PANA','Panasonic', 'Japan', 'https://www.panasonic.com/content/dam/pim/vn/en/brand-logo/panasonic-logo.png', 0, 'Panasonic');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('HITA','Hitachi', 'Japan', 'https://www.hitachi.com.vn/images/logo.png', 0, 'Hitachi');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('AQUA','Aqua', 'Vietnam', 'https://www.aqua.com.vn/wp-content/uploads/2019/10/logo-aqua.png', 0, 'Aqua');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION) 
     values('KANG','Kangaroo', 'Vietnam', 'https://kangaroo.vn/wp-content/uploads/2019/10/logo-kangaroo.png', 0, 'Kangaroo');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('DAIK','Daikio', 'Japan', 'https://www.daikin.com.vn/wp-content/uploads/2019/10/logo-daikin.png', 0, 'Daikio');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('GA', 'Galanz', 'China', 'https://www.galanz.com.vn/wp-content/uploads/2019/10/logo-galanz.png', 0, 'Galanz');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('BO', 'Bosch', 'Germany', 'https://www.bosch-home.com.vn/~/media/Images/Bosch/Global/Brand%20Logos/Bosch-Logo-Black.png', 0, 'Bosch');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('BLS', 'Bluestone', 'Vietnam', 'https://bluestone.vn/wp-content/uploads/2019/10/logo-bluestone.png', 0, 'Bluestone');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('SH', 'Sunhouse', 'Vietnam', 'https://sunhouse.com.vn/wp-content/uploads/2019/10/logo-sunhouse.png', 0, 'Sunhouse');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('SA', 'Sharp', 'Japan', 'https://www.sharp.com.vn/wp-content/uploads/2019/10/logo-sharp.png', 0, 'Sharp');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('SONY', 'Sony', 'Japan', 'https://www.sony.com.vn/image/sonyvietnam/brand_logo.png', 0, 'Sony');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('DE', 'Delonghi', 'Italy', 'https://www.delonghi.com/Global/Brand%20Logos/DeLonghi-Logo-Black.png', 0, 'Delonghi');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('PU', 'Puwa', 'Vietnam', 'https://puwa.vn/wp-content/uploads/2019/10/logo-puwa.png', 0, 'Puwa');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('AVA', 'AVA', 'Vietnam', 'https://ava.vn/wp-content/uploads/2019/10/logo-ava.png', 0, 'AVA');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('PHI', 'Philips', 'Netherlands', 'https://www.philips.com.vn/c-dam/b2c/category-pages/brand-page/brand-logo.png', 0, 'Philips');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('CEMU', 'Ceramic Mutosi', 'Vietnam', 'https://ceramicmutosi.vn/wp-content/uploads/2019/10/logo-ceramic-mutosi.png', 0, 'Ceramic Mutosi');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('OP', 'OPPO', 'China', 'https://www.oppo.com/content/dam/oppo/common/mkt/vn/logo.png', 0, 'OPPO');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('VV', 'Vivo', 'China', 'https://www.vivo.com.vn/wp-content/uploads/2019/10/logo-vivo.png', 0, 'Vivo');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('XI', 'Xiaomi', 'China', 'https://www.xiaomi.com/vn/static/images/logo.png', 0, 'Xiaomi');
-insert into BRANDS(BRAND_ID ,BRAND_NAME, CONTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
+insert into BRANDS(BRAND_ID ,BRAND_NAME, COUNTRY, BRAND_IMAGE, NUMBER_PRODUCT, BRAND_DESCRIPTION)
     values('HO', 'Hommy' , 'Vietnam', 'https://hommy.vn/wp-content/uploads/2019/10/logo-hommy.png', 0, 'Hommy');
 
 -- CATEGORIES

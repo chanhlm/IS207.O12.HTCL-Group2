@@ -31,7 +31,7 @@
             <ul>
                 <li> <a href="./index.php?page=category"><i class="bx bx-list-ul"></i>Danh sách</a></li>
                 <li> <a href="./index.php?page=category-insert"><i class="bx bx-add-to-queue"></i>Thêm danh mục</a></li>
-                <li> <a href="./index.php?page=category-update"><i class="bx bx-add-to-queue"></i>Sửa danh mục</a></li>
+                <li> <a href="./index.php?page=category-update"><i class="bx bx-edit"></i>Sửa danh mục</a></li>
             </ul>
         </li>
         <li>    
@@ -42,13 +42,13 @@
             <ul>
                 <li> <a href="./index.php?page=product"><i class="bx bxs-package"></i>Danh sách</a></li>
                 <li> <a href="./index.php?page=product-insert"><i class="bx bx-add-to-queue"></i>Thêm sản phẩm</a></li>
-                <li> <a href="./index.php?page=product-update"><i class="bx bx-add-to-queue"></i>Sửa sản phẩm</a></li>
+                <li> <a href="./index.php?page=product-update"><i class="bx bx-edit"></i>Sửa sản phẩm</a></li>
             </ul>
         </li>
 
         <li>    
             <a class="has-arrow" href="javascript:;">
-                <div class="parent-icon"><i class="bx bx-package"></i></div>
+                <div class="parent-icon"><i class="bx bx-buildings"></i></div>
                 <div class="menu-title">Kho hàng</div>
             </a>
             <ul>
@@ -58,11 +58,16 @@
             </ul>
         </li>
 
-        <li>
-            <a href="./index.php?page=supplier">
-                <div class="parent-icon"> <i class='bx bxs-hourglass-top'></i></div>
-                <div class="menu-title">Nhà cung cấp</div>
+        <li>    
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="bx bx-briefcase-alt-2"></i></div>
+                <div class="menu-title">Nhãn hàng</div>
             </a>
+            <ul>
+                <li> <a href="./index.php?page=brand"><i class="bx bxs-package"></i>Danh sách</a></li>
+                <li> <a href="./index.php?page=brand-insert"><i class="bx bx-add-to-queue"></i>Thêm nhãn hàng</a></li>
+                <li> <a href="./index.php?page=brand-update"><i class="bx bx-edit"></i>Sửa nhãn hàng</a></li>
+            </ul>
         </li>
         
 

@@ -161,7 +161,7 @@ $sql_brand = mysqli_query($connect, "SELECT * FROM BRANDS");
             // Kiểm tra nếu product_id không rỗng
             $.ajax({
                 type: "POST",
-                url: "./backend/get_product_data.php",
+                url: "./backend/product_fetch_data.php",
                 data: {
                     product_id: productId
                 },
