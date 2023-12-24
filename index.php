@@ -55,7 +55,13 @@ include_once "./libraries/connectDB.php";
         include('./public/views/cart.php');
     }
     elseif ($tam == 'purchase-history') {
-        include('./public/views/purchase-history.php');
+        include('./public/views/purchase-history.php'); 
+    }
+    elseif ($tam == 'purchase-history-detail') {
+        include('./public/views/purchase-history-detail.php');
+    }
+    elseif ($tam == 'checkout') {
+        include('./public/views/checkout.php');
     }
     // elseif ($tam=='tintuc') {
     //     include('include/tintuc.php');}

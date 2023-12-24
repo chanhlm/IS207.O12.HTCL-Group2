@@ -62,7 +62,7 @@
                     <h5><span class="finalTotal">0</span> VNĐ</h5>
                   </div>
 
-                  <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Đặt hàng</button>
+                  <button type="button" class="btn btn-dark btn-block btn-lg" id="btnPlaceOrder" data-mdb-ripple-color="dark">Đặt hàng</button>
                 </div>
               </div>
             </div>
@@ -258,4 +258,15 @@
     $('.finalTotal').html(formatNumber(finalTotal));
     $('.totalPrice').html(formatNumber(total));  
   }
+</script>
+
+
+<script>
+  $(document).ready(function() {
+        // Bắt sự kiện click cho nút "Đặt hàng"
+        $("#btnPlaceOrder").click(function() {
+            // Chuyển hướng đến trang điền thông tin khi nhấn nút
+            window.location.href = "./index.php?page=checkout";
+        });
+    });
 </script>

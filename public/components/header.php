@@ -30,7 +30,7 @@
             
             <?php
                 if (isset($_SESSION['role']) && ($_SESSION['role'] == 2)) {
-                    echo "<div class=\"login-btn btn text-center\"><a href=\"./admin/backend/logout.php\">Xin chào<br />".$_SESSION['phone']."</a></div>";
+                    echo "<div class=\"login-btn btn text-center\"><a href=\"./admin/backend/logout.php\">Xin chào<br />".$_SESSION['phone']."<br>Đăng xuất</a></div>";
                 }
                 else{
                     echo "<div class=\"login-btn btn text-center\"><a href=\"./index.php?page=authentication\">Đăng kí<br />Đăng nhập</a></div>";

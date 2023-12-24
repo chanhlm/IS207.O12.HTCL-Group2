@@ -5,12 +5,13 @@ section{
 section{
   /* margin-top: 20px; */
   padding-top: 100px;
+  padding-bottom: 0px;
   /* background-color: var(--backgound-color); */
 }
 
 .container{
-  padding-left: 100px;
-  width: 75%;
+  padding-left: 60px;
+  /* width: 75%; */
 }
 
   
