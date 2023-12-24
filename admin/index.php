@@ -60,29 +60,39 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1)
                 include('./views/category/category-insert.php');
             } elseif ($tam == 'category-update') {
                 include('./views/category/category-update.php');
-            } elseif ($tam == 'product') {
+            } 
+            
+            elseif ($tam == 'product') {
                 include('./views/product/product.php');
             } elseif ($tam == 'product-insert') {
                 include('./views/product/product-insert.php');
             } elseif ($tam == 'product-update') {
                 include('./views/product/product-update.php');
-            }elseif ($tam =='brand') {
+            }
+            
+            elseif ($tam =='brand') {
                 include('./views/brand/brand.php');
             }elseif ($tam =='brand-insert') {
                 include('./views/brand/brand-insert.php');
             }elseif ($tam =='brand-update') {
                 include('./views/brand/brand-update.php');
-            } elseif ($tam == 'warehouse') {
+            } 
+            
+            elseif ($tam == 'warehouse') {
                 include('./views/warehouse/warehouse.php');
             } elseif ($tam == 'warehouse-import') {
                 include('./views/warehouse/warehouse-import.php');
             } elseif ($tam == 'warehouse-export') {
                 include('./views/warehouse/warehouse-export.php');
-            } elseif ($tam == 'customer') {
-                include('./views/customer/customer.php');
+            } 
+            
+            elseif ($tam == 'customer') {
+                include('./views/user/customer.php');
             } elseif ($tam == 'employee') {
-                include('./views/employee/employee.php');
-            } elseif ($tam == 'order') {
+                include('./views/user/employee.php');
+            }
+            
+            elseif ($tam == 'order') {
                 include('./views/order/order.php');
             } elseif ($tam == 'order-detail') {
                 include('./views/order/order-detail.php');

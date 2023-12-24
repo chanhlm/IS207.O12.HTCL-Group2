@@ -6,7 +6,7 @@
         LEFT JOIN ORDERS ON USERS.USER_PHONE = ORDERS.USER_PHONE
         WHERE ROLE_NAME = 'User'
         GROUP BY USERS.USER_PHONE
-        ORDER BY USERS.CREATE_DATE DESC;
+        ORDER BY USERS.CREATE_DATE DESC, USERS.USER_STATE ASC;
     ");
     
 	$count_customer = mysqli_num_rows($sql_customer);
@@ -30,7 +30,7 @@
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-info" onclick="redirectToOrderPage()">Xem hóa đơn</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-success" onclick="UserAction('unlock')">Mở khóa</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-warning" onclick="UserAction('lock')">Khóa</a>
-					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
+					<!-- <a href="javascript:void(0);" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a> -->
 				</div>
 			</div>
 		</div>	
@@ -102,42 +102,42 @@
 		btnDeleteSelected.disabled = selectedCustomers.length === 0;
 	}
 
-	function deleteSelected() {
-		var selectedCustomers = document.querySelectorAll('input[name="selected_customers[]"]:checked');
-		if (selectedCustomers.length === 0) {
-			alert("Vui lòng chọn ít nhất một nhãn hàng để xóa.");
-			return;
-		}
+	// function deleteSelected() {
+	// 	var selectedCustomers = document.querySelectorAll('input[name="selected_customers[]"]:checked');
+	// 	if (selectedCustomers.length === 0) {
+	// 		alert("Vui lòng chọn ít nhất một người dùng để xóa.");
+	// 		return;
+	// 	}
 
-		var confirmDelete = confirm("Bạn có chắc muốn xóa các nhãn hàng đã chọn?");
-		if (confirmDelete) {
-			var customerIds = Array.from(selectedCustomers).map(function (checkbox) {
-				return checkbox.value;
-			});
+	// 	var confirmDelete = confirm("Bạn có chắc muốn xóa các người dùng đã chọn?");
+	// 	if (confirmDelete) {
+	// 		var customerIds = Array.from(selectedCustomers).map(function (checkbox) {
+	// 			return checkbox.value;
+	// 		});
 
-			var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function () {
-				if (xhr.readyState === 4) {
-					if (xhr.status === 200) {
-						// Successful response from the server
-						alert(xhr.responseText); // Display success message or handle accordingly
-						// You may want to reload or update the table after successful deletion
-						location.reload();
-					} else {
-						// Error handling
-						alert('Lỗi xóa: ' + xhr.statusText);
-					}
-				}
-			};
+	// 		var xhr = new XMLHttpRequest();
+	// 		xhr.onreadystatechange = function () {
+	// 			if (xhr.readyState === 4) {
+	// 				if (xhr.status === 200) {
+	// 					// Successful response from the server
+	// 					alert(xhr.responseText); // Display success message or handle accordingly
+	// 					// You may want to reload or update the table after successful deletion
+	// 					location.reload();
+	// 				} else {
+	// 					// Error handling
+	// 					alert('Lỗi xóa: ' + xhr.statusText);
+	// 				}
+	// 			}
+	// 		};
 
-			// Construct the URL for the delete operation
-			var url = "./backend/customer_delete.php?customer_ids=" + customerIds.join(",");
+	// 		// Construct the URL for the delete operation
+	// 		var url = "./backend/customer_delete.php?customer_ids=" + customerIds.join(",");
 
-			// Open and send the request
-			xhr.open("GET", url, true);
-			xhr.send();
-		}
-	}
+	// 		// Open and send the request
+	// 		xhr.open("GET", url, true);
+	// 		xhr.send();
+	// 	}
+	// }
 
 	// Thêm sự kiện change để cập nhật trạng thái của nút xóa khi checkbox thay đổi
 	document.addEventListener('DOMContentLoaded', function () {
@@ -177,7 +177,7 @@
 		var selectedCustomers = document.querySelectorAll('input[name="selected_customers[]"]:checked');
 
         // Ensure that exactly one customer is selected
-        if (selectedCustomer.length === 1) {
+        if (selectedCustomers.length === 1) {
             var selectedCustomerId = selectedCustomers[0].value;
             window.location.href = './index.php?page=order&customer_id=' + selectedCustomerId;
         } else {
