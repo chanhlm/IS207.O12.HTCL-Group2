@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include "../../libraries/connectDB.php";
 
     // Kiểm tra xem số điện thoại đã tồn tại trong cơ sở dữ liệu chưa
-    $phoneExistsQuery = "SELECT * FROM users WHERE USER_PHONE = '$userPhone'";
+    $phoneExistsQuery = "SELECT * FROM users WHERE USER_PHONE = '$userPhone' AND USER_STATE = 'active'";
     $phoneExistsResult = $connect->query($phoneExistsQuery);
 
     if ($phoneExistsResult->num_rows > 0) {
