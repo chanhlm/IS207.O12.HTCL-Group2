@@ -152,9 +152,8 @@
    `;
     // Thêm thẻ HTML vào giỏ hàng
   });
-  $('.countProduct').html(cart.length);
   $('#cart').html(productHtml);
-  calculateTotalOrder(cart)
+  calculateTotalOrder(cart);
 
   function updateQuantity(productId, change) {
     // Lấy danh sách sản phẩm từ localStorage (nếu có)
@@ -242,21 +241,25 @@
   function calculateTotalOrder(cart) {
     let total = 0;
     let finalTotal = 0;
+    let countProduct = 0;
 
     // Loop through each product in the cart
     $.each(cart, function(index, product) {
       // Multiply the product's price by its quantity
       let productTotal = product.productPrice * product.productQuantity;
       let productDiscountedTotal = product.productDiscountedPrice * product.productQuantity;
+      let productCount = product.productQuantity;
 
       // Add the product's total to the order's total
       total += productTotal;
       finalTotal += productDiscountedTotal;
+      countProduct += productCount;
     });
 
     // Display the total on the page
     $('.finalTotal').html(formatNumber(finalTotal));
     $('.totalPrice').html(formatNumber(total));  
+    $('.countProduct').html(countProduct);
   }
 </script>
 

@@ -2,10 +2,10 @@
 include_once "../libraries/connectDB.php";
 session_start();
 
-if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) 
-{
-    header('location: ../index.php');
-}
+// if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) 
+// {
+//     header('location: ../index.php');
+// }
 ?>
 
 <!DOCTYPE html>
