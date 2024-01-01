@@ -25,7 +25,8 @@ include_once "./libraries/connectDB.php";
     <link href="./shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon">
 
     <?php
-    $pageTitle = "ecoTech - Trang chủ";
+    // $pageTitle = "electroTech - Trang chủ";
+    $pageTitle = "ElectroTech";
     ?>
 
     <title><?php echo $pageTitle ?></title>

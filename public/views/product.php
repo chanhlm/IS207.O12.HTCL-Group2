@@ -418,7 +418,7 @@ if (isset($_GET['product'])) {
         let productImage = document.querySelector('#productImage').value;
         let productDiscountedPrice;
         if (document.querySelector('#productDiscountedPrice').value == 0) {
-            productDiscountedPrice = 0;
+            productDiscountedPrice = productPrice;
         } else
         productDiscountedPrice = document.querySelector('#productDiscountedPrice').value;
 

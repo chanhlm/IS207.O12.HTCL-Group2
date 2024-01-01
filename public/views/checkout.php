@@ -1,10 +1,10 @@
 <link rel="stylesheet" href="./public/assets/css/checkout.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<section class="row">
-	<div class="container bg-default col-lg-8">
-		<h4 class="my-4">Thông tin giao hàng</h4>
-		<form method="POST" id="orderForm">
+<section>
+	<form method="POST" id="orderForm" class="row" action="./public/backend/process_order.php">
+		<div class="container bg-default col-lg-8">
+			<h4 class="my-4">Thông tin giao hàng</h4>
 			<div class="form-row">
 				<div class="col-md-8 form-group pb-2">
 					<label for="username">Họ và tên</label>
@@ -52,43 +52,43 @@
 			<input type="submit" value="Đặt hàng" class="btn btn-success bt-lg btn-block" name="submit">
 			<div class="pb-5"></div>
 		</div>
-		
+
 		<div class="col-lg-4 bg-grey">
 			<div class="p-5">
 				<h3 class="fw-bold mb-5 mt-2 pt-1">Tổng tiền</h3>
 				<hr class="my-4" />
-				
+
 				<div class="d-flex justify-content-between mb-4">
 					<h5 class="text-uppercase">Sản phẩm: <span class="countProduct">0</span></h5>
 					<!-- <h6><span class="totalPrice">0</span> VNĐ</h6> -->
 				</div>
-				
+
 				<h5 class="text-uppercase mb-4">NHẬN HÀNG</h5>
-				
+
 				<div class="mb-4 pb-2">
-					<select class="select form-control" name="receiver">
+					<select class="select form-control" name="shipping">
 						<option value="0"> Tại cửa hàng </option>
 						<option value="1"> Tại nhà</option>
 					</select>
 				</div>
-				
-			</form>
-			<!-- <h5 class="text-uppercase mb-3">Mã giảm giá</h5> -->
 
-			<!-- <div class="mb-5">
-				<div class="form-outline">
-					<input type="text" id="discountCode" class="form-control" placeholder="Nhập mã giảm giá" />
+				<h5 class="text-uppercase mb-3">Mã giảm giá</h5>
+
+				<div class="mb-5">
+					<div class="form-outline">
+						<input type="text" id="discountCode" class="form-control" placeholder="Nhập mã giảm giá" />
+					</div>
 				</div>
-			</div> -->
 
-			<hr class="my-4" />
+				<hr class="my-4" />
 
-			<div class="d-flex justify-content-between mb-5">
-				<h5 class="text-uppercase">Tổng tiền</h5>
-				<h5><span class="finalTotal">0</span> VNĐ</h5>
+				<div class="d-flex justify-content-between mb-5">
+					<h5 class="text-uppercase">Tổng tiền</h5>
+					<h5><span class="finalTotal" name="total">0</span> VNĐ</h5>
+				</div>
 			</div>
 		</div>
-	</div>
+	</form>
 </section>
 
 <script>
@@ -132,25 +132,41 @@
 
 
 <script>
-$(document).ready(function() {
-   $('#orderForm').on('submit', function(e) {
-       e.preventDefault();
-       
-       let formData = $(this).serializeArray();
-       let cart = JSON.parse(localStorage.getItem('cart')) || [];
-       
-       $.ajax({
-           type: 'POST',
-           url: 'process_order.php',
-           data: { form: formData, cart: JSON.stringify(cart) },
-           success: function(response) {
-               console.log(response);
-           }
-       });
-   });
-});
+	$(document).ready(function() {
+		$('#orderForm').on('submit', function(e) {
+			e.preventDefault();
 
+			// Retrieve finalTotal value and convert it to a number
+			let finalTotalString = $('.finalTotal').text().replace(/\./g, '');
+			let finalTotalValue = parseFloat(finalTotalString);
+
+			let formData = $(this).serializeArray();
+			let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+			// Add finalTotal to the data object
+			formData.push({
+				name: 'finalTotal',
+				value: finalTotalValue
+			});
+
+			$.ajax({
+				type: 'POST',
+				url: './public/backend/process_order.php',
+				data: {
+					form: JSON.stringify(formData),
+					cart: JSON.stringify(cart)
+				},
+				success: function(response) {
+					console.log(response);
+					if (response == 'success') {
+						alert('Đặt hàng thành công');
+						localStorage.removeItem('cart');
+						window.location.href = './index.php';
+					} else {
+						alert('Đặt hàng thất bại');
+					}
+				}
+			});
+		});
+	});
 </script>
-
-
-

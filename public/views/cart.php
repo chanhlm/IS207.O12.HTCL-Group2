@@ -132,7 +132,7 @@
         </button>
       </div>
       <div class="col-md-3 col-lg-2 col-xl-2 p-0">`;
-    if (product.productDiscountedPrice == 0) {
+    if (product.productDiscountedPrice == product.productPrice) {
       productHtml += `
         <h6 class="text-black fs-6">${formatNumber(parseInt(product.productPrice))} VNĐ</h6>  
         `;

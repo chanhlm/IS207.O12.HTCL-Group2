@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2023 at 08:15 AM
+-- Generation Time: Jan 01, 2024 at 07:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -153,7 +153,7 @@ CREATE TABLE `orders` (
   `ORDER_DATE` date NOT NULL,
   `ORDER_TOTAL` int(11) NOT NULL,
   `ORDER_STATUS` varchar(50) NOT NULL,
-  `ORDER_RECEIVER` varchar(50) NOT NULL,
+  `ORDER_SHIPPING` int(10) NOT NULL DEFAULT '0',
   `USER_PHONE` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -167,7 +167,7 @@ CREATE TABLE `order_details` (
   `ORDER_DETAIL_ID` int(11) NOT NULL,
   `ORDER_DETAIL_QUANTITY` int(11) NOT NULL,
   `ORDER_DETAIL_PRICE` int(11) NOT NULL,
-  `ORDERD_DETAIL_STATUS` varchar(50) NOT NULL,
+  `ORDERD_DETAIL_STATUS` varchar(50),
   `ORDER_ID` int(11) NOT NULL,
   `PRODUCT_ID` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -326,19 +326,19 @@ CREATE TABLE `promotion` (
 --
 
 INSERT INTO `promotion` (`PROMOTION_ID`, `PROMOTION_CODE`, `PROMOTION_STARTDATE`, `PROMOTION_ENDDATE`, `PRODUCT_ID`) VALUES
-('PROMO1', 'CODE1', '2023-12-01', '2023-12-31', 'TV1'),
-('PROMO10', 'CODE1', '2023-12-01', '2023-12-31', 'TBSA1'),
-('PROMO11', 'CODE1', '2023-12-01', '2023-12-31', 'TBSA2'),
-('PROMO12', 'CODE1', '2023-12-01', '2023-12-31', 'TL1'),
-('PROMO13', 'CODE1', '2023-12-01', '2023-12-31', 'TL2'),
-('PROMO2', 'CODE1', '2023-12-01', '2023-12-31', 'TV2'),
-('PROMO3', 'CODE1', '2023-12-01', '2023-12-31', 'TV3'),
-('PROMO4', 'CODE1', '2023-12-01', '2023-12-31', 'TV4'),
-('PROMO5', 'CODE1', '2023-12-01', '2023-12-31', 'TV5'),
-('PROMO6', 'CODE1', '2023-12-01', '2023-12-31', 'TV6'),
-('PROMO7', 'CODE1', '2023-12-01', '2023-12-31', 'MG1'),
-('PROMO8', 'CODE1', '2023-12-01', '2023-12-31', 'MG2'),
-('PROMO9', 'CODE1', '2023-12-01', '2023-12-31', 'MG3');
+('PROMO1', 'CODE1', '2023-12-01', '2024-01-05', 'TV1'),
+('PROMO10', 'CODE1', '2023-12-01', '2024-01-05', 'TBSA1'),
+('PROMO11', 'CODE1', '2023-12-01', '2024-01-05', 'TBSA2'),
+('PROMO12', 'CODE1', '2023-12-01', '2024-01-05', 'TL1'),
+('PROMO13', 'CODE1', '2023-12-01', '2024-01-05', 'TL2'),
+('PROMO2', 'CODE1', '2023-12-01', '2024-01-06', 'TV2'),
+('PROMO3', 'CODE1', '2023-12-01', '2024-01-06', 'TV3'),
+('PROMO4', 'CODE1', '2023-12-01', '2024-01-06', 'TV4'),
+('PROMO5', 'CODE1', '2023-12-01', '2024-01-06', 'TV5'),
+('PROMO6', 'CODE1', '2023-12-01', '2024-01-06', 'TV6'),
+('PROMO7', 'CODE1', '2023-12-01', '2024-01-06', 'MG1'),
+('PROMO8', 'CODE1', '2023-12-01', '2024-01-06', 'MG2'),
+('PROMO9', 'CODE1', '2023-12-01', '2024-01-06', 'MG3');
 
 -- --------------------------------------------------------
 
@@ -416,7 +416,7 @@ CREATE TABLE `users` (
   `USER_ROLE` int(11) NOT NULL DEFAULT 2,
   `USER_STATE` varchar(50) NOT NULL DEFAULT 'active',
   `USER_IMAGE` varchar(100) DEFAULT NULL,
-  `CREATE_DATE` date NOT NULL,
+  `CREATE_DATE` date NOT NULL DEFAULT current_timestamp(),
   `LAST_LOGIN` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
