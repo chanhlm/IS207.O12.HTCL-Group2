@@ -90,7 +90,7 @@ $result_order = mysqli_query($connect, $sql_order);
 
                 <div class=" ">
                   <div class="cost w-100 pt-2"> TỔNG TIỀN: ' . number_format($order_row['ORDER_TOTAL']) . 'đ</div>
-                  <div class="w-100 align-right"><a href="./index.php?page=order_detail&id=' . $order_row['ORDER_ID'] .'" class="btn btn-outline-success" style = "font-size: 15px;">Xem chi tiết</a></div>
+                  <div class="w-100 align-right"><a href="./index.php?page=order-detail&id=' . $order_row['ORDER_ID'] .'" class="btn btn-outline-success" style = "font-size: 15px;">Xem chi tiết</a></div>
                 </div>
               </div>
               ';

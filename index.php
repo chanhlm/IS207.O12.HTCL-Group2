@@ -67,13 +67,9 @@ include_once "./libraries/connectDB.php";
     elseif ($tam == 'order') {
         include('./public/views/order.php');
     }
-
-    // elseif ($tam=='tintuc') {
-    //     include('include/tintuc.php');}
-    //elseif ($tam=='chitiettin') {
-    //     include('include/chitiettin.php');}
-    // elseif ($tam=='xemdonhang') {
-    //     include('include/xemdonhang.php');}
+    elseif ($tam == 'order-detail') {
+        include('./public/views/order-detail.php');
+    }
     else {
         include('./public/views/home.php');
     }
