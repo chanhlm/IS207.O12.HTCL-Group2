@@ -117,7 +117,7 @@
         <img src="${product.productImage}" class="img-fluid rounded-3" alt="${product.productName}" />
       </div>
       <div class="col-md-3 col-lg-3 col-xl-4">
-        <h6 class="text-black mb-0">${product.productName}</h6>
+        <a href = "./index.php?page=product&product=${product.productId}"><h6 class="text-black mb-0">${product.productName}</h6></a>
       </div>
       <div class="col-md-3 col-lg-3 col-xl-2 d-flex p-1">
         <button class="btn btn-link px-2" onclick="updateQuantity('${product.productId}', -1)">

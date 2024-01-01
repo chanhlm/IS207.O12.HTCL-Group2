@@ -158,10 +158,11 @@
 				},
 				success: function(response) {
 					console.log(response);
-					if (response == 'success') {
+					response = parseInt(response);
+					if (typeof response === "number") {
 						alert('Đặt hàng thành công');
 						localStorage.removeItem('cart');
-						window.location.href = './index.php';
+						window.location.href = './index.php?page=order&id=' + response;
 					} else {
 						alert('Đặt hàng thất bại');
 					}

@@ -15,7 +15,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 0.5fr 0.6fr 2fr;
     grid-gap: 0.2rem;
-    text-align: center;
+    /* text-align: center; */
 }
 
 @media only screen and (max-width: 550px) {
@@ -39,7 +39,7 @@
     display: flex;
     flex-direction: column;   
     align-items: flex-start;
-    padding: 20px 20px 20px 20px;
+    padding: 10px;
     width: 250px;
     height: 100%;
     border-radius: var(--main-radius);
@@ -55,6 +55,8 @@
     font-family: inherit;
     color: inherit;
     cursor: pointer;
+    line-height: 100%;
+    vertical-align: middle;
 }
 
 .sidebar button > span{
@@ -146,24 +148,26 @@
 }
 
 .item{
-    display: flex;
+    /* display: flex; */
     justify-content: first baseline;
     margin: 10px;
-    padding: 10px;
+    padding: 30px;
     border-radius: 10px;
     background: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     transition: 0.3s ease-in-out;
 }
 
+
 .item-image{
     margin-top: 8px;
     width: 140px;
     vertical-align: middle;
+    line-height: 100px;
 }
 
 .item img{
-    width: 90px;
+    width: 120px;
     /* height: 90px; */
     
 }
@@ -172,19 +176,17 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: flex-start;
+    align-items: flex-start
 }
 
 .btn-item-info-detail{
-    cursor: pointer;
     font-size: 16px;
     text-overflow: ellipsis;
     overflow: hidden;
+    width: 80%;
+    margin: auto;
 }
 
-.btn-item-info-detail:hover{
-    color: rgb(240, 47, 80);
-}
 
 .item-info-status.shipped{
     color: #007b55;
@@ -225,18 +227,7 @@
     flex-direction: column!important;
 }
 
-.detailReceipt{
-    margin-left: 500px;
-    position: relative;
-    padding: 3px 10px;
-    background: transparent;
-    border-radius: 3px;
-    white-space: nowrap;
-    color: #e0052b;
-    font-size: 12px;
-    cursor: pointer;
-    box-shadow: 0 0 0 0.5px #e0052b;
-}
+
 
 .item-others{
     margin-top: 5px;

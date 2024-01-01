@@ -19,8 +19,8 @@ $username = $formData[0]['value'] ?? '';
 $phone = check_addPrefix($formData[1]['value'] ?? '');
 $email = $formData[2]['value'] ?? '';
 $address = $a . ", " . $b . ", " . $c;
-$total = $formData[6]['value'] ?? '';
-$shipping = $formData[7]['value'] ?? '';
+$shipping = $formData[6]['value'] ?? '';
+$total = $formData[7]['value'] ?? '';
 
 // echo $username . "<br>" . $email . "<br>" . $phone . "<br>" . $address . "<br>" . $total . "<br>" . $shipping . "<br>";
 
@@ -56,9 +56,9 @@ if ($result->num_rows > 0) {
 $orderId = 0;
 
 // Insert data into orders table
-$sql = "INSERT INTO orders (ORDER_DATE, ORDER_TOTAL, ORDER_STATUS, ORDER_SHIPPING, USER_PHONE) VALUES (NOW(), ?, '0', ?, ?)";
+$sql = "INSERT INTO orders (ORDER_TOTAL, ORDER_SHIPPING, USER_PHONE) VALUES (?, ?, ?)";
 $stmt = $connect->prepare($sql);
-$stmt->bind_param("dss", $total, $shipping, $phone);
+$stmt->bind_param("dss", $total,$shipping, $phone);
 if ($stmt->execute() === TRUE) {
     global $orderId;
     $orderId = $stmt->insert_id; // Get the ID of the last inserted order
@@ -85,7 +85,7 @@ foreach ($cart as $item) {
 
     // echo $productId . "<br>" . $quantity . "<br>" . $discountedPrice . "<br>";
   }
-  echo "success";
+  echo $orderId;
 
 
 $stmt->close();

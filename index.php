@@ -64,6 +64,10 @@ include_once "./libraries/connectDB.php";
     elseif ($tam == 'checkout') {
         include('./public/views/checkout.php');
     }
+    elseif ($tam == 'order') {
+        include('./public/views/order.php');
+    }
+
     // elseif ($tam=='tintuc') {
     //     include('include/tintuc.php');}
     //elseif ($tam=='chitiettin') {
