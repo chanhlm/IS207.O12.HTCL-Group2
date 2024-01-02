@@ -90,11 +90,10 @@ section{
     background: rgba(0,0,0,.05);
 }
 .heading{
-    padding: 16px 24px;
+    padding: 5px 24px;
     border-radius: 4px 4px 0 0;
     font-size: 16px;
     font-weight: 300;
-    margin: 20px 0px 0px;
     display: flex;
     -webkit-box-align: center;
     align-items: center;
@@ -115,7 +114,7 @@ section{
   
     display: flex;
     justify-content: space-evenly;
-    margin: 10px 0px 20px;
+    margin: 0px 0px 20px;
   
 }
 .order__info > div:first-child{
@@ -132,10 +131,9 @@ section{
 .style_orderInfo .title {
     font-size: 16px;
     text-transform: uppercase;
-    margin: 0px 0px 15px;
     color: rgb(36, 36, 36);
     background-color: rgb(255, 255, 255);
-    padding: 5px;
+    padding:  0 5px;
     border-radius: 10px;
     font-size: 13px;
  
@@ -149,7 +147,6 @@ section{
 .order__info {
     display: flex;
     justify-content: space-evenly;
-    margin: 10px 0px 10px;
 }
 .style_orderInfo .content {
     display: flex;
@@ -233,7 +230,7 @@ a{
 }
 .productDetail .image-product>img {
     width: 150px;
-    height: 90px;
+    height: auto;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     display: block;
@@ -259,7 +256,7 @@ a{
     max-width: 100%;
 } */
 .productDetail .product_name {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 22px;
     color: rgba(0,0,0,.87);
     font-weight: bold;

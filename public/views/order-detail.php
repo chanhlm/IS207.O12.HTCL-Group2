@@ -1,35 +1,67 @@
 <?php
-// Hàm giả định để lấy thông tin đơn hàng từ CSDL hoặc nơi khác
 function getOrderDetails()
 {
     //thay csdl sau này
+    global $connect;
+    $user_phone = $_SESSION['phone'];
+    $id = $_GET['id'];
+
+    $sql_order = "SELECT * FROM `orders`, `users` WHERE `orders`.`user_phone` ='" . $user_phone . "' AND `order_id` = " . $id;
+    $result_order = mysqli_query($connect, $sql_order);
+    $order_row = $result_order->fetch_assoc();
+
+    if ($order_row['ORDER_STATUS'] == 0) {
+        $status = "Chờ tiếp nhận";
+    } else if ($order_row['ORDER_STATUS'] == 1) {
+        $status = "Đang xử lí";
+    } else if ($order_row['ORDER_STATUS'] == 2) {
+        $status = "Đang giao hàng";
+    } else if ($order_row['ORDER_STATUS'] == 3) {
+        $status = "Đã giao hàng";
+    } else {
+        $status = "Đã hủy";
+    }
+
+    if ($order_row['ORDER_SHIPPING'] == 0)
+        $shipping = "Tại cửa hàng (Đường Hàn Thuyên, khu phố 6, phường Linh Trung, TP.Thủ Đức, TP.Hồ Chí Minh)";
+    else if ($order_row['ORDER_SHIPPING'] == 1)
+        $shipping = $order_row['USER_ADDRESS'];
+
+    $product_list = array();
+    $sql = "SELECT * FROM `order_details`, `products` WHERE `order_details`.`order_id` = " . $id . " and `order_details`.`product_id` = `products`.`product_id` ";
+    $result = mysqli_query($connect, $sql);
+
+    while ($product_row = $result->fetch_assoc()) {
+        $product_list[] = array(
+            'productId' => $product_row['PRODUCT_ID'],
+            'productName' => $product_row['PRODUCT_NAME'],
+            'imageURL' => $product_row['PRODUCT_IMAGE'],
+            'warranty' => 'Bảo hành: Còn BH đến 03/08/2024',
+            'voucher' => '0 khuyến mãi',
+            'quantity' => $product_row['ORDER_DETAIL_QUANTITY'],
+            'price' => number_format($product_row['ORDER_DETAIL_PRICE'], 0, ',', '.') . ' ₫',
+            'originalPrice' => number_format($product_row['ORDER_DETAIL_PRICE'], 0, ',', '.') . ' ₫',
+        );
+    }
+    $orderId = str_pad($order_row['ORDER_ID'], 6, '0', STR_PAD_LEFT);
+    $date = date_format(date_create($order_row['ORDER_DATE']), 'd/m/Y H:i:s');
+
     return array(
-        'userName' => 'Minh Chánh',
-        'orderNumber' => '428515030',
-        'status' => 'delivered',
-        'orderDate' => '22:08 09/08/2023',
-        'deliveryAddress' => 'Ngõ A, KTX khu B làng ĐHQG, Dĩ An, Bình Dương',
-        'userPhone' => '0909090909',
+        'userName' => $order_row['USER_NAME'],
+        'orderNumber' => $orderId,
+        'status' => $status,
+        'orderDate' => $date,
+        'deliveryAddress' => $shipping,
+        'userPhone' => $order_row['USER_PHONE'],
         'deliveryMethod' => 'Thanh toán khi nhận hàng',
-        'products' => array(
-            array(
-                'productName' => 'Toshiba Smart TV 43V31MP',
-                'imageURL' => 'https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/1942/279935/product-279935-110522-094032-550x340.jpg',
-                'warranty' => 'Bảo hành: Còn BH đến 03/08/2024',
-                'voucher' => '3 khuyến mãi',
-                'quantity' => 1,
-                'price' => '9.990.000₫',
-                'originalPrice' => '12.390.000₫',
-            ),
-            // Thêm sản phẩm khác nếu cần
-        ),
-        'totalPrice' => '9.990.000₫',
+        'products' => $product_list,
+        'totalPrice' => number_format($order_row['ORDER_TOTAL'], 0, ',', '.') . ' ₫',
     );
 }
 
-// Lấy thông tin đơn hàng
 $orderDetails = getOrderDetails();
 ?>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./public/assets/css/order-detail.css" />
@@ -87,7 +119,7 @@ $orderDetails = getOrderDetails();
                 <div class="heading">
                     <span>Chi tiết đơn hàng #<?php echo $orderDetails['orderNumber']; ?></span>
                     <span class="split"> - </span>
-                    <span class="status"><?php echo ($orderDetails['status'] === 'delivered') ? 'Đã nhận hàng' : 'Chưa giao hàng'; ?></span>
+                    <span class="status"><?php echo $orderDetails['status']; ?></span>
                     <div class="order__created__date">
                         Đã đặt lúc: <?php echo $orderDetails['orderDate']; ?>
                     </div>
@@ -100,8 +132,8 @@ $orderDetails = getOrderDetails();
                                 <div class="title">ĐỊA CHỈ NGƯỜI NHẬN </div>
                                 <div class="content">
                                     <p class="cus__name"><?php echo $orderDetails['userName']; ?></p>
-                                    <p class="cus__address">
-                                        <span> Giao tại: </span>
+                                    <p class="cus__address fs-6">
+                                        <span> Địa chỉ nhận hàng: </span>
                                         <?php echo $orderDetails['deliveryAddress']; ?>
                                     </p>
                                     <p class="cus__phone">
@@ -110,7 +142,7 @@ $orderDetails = getOrderDetails();
                                 </div>
                             </div>
                             <div class="style_orderInfo">
-                                <div class="title"> HÌNH THỨC GIAO HÀNG </div>
+                                <div class="title"> HÌNH THỨC THANH TOÁN </div>
                                 <div class="content">
                                     <p><?php echo $orderDetails['deliveryMethod']; ?></p>
                                 </div>
@@ -123,7 +155,7 @@ $orderDetails = getOrderDetails();
                                 <?php foreach ($orderDetails['products'] as $product) : ?>
                                     <div class="detail-info">
                                         <div class="productDetail">
-                                            <a href="#">
+                                            <a href="./index.php?page=product&product=<?php echo $product['productId'] ?> ">
                                                 <div class="image-product">
                                                     <img src="<?php echo $product['imageURL']; ?>" alt="<?php echo $product['productName']; ?>">
                                                 </div>
@@ -157,18 +189,24 @@ $orderDetails = getOrderDetails();
                             </div>
                             <div class="total_price">
                                 <div class="text"> Tổng tiền: </div>
-                                <div class="text-price"> 9.990.000₫ </div>
+                                <div class="text-price"> <?php echo $orderDetails['totalPrice']; ?></div>
                             </div>
                             <div class="total_price">
-                                <div class="txt"> Tổng tiền đã thanh toán: </div>
-                                <div class="txt-price"> 9.990.000₫ </div>
+                                <?php
+                                if ($orderDetails['status'] == "Đã giao hàng" || $orderDetails['status'] == "Đã hủy") {
+                                    echo '<div class="txt"> Tổng tiền đã thanh toán: </div>';
+                                } else {
+                                    echo '<div class="txt"> Tổng tiền cần thanh toán: </div>';
+                                }
+                                ?>
+                                <div class="txt-price"> <?php echo $orderDetails['totalPrice']; ?> </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="back_toOrder" style="padding-left: 35%">
+            <div class="back_toOrder align-center">
                 <a class="back_Order" href="./index.php?page=purchase-history"> Về trang danh sách đơn hàng </a>
             </div>
         </div>

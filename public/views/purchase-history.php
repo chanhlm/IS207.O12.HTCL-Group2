@@ -63,7 +63,7 @@ $result_order = mysqli_query($connect, $sql_order);
           echo '<div class="item">';
           echo '
               <div class="row justify-content-between pe-4 ps-4"> 
-                <div class="item-info-status">#' . $orderId . '</div>
+                <div class="item-info-status">Mã đơn hàng: #' . $orderId . '</div>
 
                 <div class="item-info-status shipped">' . $status . '</div>
               </div>

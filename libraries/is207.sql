@@ -135,7 +135,7 @@ INSERT INTO `code_discount` (`CODE_ID`, `CODE_NAME`, `CODE_PERCENT`, `CODE_DESCR
 CREATE TABLE `feedback` (
   `FEEDBACK_ID` varchar(10) NOT NULL,
   `FEEDBACK_CONTENT` varchar(50) NOT NULL,
-  `FEEDBACK_DATE` date NOT NULL,
+  `FEEDBACK_DATE` datetime NOT NULL,
   `FEEDBACK_STATUS` varchar(50) NOT NULL,
   `PRODUCT_ID` varchar(10) NOT NULL,
   `NUMBER_STAR` int(11) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `feedback` (
 
 CREATE TABLE `orders` (
   `ORDER_ID` int(11) NOT NULL,
-  `ORDER_DATE` date NOT NULL DEFAULT current_timestamp(),
+  `ORDER_DATE` datetime NOT NULL DEFAULT current_timestamp(),
   `ORDER_TOTAL` int(11) NOT NULL,
   `ORDER_STATUS` int(10) NOT NULL DEFAULT '0',
   `ORDER_SHIPPING` int(10) NOT NULL DEFAULT '0',
@@ -316,8 +316,8 @@ DELIMITER ;
 CREATE TABLE `promotion` (
   `PROMOTION_ID` varchar(10) NOT NULL,
   `PROMOTION_CODE` varchar(50) NOT NULL,
-  `PROMOTION_STARTDATE` date NOT NULL,
-  `PROMOTION_ENDDATE` date NOT NULL,
+  `PROMOTION_STARTDATE` datetime NOT NULL,
+  `PROMOTION_ENDDATE` datetime NOT NULL,
   `PRODUCT_ID` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -416,8 +416,8 @@ CREATE TABLE `users` (
   `USER_ROLE` int(11) NOT NULL DEFAULT 2,
   `USER_STATE` varchar(50) NOT NULL DEFAULT 'active',
   `USER_IMAGE` varchar(100) DEFAULT NULL,
-  `CREATE_DATE` date NOT NULL DEFAULT current_timestamp(),
-  `LAST_LOGIN` date NOT NULL
+  `CREATE_DATE` datetime NOT NULL DEFAULT current_timestamp(),
+  `LAST_LOGIN` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
