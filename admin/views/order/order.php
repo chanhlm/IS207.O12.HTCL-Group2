@@ -31,7 +31,7 @@ $count_order = mysqli_num_rows($result_order);
 			</div>
 			<div class="ms-auto">
 				<div>
-					<a href="./index.php?page=prder-create" class="ms-2 me-2 btn btn-success">Thêm</a>
+					<a href="./index.php?page=order-create" class="ms-2 me-2 btn btn-success">Thêm</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-info" onclick="openUpdateStatusModal()">Cập nhập trạng thái</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToDetailPage()"> Xem chi tiết </a>
 				</div>
@@ -212,8 +212,8 @@ $count_order = mysqli_num_rows($result_order);
 
 				// Đóng modal
 				$("#updateStatusModal").modal("hide");
-				uncheckAllCheckboxes();
 				window.location.reload();
+				// uncheckAllCheckboxes();
 			},
 			error: function(error) {
 				console.error("Error updating status: " + error);

@@ -1,4 +1,7 @@
 <?php
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+
 function getOrderDetails()
 {
     //thay csdl sau này
@@ -31,12 +34,27 @@ function getOrderDetails()
     $sql = "SELECT * FROM `order_details`, `products` WHERE `order_details`.`order_id` = " . $id . " and `order_details`.`product_id` = `products`.`product_id` ";
     $result = mysqli_query($connect, $sql);
 
+
     while ($product_row = $result->fetch_assoc()) {
+        $sql_warranty = "SELECT * FROM `order_details` INNER JOIN `warranty` ON `warranty`.`order_detail_id` = `order_details`.`order_detail_id` and `order_details`.`order_detail_id` = " . $product_row['ORDER_DETAIL_ID'] . "";
+        $result_warranty = mysqli_query($connect, $sql_warranty);
+
+        if ($result_warranty->num_rows > 0) {
+            $warranty_row = $result_warranty->fetch_assoc();
+
+            if ($warranty_row['END_DATE'] > date("Y-m-d H:i:s"))
+                $warranty = "Bảo hành: Còn BH đến " . date_format(date_create($warranty_row['END_DATE']), 'd/m/Y');
+            else
+                $warranty = "Bảo hành: Đã hết hạn";
+        } else {
+            $warranty = "null";
+        }
+
         $product_list[] = array(
             'productId' => $product_row['PRODUCT_ID'],
             'productName' => $product_row['PRODUCT_NAME'],
             'imageURL' => $product_row['PRODUCT_IMAGE'],
-            'warranty' => 'Bảo hành: Còn BH đến 03/08/2024',
+            'warranty' => $warranty,
             'voucher' => '0 khuyến mãi',
             'quantity' => $product_row['ORDER_DETAIL_QUANTITY'],
             'price' => number_format($product_row['ORDER_DETAIL_PRICE'], 0, ',', '.') . ' ₫',
@@ -162,7 +180,7 @@ $orderDetails = getOrderDetails();
                                                 <div class="product_infoList">
                                                     <div class="product_name"><span><?php echo $product['productName']; ?></span></div>
                                                     <div class="product_warranty">
-                                                        <span><?php echo $product['warranty']; ?></span>
+                                                        <span><?php if ($product['warranty'] != "null") echo $product['warranty'] ?></span>
                                                     </div>
                                                     <div class="voucher_shop">
                                                         <span><?php echo $product['voucher']; ?></span>

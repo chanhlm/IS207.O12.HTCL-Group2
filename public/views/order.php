@@ -13,6 +13,11 @@
     $sql_detail = "SELECT sum(order_detail_quantity) as `sosp` FROM order_details, orders WHERE orders.ORDER_ID = order_details.ORDER_ID and orders.ORDER_ID = $id";
     $result_detail = mysqli_query($connect, $sql_detail);
     $row_detail = mysqli_fetch_assoc($result_detail);
+
+    if ($row_order['ORDER_SHIPPING'] == 0)
+        $shipping = "Tại cửa hàng (Đường Hàn Thuyên, khu phố 6, phường Linh Trung, TP.Thủ Đức, TP.Hồ Chí Minh)";
+    else if ($row_order['ORDER_SHIPPING'] == 1)
+        $shipping = $row_order['USER_ADDRESS'];
 ?>
 
 <section >
@@ -100,7 +105,7 @@
                                                 <tr>
                                                     <td align="left" valign="top" style="font-size: 16px; font-weight: 400; line-height: 24px;">
                                                         <p style="font-weight: 800;">Địa chỉ giao hàng</p>
-                                                        <p><?php echo $row_order['USER_ADDRESS'] ?></p>
+                                                        <p><?php echo $shipping ?></p>
                                                     </td>
                                                 </tr>
                                             </table>

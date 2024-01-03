@@ -96,8 +96,11 @@ session_start();
                 include('./views/order/order.php');
             } elseif ($tam == 'order-detail') {
                 include('./views/order/order-detail.php');
+            } elseif ($tam == 'order-create') {
+                include('./views/order/order-create.php');
+            } 
                 
-            }elseif ($tam == 'statistic') {
+            elseif ($tam == 'statistic') {
                 include('./views/statistic/statistic.php');
 
 
