@@ -96,6 +96,7 @@ session_start();
                 include('./views/order/order.php');
             } elseif ($tam == 'order-detail') {
                 include('./views/order/order-detail.php');
+                
             }elseif ($tam == 'statistic') {
                 include('./views/statistic/statistic.php');
 

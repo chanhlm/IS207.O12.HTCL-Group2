@@ -82,7 +82,8 @@
             </a>
             <ul>
                 <li> <a href="./index.php?page=order"><i class="bx bx-list-ul"></i>Danh sách đơn hàng</a></li>
-                <li> <a href="./index.php?page=create-order"><i class="bx bx-add-to-queue"></i>Tạo hóa đơn</a></li>
+                <li> <a href="./index.php?page=order-create"><i class="bx bx-add-to-queue"></i>Tạo hóa đơn</a></li>
+                <!-- <li> <a href="./index.php?page=order-update"><i class="bx bx-edit"></i>Cập nhập đơn hàng</a></li> -->
             </ul>
         </li>
 

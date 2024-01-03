@@ -1,45 +1,8 @@
 <?php
-$sql_product = "SELECT 
-		    P.PRODUCT_ID,
-		    P.PRODUCT_NAME,
-		    C.CATEGORY_NAME,
-		    B.BRAND_NAME,
-		    W.PRODUCT_QUANTITY,
-			P.PRODUCT_SALEPRICE,
-		    P.PRODUCT_IMAGE,
-		    P.PRODUCT_DESCRIPTION,
-			p.PRODUCT_STATUS
-		FROM PRODUCTS P
-		JOIN CATEGORIES C ON P.CATEGORY_ID = C.CATEGORY_ID
-		JOIN BRANDS B ON P.BRAND_ID = B.BRAND_ID
-		JOIN WAREHOUSE W ON P.PRODUCT_ID = W.PRODUCT_ID
-		ORDER BY P.CATEGORY_ID ASC, P.PRODUCT_ID ;";
+$sql = "SELECT * FROM `orders`, `users` WHERE orders.USER_PHONE = users.USER_PHONE ORDER BY orders.ORDER_ID DESC";
+$result_order = mysqli_query($connect, $sql);
+$count_order = mysqli_num_rows($result_order);
 
-if (isset($_GET['category_id'])) {
-	$category_id = $_GET['category_id'];
-	$sql_product = "SELECT 
-		    P.PRODUCT_ID,
-		    P.PRODUCT_NAME,
-		    C.CATEGORY_NAME,
-		    B.BRAND_NAME,
-		    W.PRODUCT_QUANTITY,
-			P.PRODUCT_SALEPRICE,
-		    P.PRODUCT_IMAGE,
-		    P.PRODUCT_DESCRIPTION,
-			p.PRODUCT_STATUS
-		FROM PRODUCTS P
-		JOIN CATEGORIES C ON P.CATEGORY_ID = C.CATEGORY_ID
-		JOIN BRANDS B ON P.BRAND_ID = B.BRAND_ID
-		JOIN WAREHOUSE W ON P.PRODUCT_ID = W.PRODUCT_ID
-		WHERE P.CATEGORY_ID = '$category_id'
-		ORDER BY P.CATEGORY_ID ASC, P.PRODUCT_ID ;";
-}
-
-$result_product = mysqli_query($connect, $sql_product);
-
-if ($result_product)
-	$count_product = mysqli_num_rows($result_product);
-else $count_product = 0;
 
 ?>
 
@@ -62,20 +25,20 @@ else $count_product = 0;
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb mb-0 p-0">
 						<li class="breadcrumb-item"><a href="./index.php"><i class="bx bx-home-alt"></i></a></li>
-						<li class="breadcrumb-item active" aria-current="page">Sản phẩm </li>
+						<li class="breadcrumb-item active" aria-current="page">Đơn hàng </li>
 					</ol>
 				</nav>
 			</div>
 			<div class="ms-auto">
 				<div>
-					<a href="./index.php?page=product-insert" class="ms-2 me-2 btn btn-success">Thêm</a>
-					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToUpdatePage()"> Sửa </a>
-					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
+					<a href="./index.php?page=prder-create" class="ms-2 me-2 btn btn-success">Thêm</a>
+					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-info" onclick="openUpdateStatusModal()">Cập nhập trạng thái</a>
+					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToDetailPage()"> Xem chi tiết </a>
 				</div>
 			</div>
 		</div>
 
-		<h6 class="mb-0 text-uppercase">Sản phẩm - <?php echo $count_product ?> sản phẩm</h6>
+		<h6 class="mb-0 text-uppercase">Đơn hàng - <?php echo $count_order ?> đơn</h6>
 		<hr />
 		<div class="card ">
 			<div class="card-body container">
@@ -83,55 +46,66 @@ else $count_product = 0;
 					<table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
 						<thead>
 							<tr class="text-center align-middle">
-								<th scope="col">Chọn <input type="checkbox" id="selectAllCheckbox"></th>
-								<th scope="col">Mã sản phẩm</th>
-								<th scope="col">Tên sản phẩm</th>
-								<th scope="col">Danh mục</th>
-								<th scope="col">Hãng</th>
-								<th scope="col">Giá bán</th>
-								<th scope="col">Tồn kho</th>
-								<th scope="col">Mô tả sản phẩm</th>
-								<th scope="col">Hình ảnh</th>
+								<th scope="col">Chọn <br> <input type="checkbox" id="selectAllCheckbox"></th>
+								<th scope="col">Mã đơn hàng</th>
+								<th scope="col">Ngày đặt hàng</th>
+								<th scope="col">Tên khách hàng</th>
+								<th scope="col">Số điện thoại</th>
+								<th scope="col">Tổng hóa đơn</th>
+								<th scope="col">Trạng thái</th>
+
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							if ($result_product)
-							while ($row_product = mysqli_fetch_assoc($result_product)) {
+							if ($result_order)
+								while ($row_order = mysqli_fetch_assoc($result_order)) {
 							?>
 								<tr class="align-middle 
-								<?php 
-								if ($row_product['PRODUCT_STATUS'] !== 'active') {
-									echo "table-danger text-decoration-line-through";
-								}
+								<?php
+									if ($row_order['ORDER_STATUS'] == 4) {
+										echo "table-danger text-decoration-line-through";
+									} else if ($row_order['ORDER_STATUS'] == 3) {
+										echo "table-success";
+									}
+
+
+									if ($row_order['ORDER_STATUS'] == 0) {
+										$status = "Chờ tiếp nhận";
+									} else if ($row_order['ORDER_STATUS'] == 1) {
+										$status = "Đang xử lí";
+									} else if ($row_order['ORDER_STATUS'] == 2) {
+										$status = "Đang giao hàng";
+									} else if ($row_order['ORDER_STATUS'] == 3) {
+										$status = "Đã giao hàng";
+									} else {
+										$status = "Đã hủy";
+									}
 								?>
 								">
-									<td class="text-center"><input type="checkbox" name="selected_products[]" value="<?php echo $row_product['PRODUCT_ID']; ?>"></td>
-									<td class="text-center"><?php echo $row_product['PRODUCT_ID'] ?></td>
-									<td> <?php echo $row_product['PRODUCT_NAME']; ?> </td>
-									<td class="text-center"><?php echo $row_product['CATEGORY_NAME'] ?></td>
-									<td class="text-center"><?php echo $row_product['BRAND_NAME'] ?></td>
-									<td class="text-center"><?php echo $row_product['PRODUCT_SALEPRICE'] ?></td>
-									<td class="text-center"><?php echo $row_product['PRODUCT_QUANTITY'] ?></td>
-									<td><?php echo $row_product['PRODUCT_DESCRIPTION'] ?></td>
-									<td class="text-center"><img src="<?php echo $row_product['PRODUCT_IMAGE'] ?>" width="150px" align-center></td>
+									<td class="text-center"><input type="checkbox" name="selected_orders[]" value="<?php echo $row_order['ORDER_ID']; ?>"></td>
+									<td class="text-center">#<?php echo str_pad($row_order['ORDER_ID'], 6, '0', STR_PAD_LEFT) ?></td>
+									<td class="text-center"> <?php echo date_format(date_create($row_order['ORDER_DATE']), 'd/m/Y H:i:s'); ?> </td>
+									<td class="text-center"><?php echo $row_order['USER_NAME'] ?></td>
+									<td class="text-center"><?php echo $row_order['USER_PHONE'] ?></td>
+									<td class="text-center"><?php echo number_format($row_order['ORDER_TOTAL'], 0, ',', '.') . ' ₫' ?></td>
+									<td class="text-center"><?php echo $status ?></td>
+
 								</tr>
 							<?php
-							}
+								}
 							?>
 						</tbody>
 
 						<tfoot>
 							<tr class="text-center align-middle">
 								<th>Chọn</th>
-								<th>Mã sản phẩm</th>
-								<th>Tên sản phẩm</th>
-								<th>Danh mục</th>
-								<th>Hãng</th>
-								<th>Giá bán</th>
-								<th>Tồn kho</th>
-								<th>Mô tả sản phẩm</th>
-								<th>Hình ảnh</th>
+								<th scope="col">Mã đơn hàng</th>
+								<th scope="col">Ngày đặt hàng</th>
+								<th scope="col">Tên khách hàng</th>
+								<th scope="col">Số điện thoại</th>
+								<th scope="col">Tổng hóa đơn</th>
+								<th scope="col">Trạng thái</th>
 							</tr>
 						</tfoot>
 					</table>
@@ -145,92 +119,134 @@ else $count_product = 0;
 
 <script>
 	function updateDeleteButtonState() {
-		var selectedProducts = document.querySelectorAll('input[name="selected_products[]"]:checked');
+		var selectedProducts = document.querySelectorAll('input[name="selected_orders[]"]:checked');
 		var btnDeleteSelected = document.getElementById('btnDeleteSelected');
 		btnDeleteSelected.disabled = selectedProducts.length === 0;
 	}
 
-	function deleteSelected() {
-		var selectedProducts = document.querySelectorAll('input[name="selected_products[]"]:checked');
-		if (selectedProducts.length === 0) {
-			alert("Vui lòng chọn ít nhất một sản phẩm để xóa.");
-			return;
-		}
-
-		var confirmDelete = confirm("Bạn có chắc muốn xóa các sản phẩm đã chọn?");
-		if (confirmDelete) {
-			var productIds = Array.from(selectedProducts).map(function(checkbox) {
-				
-				return checkbox.value;
-			});
-
-			var xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function() {	
-				if (xhr.readyState === 4) {
-					if (xhr.status === 200) {
-						// Successful response from the server
-						alert(xhr.responseText); // Display success message or handle accordingly
-						// You may want to reload or update the table after successful deletion
-						location.reload();	
-					} else {
-						// Error handling
-						alert('Lỗi xóa: ' + xhr.statusText);
-					}
-				}
-			};
-
-			// Construct the URL for the delete operation
-			var url = "./backend/product_delete.php?product_ids=" + productIds.join(",");
-
-			// Open and send the request
-			xhr.open("GET", url, true);
-			xhr.send();
-		}
-	}
-
 	// Thêm sự kiện change để cập nhật trạng thái của nút xóa khi checkbox thay đổi
 	document.addEventListener('DOMContentLoaded', function() {
-		var checkboxes = document.querySelectorAll('input[name="selected_products[]"]');
+		var checkboxes = document.querySelectorAll('input[name="selected_orders[]"]');
 		checkboxes.forEach(function(checkbox) {
 			checkbox.addEventListener('change', updateDeleteButtonState);
 		});
 	});
-</script>
 
-<script>
-	function redirectToUpdatePage() {
-		var selectedProducts = document.querySelectorAll('input[name="selected_products[]"]:checked');
+	function uncheckAllCheckboxes() {
+		// Lấy tất cả các checkbox theo tên
+		var checkboxes = document.querySelectorAll('input[name="selected_orders[]"]');
 
-		// Ensure that exactly one cproduct is selected
-		if (selectedProducts.length === 1) {
-			var selectedProductId = selectedProducts[0].value;
-			window.location.href = './index.php?page=product-update&product_id=' + selectedProductId;
+		// Lặp qua từng checkbox và đặt thuộc tính checked thành false
+		checkboxes.forEach(function(checkbox) {
+			checkbox.checked = false;
+		});
+
+		// Sau khi bỏ tick tất cả checkbox, cập nhật trạng thái của nút xóa
+		updateDeleteButtonState();
+	}
+
+	function redirectToDetailPage() {
+		var selectedOrders = document.querySelectorAll('input[name="selected_orders[]"]:checked');
+
+		// Ensure that exactly one  is selected
+		if (selectedOrders.length === 1) {
+			var selectedOrderId = selectedOrders[0].value;
+			window.location.href = './index.php?page=order-detail&order_id=' + selectedOrderId;
 		} else {
-			alert("Vui lòng chỉ chọn một sản phẩm để sửa.");
+			alert("Vui lòng chỉ chọn một đơn hàng.");
 		}
+	}
+
+	// button chọn tất cả
+	document.addEventListener("DOMContentLoaded", function() {
+		var selectAllCheckbox = document.getElementById("selectAllCheckbox");
+		var orderCheckboxes = document.querySelectorAll("#example tbody td:first-child input[type='checkbox']");
+
+		selectAllCheckbox.addEventListener("change", function() {
+			// Khi checkbox "Chọn Tất Cả" thay đổi trạng thái, cập nhật trạng thái của các checkbox sản phẩm
+			orderCheckboxes.forEach(function(checkbox) {
+				checkbox.checked = selectAllCheckbox.checked;
+			});
+		});
+
+		// Sự kiện để kiểm tra trạng thái của các checkbox sản phẩm và cập nhật checkbox "Chọn Tất Cả"
+		orderCheckboxes.forEach(function(checkbox) {
+			checkbox.addEventListener("change", function() {
+				selectAllCheckbox.checked = [...orderCheckboxes].every(function(checkbox) {
+					return checkbox.checked;
+				});
+			});
+		});
+	});
+
+	function openUpdateStatusModal() {
+		var selectedOrders = document.querySelectorAll('input[name="selected_orders[]"]:checked');
+
+		// Ensure that exactly one  is selected
+		if (selectedOrders.length !== 1) {
+			alert("Vui lòng chỉ chọn một đơn hàng.");
+		} else {
+			$("#updateStatusModal #order-id").val(selectedOrders[0].value);
+			$("#updateStatusModal #current-status").val($("#example tbody tr input[type='checkbox']:checked").parent().siblings().last().text());
+			// Hiển thị modal
+			$("#updateStatusModal").modal("show");
+		}
+	}
+
+	function updateStatus() {
+
+		var order_id = document.querySelectorAll('input[name="selected_orders[]"]:checked')[0].value;
+		var new_status = $("#status-select").val();
+
+		// Thực hiện AJAX để cập nhật trạng thái
+		$.ajax({
+			type: "POST",
+			url: "./backend/update_status.php",
+			data: {
+				order_id: order_id,
+				new_status: new_status
+			},
+			success: function(response) {
+				// Xử lý phản hồi từ server (nếu cần)
+				console.log(response);
+
+				// Đóng modal
+				$("#updateStatusModal").modal("hide");
+				uncheckAllCheckboxes();
+				window.location.reload();
+			},
+			error: function(error) {
+				console.error("Error updating status: " + error);
+			}
+		});
 	}
 </script>
 
-<script>
-	// button chọn tất cả
-    document.addEventListener("DOMContentLoaded", function () {
-        var selectAllCheckbox = document.getElementById("selectAllCheckbox");
-        var productCheckboxes = document.querySelectorAll("#example tbody td:first-child input[type='checkbox']");
-
-        selectAllCheckbox.addEventListener("change", function () {
-            // Khi checkbox "Chọn Tất Cả" thay đổi trạng thái, cập nhật trạng thái của các checkbox sản phẩm
-            productCheckboxes.forEach(function (checkbox) {
-                checkbox.checked = selectAllCheckbox.checked;
-            });
-        });
-
-        // Sự kiện để kiểm tra trạng thái của các checkbox sản phẩm và cập nhật checkbox "Chọn Tất Cả"
-        productCheckboxes.forEach(function (checkbox) {
-            checkbox.addEventListener("change", function () {
-                selectAllCheckbox.checked = [...productCheckboxes].every(function (checkbox) {
-                    return checkbox.checked;
-                });
-            });
-        });
-    });
-</script>
+<!-- Thêm Bootstrap Modal -->
+<div class="modal fade" id="updateStatusModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Cập nhật trạng thái đơn hàng</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="order-id">
+				<label for="status-select" class="form-label">Trạng thái hiện tại:</label>
+				<input type="text" class="form-control" id="current-status" readonly>
+				<label for="status-select" class="form-label mt-3">Chọn trạng thái mới:</label>
+				<select class="form-select" id="status-select" required>
+					<option value="0">Chờ tiếp nhận</option>
+					<option value="1">Đang xử lí</option>
+					<option value="2">Đang giao hàng</option>
+					<option value="3">Đã giao hàng</option>
+					<option value="4">Đã hủy</option>
+				</select>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+				<button type="button" class="btn btn-primary" onclick="updateStatus()">Cập nhật</button>
+			</div>
+		</div>
+	</div>
+</div>

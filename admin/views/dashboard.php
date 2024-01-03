@@ -77,7 +77,7 @@
 										$currentMonth = date('m');
 										
 										// Truy vấn SQL để lấy tổng doanh thu của tháng hiện tại
-										$sql = "SELECT SUM(REVENUE_TOTAL) AS totalRevenue FROM REVENUE WHERE MONTH(REVENUE_DATE) = $currentMonth";
+										$sql = "SELECT SUM(ORDER_TOTAL) AS totalRevenue FROM ORDERS WHERE order_status != 4 ";
 										$result = mysqli_query($connect, $sql);
 										
 										// Lấy dữ liệu từ truy vấn
