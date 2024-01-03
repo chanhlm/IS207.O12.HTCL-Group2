@@ -10,9 +10,9 @@
             <a href="./index.php"><img src="./public/assets/img/logo.png" class="header-logo" alt="Logo" /></a>
         </div>
         <div class="search-bar col-lg-4 col-md-3">
-            <form action="search.php" method="post">
+            <form  method="post">
                 <input type="text" class="search-product" placeholder="Sản phẩm..." />
-                <span class="input-group-text search-btn btn"><i class="ti-search"></i></span>
+                <span class="input-group-text search-btn btn" id="btn-search"><i class="ti-search"></i></span>
                 </input>
             </form>
         </div>
@@ -39,4 +39,13 @@
             <div class="cart-btn btn align-right col"><a href="./index.php?page=cart">Giỏ hàng <i class="ti-shopping-cart"></i></a></div>
         </div>
 </header>
+
+<script>
+    $(document).ready(function(){
+        $("#btn-search").click(function(){
+            var search = $(".search-product").val();
+            window.location.href = "./index.php?page=category&search="+search;
+        });
+    });
+</script>
 

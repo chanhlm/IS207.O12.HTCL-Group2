@@ -1,6 +1,17 @@
 <link rel="stylesheet" href="./public/assets/css/list-product.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
+<?php
+if (isset($_GET['category'])) {
+    $id = $_GET['category'];
+
+    $sql = "SELECT * FROM products WHERE CATEGORY_ID = ? AND PRODUCT_STATUS = 'active'";
+} else if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+
+    $sql = "SELECT * FROM products WHERE PRODUCT_NAME LIKE '%$search%' AND PRODUCT_STATUS = 'active'";
+}
+?>
 
 <section class="cate-main-container">
     <div class="box-filter top-box block-scroll-main cate">
@@ -101,33 +112,36 @@
         <div class="box-sort">
             <p class="sort-total">
                 <?php
-                $id = $_GET['category'];
-                $name;
-                $count;
+                if (isset($_GET['category'])) {
+                    $name;
+                    $count;
 
-                $sql = "SELECT * FROM products WHERE CATEGORY_ID = ? and PRODUCT_STATUS = 'active'";
-                $stmt = mysqli_prepare($connect, $sql);
+                    $stmt = mysqli_prepare($connect, $sql);
 
-                if ($stmt) {
-                    mysqli_stmt_bind_param($stmt, "s", $id);
-                    mysqli_stmt_execute($stmt);
-                    $result = mysqli_stmt_get_result($stmt);
-                    $count = mysqli_num_rows($result);
-                    echo "<b> " . $count . " </b> ";
-                }
-                $sql = "SELECT * FROM categories WHERE CATEGORY_ID = ?";
-                $stmt = mysqli_prepare($connect, $sql);
-
-                if ($stmt) {
-                    mysqli_stmt_bind_param($stmt, "s", $id);
-                    mysqli_stmt_execute($stmt);
-                    $categoryResult = mysqli_stmt_get_result($stmt);
-
-                    if ($category = mysqli_fetch_assoc($categoryResult)) {
-                        $name = $category['CATEGORY_NAME'];
+                    if ($stmt) {
+                        mysqli_stmt_bind_param($stmt, "s", $id);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+                        $count = mysqli_num_rows($result);
+                        echo "<b> " . $count . " </b> ";
                     }
-                    echo "<span> " . $name . " </span>";
+                    $sql_name = "SELECT * FROM categories WHERE CATEGORY_ID = ?";
+                    $stmt = mysqli_prepare($connect, $sql_name);
+
+                    if ($stmt) {
+                        mysqli_stmt_bind_param($stmt, "s", $id);
+                        mysqli_stmt_execute($stmt);
+                        $categoryResult = mysqli_stmt_get_result($stmt);
+
+                        if ($category = mysqli_fetch_assoc($categoryResult)) {
+                            $name = $category['CATEGORY_NAME'];
+                        }
+                        echo "<span> - " . $name . " </span>";
+                    }
+                } else {
+          
                 }
+
                 ?>
             </p>
             <!-- <div class="box-checkbox extend">
@@ -168,13 +182,14 @@
             </div>
             <ul class="listproduct">
                 <?php
-                $id = $_GET['category'];
 
-                $sql = "SELECT * FROM products WHERE CATEGORY_ID = ? AND PRODUCT_STATUS = 'active'";
                 $stmt = mysqli_prepare($connect, $sql);
 
                 if ($stmt) {
-                    mysqli_stmt_bind_param($stmt, "s", $id);
+                    if (isset($_GET['category'])) {
+                        mysqli_stmt_bind_param($stmt, "s", $id);
+                    }
+
                     mysqli_stmt_execute($stmt);
                     $result = mysqli_stmt_get_result($stmt);
 
@@ -185,8 +200,8 @@
                         // Bổ sung phần hiển thị thông tin khuyến mãi
                         $productPromotions = getProductPromotions($connect, $row['PRODUCT_ID']);
                         $promotionInfo = getAppliedPromotionInfo($productPromotions);
-                        
-                        if($promotionInfo) {
+
+                        if ($promotionInfo) {
                             $discountedPrice = $salePrice * (100 - $promotionInfo['CODE_PERCENT']) / 100;
                             $formattedDiscountedPrice = number_format($discountedPrice, 0, ',', '.');
                         } else {
@@ -201,20 +216,18 @@
                                 <h3>" . $row['PRODUCT_NAME'] . "</h3>
                                     <div class='box-p'>";
 
-                            if ($promotionInfo) {
-                                echo "<p class='price-old black'>" . $formattedSalePrice . " VNĐ</p>";
-                                echo "<span class='percent'> - " . $promotionInfo['CODE_PERCENT'] . "% </span>";
-                            }
-                            else {
-                                echo "<p class='price-old black' style='visibility: hidden;'>" . $formattedSalePrice . " VNĐ</p>";
-                                echo "<span class='percent' style='visibility: hidden;'> - " . 0  . "% </span>";
-                            }
+                        if ($promotionInfo) {
+                            echo "<p class='price-old black'>" . $formattedSalePrice . " VNĐ</p>";
+                            echo "<span class='percent'> - " . $promotionInfo['CODE_PERCENT'] . "% </span>";
+                        } else {
+                            echo "<p class='price-old black' style='visibility: hidden;'>" . $formattedSalePrice . " VNĐ</p>";
+                            echo "<span class='percent' style='visibility: hidden;'> - " . 0  . "% </span>";
+                        }
 
-                            echo "</div>";
+                        echo "</div>";
                         if ($promotionInfo) {
                             echo '<strong>' . $formattedDiscountedPrice . ' VNĐ </strong>';
-                        }
-                        else {
+                        } else {
                             echo '<strong>' . $formattedSalePrice . ' VNĐ </strong>';
                         }
 

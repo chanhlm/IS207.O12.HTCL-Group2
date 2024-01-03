@@ -150,7 +150,7 @@
 		</div><!--End Row-->
 
 
-		<div class="card radius-10">
+		<!-- <div class="card radius-10">
 			<div class="card-body">
 				<div class="d-flex align-items-center">
 					<div>
@@ -361,7 +361,7 @@
 					</table>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 	</div>
 </div>
