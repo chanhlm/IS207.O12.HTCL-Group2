@@ -106,34 +106,55 @@ $count_product = mysqli_fetch_assoc($count);
         <div class="cart">
             <div class="cart-body">
                 <?php
-                    while ($row_order_detail = mysqli_fetch_assoc($result)) {
-                        // echo '<div class="cart-item">';
-                        echo '<div class="row">';
-                        echo '<div class="col-md-2">';
-                        echo '<img src="' . $row_order_detail['PRODUCT_IMAGE'] . '" alt="" class="img-fluid">';
-                        echo '</div>';
-                        echo '<div class="col-md-10">';
-                        echo '<div class="row">';
-                        echo '<div class="col-md-8">';
-                        echo '<p>Mã sản phẩm: ' . $row_order_detail['PRODUCT_ID'] . '</p>';
-                        echo '<h5>' . $row_order_detail['PRODUCT_NAME'] . '</h5>';
-                        echo '</div>';
-                        echo '<div class="col-md-4">';
-                        echo '<h5 class="text-end">' . number_format($row_order_detail['ORDER_DETAIL_PRICE'], 0, ',', '.') . ' ₫</h5>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '<div class="row">';
-                        echo '<div class="col-md-8">';
-                        echo '<p>Số lượng: ' . $row_order_detail['ORDER_DETAIL_QUANTITY'] . '</p>';
-                        echo '</div>';
-                        echo '<div class="col-md-4">';
-                        echo '<p class="text-end">Tổng: ' . number_format($row_order_detail['ORDER_DETAIL_PRICE'] * $row_order_detail['ORDER_DETAIL_QUANTITY'], 0, ',', '.') . ' ₫</p>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '<hr>';
+                while ($row_order_detail = mysqli_fetch_assoc($result)) {
+                    $sql_warranty = "SELECT * FROM `order_details` INNER JOIN `warranty` ON `warranty`.`order_detail_id` = `order_details`.`order_detail_id` and `order_details`.`order_detail_id` = " . $row_order_detail['ORDER_DETAIL_ID'] . "";
+                    $result_warranty = mysqli_query($connect, $sql_warranty);
+
+                    if ($result_warranty->num_rows > 0) {
+                        $warranty_row = $result_warranty->fetch_assoc();
+
+                        if ($warranty_row['END_DATE'] > date("Y-m-d H:i:s"))
+                            $warranty = "Bảo hành: Còn BH đến " . date_format(date_create($warranty_row['END_DATE']), 'd/m/Y');
+                        else
+                            $warranty = "Bảo hành: Đã hết hạn";
+                    } else {
+                        $warranty = "null";
                     }
+
+                    // echo '<div class="cart-item">';
+                    echo '<div class="row">';
+                    echo '<div class="col-md-2">';
+                    echo '<img src="' . $row_order_detail['PRODUCT_IMAGE'] . '" alt="" class="img-fluid">';
+                    echo '</div>';
+                    echo '<div class="col-md-10">';
+                    echo '<div class="row">';
+                    echo '<div class="col-md-8">';
+                    echo '<p>Mã sản phẩm: ' . $row_order_detail['PRODUCT_ID'] . '</p>';
+                    echo '<h5>' . $row_order_detail['PRODUCT_NAME'] . '</h5>';
+                    echo '</div>';
+                    echo '<div class="col-md-4">';
+                    echo '<h5 class="text-end">' . number_format($row_order_detail['ORDER_DETAIL_PRICE'], 0, ',', '.') . ' ₫</h5>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="row">';
+                    echo '<div class="col-md-8">';
+                    echo '<p>Số lượng: ' . $row_order_detail['ORDER_DETAIL_QUANTITY'] . '</p>';
+                    echo '</div>';
+                    echo '<div class="col-md-4">';
+                    echo '<p class="text-end">Tổng: ' . number_format($row_order_detail['ORDER_DETAIL_PRICE'] * $row_order_detail['ORDER_DETAIL_QUANTITY'], 0, ',', '.') . ' ₫</p>';
+                    echo '</div>';
+                    echo '<div class="col-md-8">';
+                    if ($warranty != "null") {
+                        echo '<p>' . $warranty . '</p>';
+                        if ($warranty_row['WARRANTY_STATUS'] != 'Cancelled') echo '<button class="btn btn-danger" id="cancel-warranty" onclick="cancelWarranty(' . $row_order_detail['ORDER_DETAIL_ID'] . ')">Dừng bảo hành</button>';
+                    }
+                    echo '</div>';
+
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<hr>';
+                }
                 ?>
             </div>
         </div>
@@ -199,6 +220,28 @@ $count_product = mysqli_fetch_assoc($count);
         });
     }
 </script>
+
+<script>
+    function cancelWarranty(orderDetailId) {
+
+        $.ajax({
+            url: './backend/cancel_warranty.php', // Adjust the URL to your server-side script
+            method: 'POST',
+            data: { order_detail_id: orderDetailId },
+            success: function(response) {
+                // Handle the response from the server
+                alert(response);
+                location.reload();
+
+            },
+            error: function(error) {
+                // Handle errors
+                console.error(error);
+            }
+        });
+    }
+</script>
+
 
 
 <?php

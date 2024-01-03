@@ -87,12 +87,12 @@
             </ul>
         </li>
 
-        <li>
+        <!-- <li>
             <a href="./index.php?page=warranty">
                 <div class="parent-icon"> <i class='bx bxs-hourglass-top'></i></div>
                 <div class="menu-title">Bảo hành</div>
             </a>
-        </li>
+        </li> -->
 
         <li>
             <a href="./index.php?page=blog">
