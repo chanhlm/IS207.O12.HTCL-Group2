@@ -32,7 +32,7 @@ session_start();
     <link href="../shared/img/logo-icon.png" rel="shortcut icon" type="image/x-icon">
 
     <?php
-    $pageTitle = "ecoTech - Dashboard";
+    $pageTitle = "ElectroTech - Admin";
     ?>
     <title><?php echo $pageTitle ?></title>
 </head>

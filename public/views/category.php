@@ -22,79 +22,97 @@ if (isset($_GET['category'])) {
                         <div class="btn-right-scroll"></div>
                     </div>
                     <div class="filter-total">
-                        <div class="filter-item__title jsTitle">
+                        <div class="filter-item__title jsTitle" onclick="toggleFilter('show-total')">
                             <div class="arrow-filter">
                                 <i class="ti-filter"> Bộ lọc </i>
                                 <strong class="number count-total" style="display:none;"></strong>
                             </div>
                         </div>
-                        <div class="filter-show show-total" id="wrapper">
+                        <div class="filter-show" id="show-total">
                             <div class="list-filter-active" style="display:none;"> </div>
                             <div class="show-total-main"> </div>
                         </div>
                     </div>
+
                     <div class="filter-item block-manu">
-                        <div class="filter-item__title jsTitle">
+                        <div class="filter-item__title jsTitle" onclick="toggleFilter('filter-show')">
                             <div class="arrow-filter"></div>
                             <span> Hãng </span>
                         </div>
-                        <div class="filter-show hascount" style="display:none;">
+                        <div class="filter-show hascount" id="filter-show" style="display:none;">
                             <div class="filter-list filter-list--hang manu">
-                                <a href="#" data-href="tivi-samsung" data-index="0" class="c-btnbox filter-manu">
+                                <a href="#" data-href="tivi-samsung" data-index="0" class="c-btnbox filter-manu" onclick="filterByBrand('Samsung')">
                                     <img src="E:\PHATTRIENWEB\ĐỒ ÁN\asset\IMG\Samsung1942-b_51.png" width="68" height="30" alt="Samsung">
                                 </a>
-
+                                <!-- Add more brand filter links as needed -->
                             </div>
                             <div class="filter-button">
-                                <a href="#" class="btn-filter-close"> Bỏ chọn </a>
+                                <a href="#" class="btn-filter-close" onclick="toggleFilter('filter-show')"> Bỏ chọn </a>
                                 <a href="#" class="btn-filter-readmore">
                                     Xem <b class="total-reloading"> xxx </b> kết quả
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="filter-item">
+
+                    <!-- <div class="filter-item">
                         <div class="filter-item__title jsTitle noselecttext">
                             <div class="arrow-filter"></div>
                             <span> Kích cỡ màn hình </span>
                         </div>
                         <div class="filter-show" style="display:none;"></div>
-                    </div>
+                    </div> -->
                     <div class="filter-item warpper-price-outside">
-                        <div class="filter-item__title jsTitle">
+                        <div class="filter-item__title jsTitle" onclick="toggleFilter('filter-show-price')">
                             <div class="arrow-filter"></div>
                             <span> Giá </span>
                         </div>
-                        <div class="filter-show" style="display:none;"></div>
+                        <div class="filter-show p-3" id="filter-show-price" style="display:none;">
+                            <label for="price-range">Price Range:</label>
+
+                            <!-- Buttons for predefined price ranges -->
+                            <button class="price-range-button" data-min="0" data-max="500000">0 - 500,000</button>
+                            <button class="price-range-button" data-min="500000" data-max="1000000">500,000 - 1,000,000</button>
+                            <button class="price-range-button" data-min="1000000" data-max="5000000">1,000,000 - 5,000,000</button>
+                            <button class="price-range-button" data-min="5000000" data-max="10000000">5,000,000 - 10,000,000</button>
+                            <button class="price-range-button" data-min="10000000" data-max="20000000">10,000,000 - 20,000,000</button>
+                            <button class="price-range-button" data-min="20000000" data-max="max">20,000,000 - Trở lên</button>
+
+                            <!-- Display values for the selected buttons -->
+                            <div id="selected-range"></div>
+
+                            <button onclick="applyPriceFilter()">Apply</button>
+                        </div>
+
                     </div>
-                    <div class="filter-item">
+                    <!-- <div class="filter-item">
                         <div class="filter-item__title jsTitle noselecttext">
                             <div class="arrow-filter"></div>
                             <span> Độ phân giải </span>
                         </div>
                         <div class="filter-show" style="display:none;"></div>
-                    </div>
-                    <div class="filter-item">
+                    </div> -->
+                    <!-- <div class="filter-item">
                         <div class="filter-item__title jsTitle noselecttext">
                             <div class="arrow-filter"></div>
                             <span> Loại Tivi </span>
                         </div>
                         <div class="filter-show" style="display:none;"></div>
-                    </div>
-                    <div class="filter-item">
+                    </div> -->
+                    <!-- <div class="filter-item">
                         <div class="filter-item__title jsTitle noselecttext">
                             <div class="arrow-filter"></div>
                             <span> Tiện ích </span>
                         </div>
                         <div class="filter-show" style="display:none;"></div>
-                    </div>
-                    <div class="filter-item">
+                    </div> -->
+                    <!-- <div class="filter-item">
                         <div class="filter-item__title jsTitle noselecttext">
                             <div class="arrow-filter"></div>
                             <span> Hệ điều hành </span>
                         </div>
                         <div class="filter-show" style="display:none;"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- <div class="box-quicklink block-scroll-main">
@@ -139,7 +157,6 @@ if (isset($_GET['category'])) {
                         echo "<span> - " . $name . " </span>";
                     }
                 } else {
-          
                 }
 
                 ?>
@@ -204,11 +221,17 @@ if (isset($_GET['category'])) {
                         if ($promotionInfo) {
                             $discountedPrice = $salePrice * (100 - $promotionInfo['CODE_PERCENT']) / 100;
                             $formattedDiscountedPrice = number_format($discountedPrice, 0, ',', '.');
+
+                            $str = 'data-price=' . $discountedPrice .' ';
                         } else {
                             $formattedDiscountedPrice = $formattedSalePrice;
+                            $str = 'data-price=' . $salePrice .' ';
                         }
+                        
 
-                        echo "<li class='item __cate' data-index='1'>
+                        
+
+                        echo "<li class='item__cate' data-index='1' style='height: 420px' $str >
                                 <a href='index.php?page=product&product=" . $row['PRODUCT_ID'] . "' data-s='TwoPrice' data-site='2' data-pro='3' data-name='" . $row['PRODUCT_NAME'] . "' class='main-contain'>
                             <div class='item-img item-img'>
                                 <img class='thumb ls-is-cached lazyloaded' src='" . $row['PRODUCT_IMAGE'] . "'>
@@ -217,20 +240,16 @@ if (isset($_GET['category'])) {
                                     <div class='box-p'>";
 
                         if ($promotionInfo) {
-                            echo "<p class='price-old black'>" . $formattedSalePrice . " VNĐ</p>";
-                            echo "<span class='percent'> - " . $promotionInfo['CODE_PERCENT'] . "% </span>";
+                            echo "<p class='price-old black m-0'>$formattedSalePrice VNĐ</p>";
+                            echo "<span class='percent'> - {$promotionInfo['CODE_PERCENT']}% </span>";
+                            echo '</div>';
+                            echo '<strong class="item"  >' . $formattedDiscountedPrice . ' VNĐ </strong>';
                         } else {
-                            echo "<p class='price-old black' style='visibility: hidden;'>" . $formattedSalePrice . " VNĐ</p>";
-                            echo "<span class='percent' style='visibility: hidden;'> - " . 0  . "% </span>";
+                            echo "<p class='price-old black m-0' style='visibility: hidden;'>$formattedSalePrice VNĐ</p>";
+                            echo "<span class='percent' style='visibility: hidden;'> - 0% </span>";
+                            echo '</div>';
+                            echo '<strong class="item" data-price="' . $salePrice . ' " >' . $formattedSalePrice . ' VNĐ </strong>';
                         }
-
-                        echo "</div>";
-                        if ($promotionInfo) {
-                            echo '<strong>' . $formattedDiscountedPrice . ' VNĐ </strong>';
-                        } else {
-                            echo '<strong>' . $formattedSalePrice . ' VNĐ </strong>';
-                        }
-
                         echo "
                         <div class='item-rating'>
                             <p>
@@ -325,3 +344,62 @@ if (isset($_GET['category'])) {
         </div>
     </div>
 </section>
+
+<script>
+    function filterByBrand(brand) {
+        console.log('Filtering by brand:', brand);
+    }
+
+    function toggleFilter(filterId) {
+        var filterShow = document.getElementById(filterId);
+        filterShow.style.display = (filterShow.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function applyPriceFilter() {
+        var selectedButton = document.querySelector('.price-range-button.selected');
+
+        if (selectedButton) {
+            var minPrice = parseFloat(selectedButton.getAttribute('data-min')) || 0;
+            var maxPrice = parseFloat(selectedButton.getAttribute('data-max')) || Number.POSITIVE_INFINITY;
+
+            // Hide all items
+            var items = document.querySelectorAll('.item__cate');
+            console.log('Items:', items);
+            items.forEach(function(item) {
+                item.style.display = 'none';
+            });
+
+            // Show items within the selected price range
+            items.forEach(function(item) {
+                var itemPrice = parseFloat(item.getAttribute('data-price'));
+                console.log('Item price:', itemPrice);
+                if (itemPrice >= minPrice && itemPrice <= maxPrice) {
+                    item.style.display = 'block';
+                }
+            });
+        } else {
+            // Handle the case where no button is selected (e.g., "None" case)
+            console.log('No button selected');
+        }
+    }
+
+
+
+    function updateDisplayedValues() {
+        var selectedButton = document.querySelector('.price-range-button.selected');
+        var selectedValue = selectedButton ? `${selectedButton.getAttribute('data-min')} - ${selectedButton.getAttribute('data-max')}` : 'None';
+        document.getElementById('selected-range').textContent = selectedValue;
+    }
+
+    // Event listener for the buttons
+    var buttons = document.querySelectorAll('.price-range-button');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            buttons.forEach(function(btn) {
+                btn.classList.remove('selected');
+            });
+            this.classList.add('selected');
+            updateDisplayedValues();
+        });
+    });
+</script>
