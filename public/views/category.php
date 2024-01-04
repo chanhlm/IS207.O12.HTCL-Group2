@@ -79,7 +79,7 @@ if (isset($_GET['category'])) {
                             <button class="price-range-button" data-min="20000000" data-max="max">20,000,000 - Trở lên</button>
 
                             <!-- Display values for the selected buttons -->
-                            <div id="selected-range"></div>
+                            <!-- <div id="selected-range"></div> -->
 
                             <button onclick="applyPriceFilter()">Apply</button>
                         </div>
@@ -385,11 +385,11 @@ if (isset($_GET['category'])) {
 
 
 
-    function updateDisplayedValues() {
-        var selectedButton = document.querySelector('.price-range-button.selected');
-        var selectedValue = selectedButton ? `${selectedButton.getAttribute('data-min')} - ${selectedButton.getAttribute('data-max')}` : 'None';
-        document.getElementById('selected-range').textContent = selectedValue;
-    }
+    // function updateDisplayedValues() {
+    //     var selectedButton = document.querySelector('.price-range-button.selected');
+    //     var selectedValue = selectedButton ? `${selectedButton.getAttribute('data-min')} - ${selectedButton.getAttribute('data-max')}` : 'None';
+    //     document.getElementById('selected-range').textContent = selectedValue;
+    // }
 
     // Event listener for the buttons
     var buttons = document.querySelectorAll('.price-range-button');
