@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header text-center">
         <div><img src="../shared/img/logo-icon.png" class="logo-icon px-20" alt="logo icon"></div>
-        <div><h4 class="logo-text">ecoTech</h4></div>
+        <div><h4 class="logo-text">ElectroTech</h4></div>
         <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i></div>
     </div>
     <!--navigation-->
@@ -87,6 +87,18 @@
             </ul>
         </li>
 
+        <li>    
+            <a class="has-arrow" href="javascript:;">
+                <div class="parent-icon"><i class="bx bx-package"></i></div>
+                <div class="menu-title">Khuyến mãi</div>
+            </a>    
+            <ul>
+                <li> <a href="./index.php?page=code"><i class="bx bxs-package"></i>Danh sách mã</a></li>
+                <li> <a href="./index.php?page=promotion"><i class="bx bx-add-to-queue"></i>Danh sách khuyến mãi</a></li>
+                <!-- <li> <a href="./index.php?page=product-update"><i class="bx bx-edit"></i>Sửa sản phẩm</a></li> -->
+            </ul>
+        </li>
+
         <!-- <li>
             <a href="./index.php?page=warranty">
                 <div class="parent-icon"> <i class='bx bxs-hourglass-top'></i></div>
@@ -101,12 +113,7 @@
             </a>
         </li>
 
-        <li>
-            <a href="./index.php?page=promotion">
-                <div class="parent-icon"> <i class="bx bxs-discount"></i></div>
-                <div class="menu-title">Khuyến mãi</div>
-            </a>
-        </li>
+        
 
         <li>
             <a href="./index.php?page=feedback">

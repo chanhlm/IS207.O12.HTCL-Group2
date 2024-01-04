@@ -102,9 +102,24 @@ session_start();
                 
             elseif ($tam == 'statistic') {
                 include('./views/statistic/statistic.php');
+            }
 
+            elseif ($tam == 'code') {
+                include('./views/promotion/code.php');
+            } elseif ($tam == 'code-insert') {
+                include('./views/promotion/code-insert.php');
+            } elseif ($tam == 'code-update') {
+                include('./views/promotion/code-update.php');
+            }   
+            elseif ($tam == 'promotion') {
+                include('./views/promotion/promotion.php');
+            } elseif ($tam == 'promotion-insert') {
+                include('./views/promotion/promotion-insert.php');
+            } elseif ($tam == 'promotion-update') {
+                include('./views/promotion/promotion-update.php');
+            }
 
-            }else include('./views/dashboard.php');
+            else include('./views/dashboard.php');
 
 
 

@@ -36,7 +36,7 @@ $count_brand = mysqli_num_rows($sql_brand);
 						<div class="col-md-5">
 							<div class="mb-3">
 								<label for="name" class="form-label">Tên nhãn hàng</label>
-								<input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên danh mục" required>
+								<input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên nhãn hàng" required>
 							</div>
 						</div>
 						<div class="col-md-4">
