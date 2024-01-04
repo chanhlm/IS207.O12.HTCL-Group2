@@ -1,6 +1,10 @@
 <?php
-	$sql_brand = mysqli_query($connect, "SELECT * FROM BRANDS");
-	$count_brand = mysqli_num_rows($sql_brand);
+    if (isset($_GET['code_id'])) {
+        $sql_promotion = mysqli_query($connect, "SELECT * FROM PROMOTION WHERE PROMOTION_CODE = '{$_GET['code_id']}' ORDER BY PROMOTION_ID");
+    }
+    else $sql_promotion = mysqli_query($connect, "SELECT * FROM PROMOTION ORDER BY PROMOTION_CODE");
+
+	$count_promotion = mysqli_num_rows($sql_promotion);
 ?>
 
 <!--start page wrapper -->
@@ -12,21 +16,21 @@
 				<nav aria-label="breadcrumb">
 					<ol class="breadcrumb mb-0 p-0">
 						<li class="breadcrumb-item"><a href="./index.php"><i class="bx bx-home-alt"></i></a></li>
-						<li class="breadcrumb-item active" aria-current="page">Nhãn hàng </li>
+						<li class="breadcrumb-item active" aria-current="page">Khuyến mãi </li>
 					</ol>
 				</nav>
 			</div>
 			<div class="ms-auto">
 				<div>
-					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-info" onclick="redirectToProductPage()">Xem sản phẩm</a>
-					<a href="./index.php?page=brand-insert" class="ms-2 me-2 btn btn-success">Thêm</a>
+					<!-- <a href="javascript:void(0);" class="ms-2 me-2 btn btn-info" onclick="redirectToProductPage()">Xem sản phẩm</a> -->
+					<!-- <a href="./index.php?page=promotion-insert" class="ms-2 me-2 btn btn-success">Thêm</a> -->
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToUpdatePage()"> Sửa </a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
 				</div>
 			</div>
 		</div>	
 
-		<h6 class="mb-0 text-uppercase">Nhãn hàng - <?php echo $count_brand ?> hãng</h6>
+		<h6 class="mb-0 text-uppercase">Khuyến mãi - <?php echo $count_promotion ?> </h6>
 		<hr />
 		<div class="card">
 			<div class="card-body">
@@ -35,26 +39,24 @@
 						<thead>
 							<tr class="text-center">
 								<th>Chọn <br> <input type="checkbox" id="selectAllCheckbox"></th>
-								<th>Mã nhãn hàng</th>
-								<th>Tên nhãn hàng</th>
-								<th>Quốc gia</th>
-								<th>Số sản phẩm</th>
-								<th>Ghi chú</th>
-								<th>Hình ảnh</th>
+								<th>Mã khuyến mãi</th>
+								<th>CODE</th>
+								<th>Ngày bắt đầu</th>
+								<th>Ngày kết thúc</th>
+								<th>Sản phẩm </th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							while ($row_brand = mysqli_fetch_array($sql_brand)) {
+							while ($row_promotion = mysqli_fetch_array($sql_promotion)) {
 							?>
 								<tr class="align-middle">
-									<td class="text-center"><input type="checkbox" name="selected_brands[]" value="<?php echo $row_brand['BRAND_ID']; ?>"></td>
-									<td class="text-center"><?php echo $row_brand['BRAND_ID'] ?></td>
-									<td><?php echo $row_brand['BRAND_NAME'] ?></td>
-									<td><?php echo $row_brand['COUNTRY'] ?></td>
-									<td class="text-center"><?php echo $row_brand['NUMBER_PRODUCT'] ?></td>
-									<td><?php echo $row_brand['BRAND_DESCRIPTION'] ?></td>
-									<td class="text-center"><img src="<?php echo $row_brand['BRAND_IMAGE'] ?>" width="150px" align-center></td>
+									<td class="text-center"><input type="checkbox" name="selected_promotions[]" value="<?php echo $row_promotion['PROMOTION_ID']; ?>"></td>
+									<td class="text-center"><?php echo $row_promotion['PROMOTION_ID'] ?></td>
+									<td class="text-center"><?php echo $row_promotion['PROMOTION_CODE'] ?></td>
+									<td class="text-center"><?php echo date("d/m/Y H:i:s", strtotime($row_promotion['PROMOTION_STARTDATE'])) ?></td>
+									<td class="text-center"><?php echo date("d/m/Y H:i:s", strtotime($row_promotion['PROMOTION_ENDDATE'])) ?></td>
+									<td class="text-center"><?php echo $row_promotion['PRODUCT_ID'] ?></td>
 								</tr>
 							<?php
 							}
@@ -64,12 +66,11 @@
 						<tfoot>
 							<tr class="text-center">
 								<th>Chọn</th>
-								<th>Mã nhãn hàng</th>
-								<th>Tên nhãn hàng</th>
-								<th>Quốc gia</th>
-								<th>Số sản phẩm</th>
-								<th>Ghi chú</th>
-								<th>Hình ảnh</th>
+								<th>Mã khuyến mãi</th>
+								<th>CODE</th>
+								<th>Ngày bắt đầu</th>
+								<th>Ngày kết thúc</th>
+								<th>Sản phẩm </th>
 							</tr>
 						</tfoot>
 					</table>
@@ -83,21 +84,21 @@
 
 <script>
 	function updateDeleteButtonState() {
-		var selectedBrands = document.querySelectorAll('input[name="selected_brands[]"]:checked');
+		var selectedPromotions = document.querySelectorAll('input[name="selected_promotions[]"]:checked');
 		var btnDeleteSelected = document.getElementById('btnDeleteSelected');
-		btnDeleteSelected.disabled = selectedBrands.length === 0;
+		btnDeleteSelected.disabled = selectedPromotions.length === 0;
 	}
 
 	function deleteSelected() {
-		var selectedBrands = document.querySelectorAll('input[name="selected_brands[]"]:checked');
-		if (selectedBrands.length === 0) {
-			alert("Vui lòng chọn ít nhất một nhãn hàng để xóa.");
+		var selectedPromotions = document.querySelectorAll('input[name="selected_promotions[]"]:checked');
+		if (selectedPromotions.length === 0) {
+			alert("Vui lòng chọn ít nhất một khuyến mãi để hủy.");
 			return;
 		}
 
-		var confirmDelete = confirm("Bạn có chắc muốn xóa các nhãn hàng đã chọn?");
+		var confirmDelete = confirm("Bạn có chắc muốn hủy các khuyến mãi đã chọn?");
 		if (confirmDelete) {
-			var brandIds = Array.from(selectedBrands).map(function (checkbox) {
+			var promotionIds = Array.from(selectedPromotions).map(function (checkbox) {
 				return checkbox.value;
 			});
 
@@ -117,7 +118,7 @@
 			};
 
 			// Construct the URL for the delete operation
-			var url = "./backend/brand_delete.php?brand_ids=" + brandIds.join(",");
+			var url = "./backend/promotion_delete.php?promotion_ids=" + promotionIds.join(",");
 
 			// Open and send the request
 			xhr.open("GET", url, true);
@@ -127,7 +128,7 @@
 
 	// Thêm sự kiện change để cập nhật trạng thái của nút xóa khi checkbox thay đổi
 	document.addEventListener('DOMContentLoaded', function () {
-		var checkboxes = document.querySelectorAll('input[name="selected_brands[]"]');
+		var checkboxes = document.querySelectorAll('input[name="selected_promotions[]"]');
 		checkboxes.forEach(function (checkbox) {
 			checkbox.addEventListener('change', updateDeleteButtonState);
 		});
@@ -136,14 +137,14 @@
 
 <script>
     function redirectToUpdatePage() {
-        var selectedBrands = document.querySelectorAll('input[name="selected_brands[]"]:checked');
+        var selectedPromotions = document.querySelectorAll('input[name="selected_promotions[]"]:checked');
 
-        // Ensure that exactly one brand is selected
-        if (selectedBrands.length === 1) {
-            var selectedbrandId = selectedBrands[0].value;
-            window.location.href = './index.php?page=brand-update&brand_id=' + selectedbrandId;
+        // Ensure that exactly one promotion is selected
+        if (selectedPromotions.length === 1) {
+            var selectedpromotionId = selectedPromotions[0].value;
+            window.location.href = './index.php?page=promotion-update&promotion_id=' + selectedpromotionId;
         } else {
-            alert("Vui lòng chỉ chọn một nhãn hàng");
+            alert("Vui lòng chỉ chọn một khuyến mãi");
         }
     }
 </script>
@@ -174,12 +175,12 @@
 
 <script>
 	function redirectToProductPage() {
-		var selectedBrands = document.querySelectorAll('input[name="selected_brands[]"]:checked');
+		var selectedPromotions = document.querySelectorAll('input[name="selected_promotions[]"]:checked');
 
-        // Ensure that exactly one brand is selected
-        if (selectedBrands.length === 1) {
-            var selectedBrandId = selectedBrands[0].value;
-            window.location.href = './index.php?page=product&brand_id=' + selectedBrandId;
+        // Ensure that exactly one promotion is selected
+        if (selectedPromotions.length === 1) {
+            var selectedPromotionId = selectedPromotions[0].value;
+            window.location.href = './index.php?page=product&promotion_id=' + selectedPromotionId;
         } else {
             alert("Vui lòng chọn 1 danh mục!.");
         }

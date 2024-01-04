@@ -1,5 +1,5 @@
 <?php
-	$sql_code = mysqli_query($connect, "SELECT *, count(PROMOTION_ID) as count_promotion FROM CODE_DISCOUNT, PROMOTION WHERE CODE_DISCOUNT.CODE_ID = PROMOTION.PROMOTION_CODE GROUP BY CODE_DISCOUNT.CODE_ID");
+	$sql_code = mysqli_query($connect, "SELECT * FROM CODE_DISCOUNT");
 	$count_code = mysqli_num_rows($sql_code);
 ?>
 

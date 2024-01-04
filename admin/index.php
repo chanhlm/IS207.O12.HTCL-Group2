@@ -119,6 +119,10 @@ session_start();
                 include('./views/promotion/promotion-update.php');
             }
 
+            elseif ($tam == 'feedback') {
+                include('./views/feedback.php');
+            }
+
             else include('./views/dashboard.php');
 
 

@@ -19,7 +19,8 @@
 			<div class="ms-auto">
 				<div>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-info" onclick="redirectToPromotionPage()">Xem khuyến mãi</a>
-					<a href="./index.php?page=code-insert" class="ms-2 me-2 btn btn-success">Thêm</a>
+					<a href="./index.php?page=code-insert" class="ms-2 me-2 btn btn-success">Thêm mã</a>
+					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-secondary" onclick="redirectToAddPromotionPage()">Thêm khuyến mãi</a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-primary" onclick="redirectToUpdatePage()"> Sửa </a>
 					<a href="javascript:void(0);" class="ms-2 me-2 btn btn-danger" onclick="deleteSelected()"> Xóa </a>
 				</div>
@@ -183,4 +184,18 @@
         }
 	}
 
+</script>
+
+<script>
+	function redirectToAddPromotionPage() {
+		var selectedCodes = document.querySelectorAll('input[name="selected_codes[]"]:checked');
+
+		// Ensure that exactly one code is selected
+		if (selectedCodes.length === 1) {
+			var selectedCodeId = selectedCodes[0].value;
+			window.location.href = './index.php?page=promotion-insert&code_id=' + selectedCodeId;
+		} else {
+			alert("Vui lòng chọn 1 mã khuyến mãi!.");
+		}
+	}
 </script>

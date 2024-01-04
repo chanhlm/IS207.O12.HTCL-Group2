@@ -111,7 +111,7 @@ else $count_product = 0;
 									<td> <?php echo $row_product['PRODUCT_NAME']; ?> </td>
 									<td class="text-center"><?php echo $row_product['CATEGORY_NAME'] ?></td>
 									<td class="text-center"><?php echo $row_product['BRAND_NAME'] ?></td>
-									<td class="text-center"><?php echo $row_product['PRODUCT_SALEPRICE'] ?></td>
+									<td class="text-center"><?php echo number_format($row_product['PRODUCT_SALEPRICE'], 0, ',', '.') ?>đ</td>
 									<td class="text-center"><?php echo $row_product['PRODUCT_QUANTITY'] ?></td>
 									<td><?php echo $row_product['PRODUCT_DESCRIPTION'] ?></td>
 									<td class="text-center"><img src="<?php echo $row_product['PRODUCT_IMAGE'] ?>" width="150px" align-center></td>
