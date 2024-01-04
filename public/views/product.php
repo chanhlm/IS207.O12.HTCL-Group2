@@ -60,18 +60,17 @@ if (isset($_GET['product'])) {
         CD.CODE_PERCENT,
         CD.CODE_DESCRIPTION
     FROM PROMOTION P JOIN CODE_DISCOUNT CD ON P.PROMOTION_CODE = CD.CODE_ID 
-    WHERE P.PRODUCT_ID = ?;";
+    WHERE P.PRODUCT_ID = ? ORDER BY CODE_PERCENT DESC";
 
     $stmtPromotions = mysqli_prepare($connect, $sqlPromotions);
     $resultPromotions;
-    $discountedPrice = 0;
+
+    $promotions = array(); // Initialize outside the loop
 
     if ($stmtPromotions) {
         mysqli_stmt_bind_param($stmtPromotions, "s", $id);
         mysqli_stmt_execute($stmtPromotions);
         $resultPromotions = mysqli_stmt_get_result($stmtPromotions);
-
-        $promotions = array(); // Mảng chứa thông tin về các khuyến mãi
 
         while ($rowPromotion = mysqli_fetch_assoc($resultPromotions)) {
             // Lấy thông tin khuyến mãi
@@ -83,23 +82,29 @@ if (isset($_GET['product'])) {
             $codePercent = $rowPromotion['CODE_PERCENT'];
             $codeDescription = $rowPromotion['CODE_DESCRIPTION'];
 
-            if ($promotionEndDate >= date('Y-m-d') && $promotionStartDate <= date('Y-m-d')) {
+            $startDate = new DateTime($promotionStartDate);
+            $endDate = new DateTime($promotionEndDate);
+            $currentDate = new DateTime();
+
+            // Check if the current date is within the promotion period
+            if ($currentDate >= $startDate && $currentDate <= $endDate) {
+                // Calculate the discounted price for the current promotion
                 $discountedPrice = $salePrice * (1 - $codePercent / 100);
                 $formattedDiscountedPrice = number_format($discountedPrice, 0, ',', '.');
-            }
 
-            // Lưu thông tin vào mảng
-            $promotions[] = array(
-                'promotionId' => $promotionId,
-                'promotionCode' => $promotionCode,
-                'promotionStartDate' => $promotionStartDate,
-                'promotionEndDate' => $promotionEndDate,
-                'codeName' => $codeName,
-                'codePercent' => $codePercent,
-                'codeDescription' => $codeDescription,
-                'discountedPrice' => $discountedPrice,
-                'formattedDiscountedPrice' => $formattedDiscountedPrice,
-            );
+                // Store information about the current promotion in the array
+                $promotions[] = array(
+                    'promotionId' => $promotionId,
+                    'promotionCode' => $promotionCode,
+                    'promotionStartDate' => $promotionStartDate,
+                    'promotionEndDate' => $promotionEndDate,
+                    'codeName' => $codeName,
+                    'codePercent' => $codePercent,
+                    'codeDescription' => $codeDescription,
+                    'discountedPrice' => $discountedPrice,
+                    'formattedDiscountedPrice' => $formattedDiscountedPrice,
+                );
+            }
         }
     }
 }
@@ -420,7 +425,7 @@ if (isset($_GET['product'])) {
         if (document.querySelector('#productDiscountedPrice').value == 0) {
             productDiscountedPrice = productPrice;
         } else
-        productDiscountedPrice = document.querySelector('#productDiscountedPrice').value;
+            productDiscountedPrice = document.querySelector('#productDiscountedPrice').value;
 
         let productQuantity = 1; // Số lượng mặc định là 1
 

@@ -4,6 +4,8 @@ if (isset($_GET['code_id'])) {
 } else $sql_promotion = mysqli_query($connect, "SELECT * FROM PROMOTION ORDER BY PROMOTION_CODE");
 
 $count_promotion = mysqli_num_rows($sql_promotion);
+
+
 ?>
 
 <!--start page wrapper -->
