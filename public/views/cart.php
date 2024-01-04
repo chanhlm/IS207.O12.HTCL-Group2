@@ -38,14 +38,14 @@
                     <h6><span class="totalPrice">0</span> VNĐ</h6>
                   </div>
 
-                  <h5 class="text-uppercase mb-4">NHẬN HÀNG</h5>
+                  <!-- <h5 class="text-uppercase mb-4">NHẬN HÀNG</h5>
 
                   <div class="mb-4 pb-2">
                     <select class="select form-control">
                       <option value="1"> Tại cửa hàng </option>
                       <option value="2"> Tại nhà</option>
                     </select>
-                  </div>
+                  </div> -->
 
                   <h5 class="text-uppercase mb-3">Mã giảm giá</h5>
 

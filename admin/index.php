@@ -4,10 +4,10 @@ session_start();
 
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
-// if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) 
-// {
-//     header('location: ../index.php');
-// }
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) 
+{
+    header('location: ../index.php');
+}
 ?>
 
 <!DOCTYPE html>

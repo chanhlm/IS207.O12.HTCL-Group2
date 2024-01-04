@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2024 at 07:41 AM
+-- Generation Time: Jan 04, 2024 at 05:52 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -41,10 +41,10 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`BRAND_ID`, `BRAND_NAME`, `COUNTRY`, `BRAND_IMAGE`, `NUMBER_PRODUCT`, `BRAND_DESCRIPTION`) VALUES
-('AQUA', 'Aqua', 'Vietnam', 'https://www.aqua.com.vn/wp-content/uploads/2019/10/logo-aqua.png', 3, 'Aqua'),
-('AVA', 'AVA', 'Vietnam', 'https://ava.vn/wp-content/uploads/2019/10/logo-ava.png', 1, 'AVA'),
-('BLS', 'Bluestone', 'Vietnam', 'https://bluestone.vn/wp-content/uploads/2019/10/logo-bluestone.png', 1, 'Bluestone'),
-('BO', 'Bosch', 'Germany', 'https://www.bosch-home.com.vn/~/media/Images/Bosch/Global/Brand%20Logos/Bosch-Logo-Black.png', 1, 'Bosch'),
+('AQUA', 'Aqua', 'Vietnam', 'https://images.glints.com/unsafe/glints-dashboard.s3.amazonaws.com/company-logo/2f18cd141c12c723ee8503874227fb38.jpg', 3, 'Aqua'),
+('AVA', 'AVA', 'Vietnam', 'https://avajsc.com/library/module_new/cong-ty-cp-thuong-mai-ava-viet-nam_s2335.jpg', 1, 'AVA'),
+('BLS', 'Bluestone', 'Vietnam', 'https://bluestone.vn/wp-content/uploads/2019/10/logo-bluestone.pnghttps://upload.wikimedia.org/wikipedia/commons/0/08/Bluestone_Group_logo_mid_resolution.jpg', 1, 'Bluestone'),
+('BO', 'Bosch', 'Germany', 'https://logos-world.net/wp-content/uploads/2020/08/Bosch-Logo-1981-2002.png', 1, 'Bosch'),
 ('CEMU', 'Ceramic Mutosi', 'Vietnam', 'https://ceramicmutosi.vn/wp-content/uploads/2019/10/logo-ceramic-mutosi.png', 1, 'Ceramic Mutosi'),
 ('DAIK', 'Daikio', 'Japan', 'https://www.daikin.com.vn/wp-content/uploads/2019/10/logo-daikin.png', 0, 'Daikio'),
 ('DE', 'Delonghi', 'Italy', 'https://www.delonghi.com/Global/Brand%20Logos/DeLonghi-Logo-Black.png', 1, 'Delonghi'),
@@ -116,7 +116,7 @@ CREATE TABLE `code_discount` (
   `CODE_ID` varchar(10) NOT NULL,
   `CODE_NAME` varchar(50) NOT NULL,
   `CODE_PERCENT` int(11) NOT NULL,
-  `CODE_DESCRIPTION` varchar(50) NOT NULL
+  `CODE_DESCRIPTION` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -124,7 +124,9 @@ CREATE TABLE `code_discount` (
 --
 
 INSERT INTO `code_discount` (`CODE_ID`, `CODE_NAME`, `CODE_PERCENT`, `CODE_DESCRIPTION`) VALUES
-('CODE1', 'Khai trương trang web', 15, 'Mừng ngày khai trương trang web 05/01/2024');
+('CODE1', 'Khai trương trang web', 16, 'Mừng ngày khai trương trang web 05/01/2024'),
+('CODE2', 'Ưu đãi mùa tết', 15, 'Mừng xuân 2024'),
+('CODE3', 'Tựu trường 2023', 5, 'Ưu đãi tựu trường cho học sinh, sinh viên, giáo viên');
 
 -- --------------------------------------------------------
 
@@ -163,12 +165,13 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`ORDER_ID`, `ORDER_DATE`, `ORDER_TOTAL`, `ORDER_STATUS`, `ORDER_SHIPPING`, `USER_PHONE`) VALUES
 (1, '2024-01-05 13:26:05', 35390000, 4, 1, '+84359297916'),
-(2, '2024-01-06 13:26:34', 3600000, 0, 0, '+84359297916'),
+(2, '2024-01-06 13:26:34', 3600000, 3, 0, '+84359297916'),
 (3, '2024-01-03 13:26:54', 2400000, 0, 1, '+84359297916'),
-(4, '2024-01-03 13:27:14', 11980000, 3, 0, '+84359297916'),
-(5, '2024-01-03 13:35:21', 109900000, 0, 0, '+84359297916'),
+(4, '2024-01-03 13:27:14', 11980000, 1, 0, '+84359297916'),
+(5, '2024-01-03 13:35:21', 109900000, 3, 0, '+84359297916'),
 (6, '2024-01-03 13:40:17', 25800000, 0, 0, '+84359297916'),
-(7, '2024-01-03 13:41:04', 58973000, 0, 1, '+84359297916');
+(7, '2024-01-03 13:41:04', 58973000, 0, 1, '+84359297916'),
+(8, '2024-01-04 22:29:16', 45763200, 0, 1, '+84359297916');
 
 -- --------------------------------------------------------
 
@@ -199,7 +202,9 @@ INSERT INTO `order_details` (`ORDER_DETAIL_ID`, `ORDER_DETAIL_QUANTITY`, `ORDER_
 (8, 10, 10990000, 5, 'L4'),
 (9, 2, 12900000, 6, 'TV1'),
 (10, 1, 1190000, 7, 'MX1'),
-(11, 2, 28891500, 7, 'MG2');
+(11, 2, 28891500, 7, 'MG2'),
+(12, 1, 17211600, 8, 'TL2'),
+(13, 1, 28551600, 8, 'MG2');
 
 -- --------------------------------------------------------
 
@@ -233,7 +238,7 @@ INSERT INTO `products` (`PRODUCT_ID`, `PRODUCT_NAME`, `PRODUCT_DESCRIPTION`, `PR
 ('DT2', 'OPPO A57 128GB', 'OPPO A57 128GB', 'https://cdn.tgdd.vn/Products/Images/42/285082/oppo-a57-xanh-thumb-1-600x600.jpeg', 'DT', 'OP', 1200000, 12, 'active', 'https://cdn.tgdd.vn/Products/Images/42/285082/Slider/oppo-a57-4g637916782091781459-1020x570.jpg,https://cdn.tgdd.vn/Products/Images/42/285082/Slider/oppo-a57-4g637916782093061646-1020x570.jpg,https://cdn.tgdd.vn/Products/Images/42/285082/Slider/oppo-a57-4g637916782095512041-1020x570.jpg'),
 ('DT3', 'Vivo V25 series', 'Vivo V25 series', 'https://cdn.tgdd.vn/Products/Images/42/283148/vivo-v25-5g-vang-thumb-1-1-600x600.jpg', 'DT', 'VV', 1200000, 12, 'active', 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/v/i/vivo-v25.png,https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/6/3/637987658869475958_vivo-v25e-den-5.jpg,https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/6/3/637987661253416302_vivo-v25e-vang-4.jpg'),
 ('DT4', 'Xiaomi 13T Pro 5G', 'Xiaomi 13T Pro 5G', 'https://cdn.tgdd.vn/Products/Images/42/309816/xiaomi-13t-xanh-thumb-1-600x600.jpg', 'DT', 'XI', 1200000, 12, 'active', 'https://cdn.tgdd.vn/Products/Images/42/309816/Slider/vi-vn-xiaomi-13t-pro-slider--(1).jpg,https://cdn.tgdd.vn/Products/Images/42/309816/Slider/vi-vn-xiaomi-13t-pro-slider--(3).jpg,https://cdn.tgdd.vn/Products/Images/42/309816/Slider/vi-vn-xiaomi-13t-pro-slider--(2).jpg'),
-('DT5', 'Samsung Galaxy S22 Ultra 5G 128GB', 'Samsung Galaxy S22 Ultra 5G 128GB', 'https://cdn.tgdd.vn/Products/Images/42/235838/Galaxy-S22-Ultra-Burgundy-600x600.jpg', 'DT', 'SS', 1200000, 12, 'active', 'https://cdn.tgdd.vn/Products/Images/42/235838/Slider/samsung-galaxy-s22-ultra-1020x570.jpg,https://cdn.tgdd.vn/Products/Images/42/235838/Slider/2.ButSpen-1020x570.jpg,https://cdn.tgdd.vn/Products/Images/42/235838/Slider/3.Trainghiemthigiac-1020x570.jpg'),
+('DT5', 'Samsung Galaxy S22 Ultra 5G 128GB', 'Samsung Galaxy S22 Ultra 5G 128GB', 'https://cdn.tgdd.vn/Products/Images/42/235838/Galaxy-S22-Ultra-Burgundy-600x600.jpg', 'DT', 'SS', 25000000, 12, 'active', 'https://cdn.tgdd.vn/Products/Images/42/235838/Slider/samsung-galaxy-s22-ultra-1020x570.jpg,https://cdn.tgdd.vn/Products/Images/42/235838/Slider/2.ButSpen-1020x570.jpg,https://cdn.tgdd.vn/Products/Images/42/235838/Slider/3.Trainghiemthigiac-1020x570.jpg'),
 ('L1', 'Bộ loa thanh Samsung HW-Q700B 320W', 'Bộ loa thanh Samsung HW-Q700B 320W', 'https://cdn.tgdd.vn/Products/Images/2162/273906/1-3.png', 'L', 'SS', 13990000, 12, 'active', 'https://cdn.tgdd.vn/Products/Images/2162/273906/2-3.png ,https://cdn.tgdd.vn/Products/Images/2162/273906/3-3.png ,https://cdn.tgdd.vn/Products/Images/2162/273906/4-3.png ,https://cdn.tgdd.vn/Products/Images/2162/273906/Slider/thanh-samsung-hw-q700b638295983987442558.jpg'),
 ('L2', 'Bộ loa thanh LG S75Q 380W', 'Bộ loa thanh LG S75Q 380W', 'https://cdn.tgdd.vn/Products/Images/2162/284108/loa-thanh-soundbar-lg-s75q-001.jpg', 'L', 'LG', 4990000, 12, 'active', 'https://cdn.tgdd.vn/Products/Images/2162/284108/thanh-soundbar-lg-s75q-01-1.jpg ,https://cdn.tgdd.vn/Products/Images/2162/284108/thanh-soundbar-lg-s75q-02-1.jpg ,https://cdn.tgdd.vn/Products/Images/2162/284108/thanh-soundbar-lg-s75q-03-1.jpg , https://cdn.tgdd.vn/Products/Images/2162/284108/thanh-soundbar-lg-s75q-04-1.jpg'),
 ('L3', 'Bộ loa thanh LG SN4 300W', 'Bộ loa thanh LG SN4 300W', 'https://cdn.tgdd.vn/Products/Images/2162/309068/loa-thanh-lg-sn4-hang-1.jpg', 'L', 'LG', 5490000, 12, 'active', 'https://cdn.tgdd.vn/Products/Images/2162/309068/loa-thanh-lg-sn4-hang-2.jpg ,https://cdn.tgdd.vn/Products/Images/2162/309068/loa-thanh-lg-sn4-hang-3.jpg , https://cdn.tgdd.vn/Products/Images/2162/309068/loa-thanh-lg-sn4-hang-4.jpg , https://cdn.tgdd.vn/Products/Images/2162/309068/loa-thanh-lg-sn4-hang-7.jpg'),
@@ -343,7 +348,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `promotion` (
-  `PROMOTION_ID` varchar(10) NOT NULL,
+  `PROMOTION_ID` varchar(15) NOT NULL,
   `PROMOTION_CODE` varchar(50) NOT NULL,
   `PROMOTION_STARTDATE` datetime NOT NULL,
   `PROMOTION_ENDDATE` datetime NOT NULL,
@@ -355,7 +360,13 @@ CREATE TABLE `promotion` (
 --
 
 INSERT INTO `promotion` (`PROMOTION_ID`, `PROMOTION_CODE`, `PROMOTION_STARTDATE`, `PROMOTION_ENDDATE`, `PRODUCT_ID`) VALUES
-('PROMO1', 'CODE1', '2023-12-01 00:00:00', '2024-12-31 00:00:00', 'TV1'),
+('CODE2TL1', 'CODE2', '2024-01-04 13:05:05', '2024-01-04 13:07:08', 'TL1'),
+('CODE2TL2', 'CODE2', '2024-01-04 13:05:05', '2024-01-04 13:07:08', 'TL2'),
+('CODE2TV10', 'CODE2', '2024-01-04 12:15:35', '2024-01-05 16:15:37', 'TV10'),
+('CODE2TV11', 'CODE2', '2024-01-04 12:15:35', '2024-01-04 12:15:37', 'TV11'),
+('CODE3TV10', 'CODE3', '2024-01-04 12:21:09', '2024-01-06 12:23:10', 'TV10'),
+('CODE3TV11', 'CODE3', '2024-01-04 12:21:09', '2024-01-05 12:23:10', 'TV11'),
+('PROMO1', 'CODE1', '2023-12-01 00:00:01', '2023-12-26 00:00:02', 'TV1'),
 ('PROMO10', 'CODE1', '2023-12-01 00:00:00', '2024-12-31 00:00:00', 'TBSA1'),
 ('PROMO11', 'CODE1', '2023-12-01 00:00:00', '2024-12-31 00:00:00', 'TBSA2'),
 ('PROMO12', 'CODE1', '2023-12-01 00:00:00', '2024-12-31 00:00:00', 'TL1'),
@@ -454,7 +465,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`USER_NAME`, `USER_PASSWORD`, `USER_EMAIL`, `USER_PHONE`, `USER_ADDRESS`, `USER_ROLE`, `USER_STATE`, `USER_IMAGE`, `CREATE_DATE`, `LAST_LOGIN`) VALUES
-('Lê Minh Chánh', NULL, 'minhchanh.lmc@gmail.com', '+84359297916', 'KTX Khu B - Đại học Quốc gia TP Hồ Chí Minh, Thủ Đức, TP Hồ Chí Minh', 1, 'active', NULL, '2020-11-30 00:00:00', '2020-11-30 00:00:00');
+('Lê Minh Chánh', NULL, 'minhchanh.lmc@gmail.com', '+84359297916', 'KTX Khu B - Đại học Quốc gia TP Hồ Chí Minh, Thủ Đức, TP Hồ Chí Minh', 1, 'active', NULL, '2020-11-30 00:00:00', '2020-11-30 00:00:00'),
+('+84376195921', NULL, NULL, '+84376195921', NULL, 2, 'unactive', NULL, '2024-01-04 22:45:44', '2024-01-04 22:45:44'),
+('+84934787382', NULL, NULL, '+84934787382', NULL, 2, 'active', NULL, '2024-01-04 22:43:52', '2024-01-04 22:43:52');
 
 -- --------------------------------------------------------
 
@@ -561,6 +574,16 @@ CREATE TABLE `warranty` (
   `WARRANTY_STATUS` varchar(50) NOT NULL,
   `ORDER_DETAIL_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `warranty`
+--
+
+INSERT INTO `warranty` (`WARRANTY_ID`, `CREATE_DATE`, `END_DATE`, `WARRANTY_STATUS`, `ORDER_DETAIL_ID`) VALUES
+('w3', '2024-01-03 14:03:18', '1990-01-01 00:00:00', 'Cancelled', 3),
+('w4', '2024-01-03 14:03:18', '2025-01-03 14:03:18', 'Active', 4),
+('w5', '2024-01-03 14:03:18', '2025-01-03 14:03:18', 'Active', 5),
+('w8', '2024-01-03 14:02:27', '1990-01-01 00:00:00', 'Cancelled', 8);
 
 --
 -- Indexes for dumped tables
@@ -676,13 +699,13 @@ ALTER TABLE `warranty`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `ORDER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ORDER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `ORDER_DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ORDER_DETAIL_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `roles`

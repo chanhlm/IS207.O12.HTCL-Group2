@@ -35,6 +35,26 @@ if (isset($_GET['category_id'])) {
 		ORDER BY P.CATEGORY_ID ASC, P.PRODUCT_ID ;";
 }
 
+if (isset($_GET['brand_id'])) {
+	$brand_id = $_GET['brand_id'];
+	$sql_product = "SELECT 
+		    P.PRODUCT_ID,
+		    P.PRODUCT_NAME,
+		    C.CATEGORY_NAME,
+		    B.BRAND_NAME,
+		    W.PRODUCT_QUANTITY,
+			P.PRODUCT_SALEPRICE,
+		    P.PRODUCT_IMAGE,
+		    P.PRODUCT_DESCRIPTION,
+			p.PRODUCT_STATUS
+		FROM PRODUCTS P
+		JOIN CATEGORIES C ON P.CATEGORY_ID = C.CATEGORY_ID
+		JOIN BRANDS B ON P.BRAND_ID = B.BRAND_ID
+		JOIN WAREHOUSE W ON P.PRODUCT_ID = W.PRODUCT_ID
+		WHERE P.BRAND_ID = '$brand_id'
+		ORDER BY P.CATEGORY_ID ASC, P.PRODUCT_ID ;";
+}
+
 $result_product = mysqli_query($connect, $sql_product);
 
 if ($result_product)

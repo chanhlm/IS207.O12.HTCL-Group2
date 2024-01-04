@@ -44,6 +44,9 @@ header{
     text-align: center;
     font-size: 14px!important;
     z-index: 999;
+    /* border-bottom: 1px solid var(--grey-color); */
+    margin-right: 110px!important;
+    display: inline-block;
 }
 
 header .header-logo{

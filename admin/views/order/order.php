@@ -1,5 +1,9 @@
 <?php
-$sql = "SELECT * FROM `orders`, `users` WHERE orders.USER_PHONE = users.USER_PHONE ORDER BY orders.ORDER_ID DESC";
+if (isset($_GET['customer_id']))
+	$sql = "SELECT * FROM `orders`, `users` WHERE orders.USER_PHONE = users.USER_PHONE and USERS.USER_PHONE = '" .$_GET['customer_id'] . "' ORDER BY orders.ORDER_ID DESC";
+else
+	$sql = "SELECT * FROM `orders`, `users` WHERE orders.USER_PHONE = users.USER_PHONE ORDER BY orders.ORDER_ID DESC";
+
 $result_order = mysqli_query($connect, $sql);
 $count_order = mysqli_num_rows($result_order);
 

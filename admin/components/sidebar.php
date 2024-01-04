@@ -62,7 +62,7 @@
 
         
 
-        <li>    
+        <!-- <li>    
             <a class="has-arrow" href="javascript:;">
                 <div class="parent-icon"><i class="bx bx-buildings"></i></div>
                 <div class="menu-title">Kho hàng</div>
@@ -72,7 +72,7 @@
                 <li> <a href="./index.php?page=warehouse-import"><i class="bx bx-import"></i>Nhập kho</a></li>
                 <li> <a href="./index.php?page=warehouse-export"><i class="bx bx-export"></i>Xuất kho</a></li>
             </ul>
-        </li>
+        </li> -->
         
 
         <li>
