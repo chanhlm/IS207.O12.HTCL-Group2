@@ -36,7 +36,7 @@ while ($row = mysqli_fetch_assoc($result_product)) {
         display: none;
     }
 
-    .hot-deal {
+sale-deal {
         text-align: center;
     }
 
@@ -124,12 +124,12 @@ while ($row = mysqli_fetch_assoc($result_product)) {
     <div class="hot-deal" id="hot-deal">
         <h3>HOT DEAL</h3>
         <div class="hot-deal-content">
-            <i class="ti-angle-double-left slide-btn pre-btn btn prev-button"></i>
+            <i class="ti-angle-double-left slide-btn pre-btn btn prev-button-hot"></i>
             <?php
             $index = 1;
             foreach ($products as $product) {
                 // echo "<script>console.log('" . $product["name"] . "')</script>";
-                echo "<div class='product align-center slide'  idx='" . $index . "'> ";
+                echo "<div class='product align-center slidehot " . ($index > 5 ? 'hide' : '') . "' idx='" . $index . "'>";
                 echo "<img src='" . $product["image"] . "' alt=''>";
                 echo "<a href='./index.php?page=product&product=" . $product["id"] . "'>";
                 echo "<p class='product-name mb-1'>" . $product["name"] . "</p>";
@@ -145,7 +145,7 @@ while ($row = mysqli_fetch_assoc($result_product)) {
 
             ?>
 
-            <i class="ti-angle-double-right slide-btn next-btn btn next-button"></i>
+            <i class="ti-angle-double-right slide-btn next-btn btn next-button-hot"></i>
         </div>
 
         <div class="see-all-btn">
@@ -156,12 +156,12 @@ while ($row = mysqli_fetch_assoc($result_product)) {
     <div class="sale" id="sale">
         <h3>KHUYẾN MÃI</h3>
         <div class="sale-content">
-            <i class="ti-angle-double-left slide-btn pre-btn btn"></i>
+            <i class="ti-angle-double-left slide-btn pre-btn btn prev-button-sale"></i>
             <?php
             $index = 1;
             foreach ($products as $product) {
                 // echo "<script>console.log('" . $product["name"] . "')</script>";
-                echo "<div class='product align-center slide'  idx='" . $index . "'> ";
+                echo "<div class='product align-center slidesale " . ($index > 5 ? 'hide' : '') . "' idx='" . $index . "'>";
                 echo "<img src='" . $product["image"] . "' alt=''>";
                 echo "<a href='./index.php?page=product&product=" . $product["id"] . "'>";
                 echo "<p class='product-name mb-1'>" . $product["name"] . "</p>";
@@ -176,7 +176,8 @@ while ($row = mysqli_fetch_assoc($result_product)) {
             }
 
             ?>
-            <i class="ti-angle-double-right slide-btn next-btn btn"></i>
+            <i class="ti-angle-double-right slide-btn next-btn btn next-button-sale"></i>
+
         </div>
         <div class="see-all-btn">
             <a href="#">XEM TẤT CẢ</a>
@@ -204,57 +205,38 @@ while ($row = mysqli_fetch_assoc($result_product)) {
     <hr>
 </footer>
 
-<script>
-    const slider = document.querySelector('.hot-deal-content');
-    const nextBtn = document.querySelector('.next-btn');
-    const prevBtn = document.querySelector('.pre-btn');
 
-    let counter = 0;
-
-    nextBtn.addEventListener('click', () => {
-        counter++;
-        updateSlider();
-    });
-
-    prevBtn.addEventListener('click', () => {
-        counter--;
-        updateSlider();
-    });
-
-    function updateSlider() {
-        const groupWidth = document.querySelector('.product-group').offsetWidth;
-        slider.style.transform = 'translateX(' + (-groupWidth * counter) + 'px)';
-    }
-</script>
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
-        var length = $(".slide").length;
+        var length = $(".slidehot").length;
         console.log(length);
 
         var begin = 1;
         var end = 5;
-        var currentState = "firstSet"; // Thêm biến giữ trạng thái
+        var currentState = "firstSet";
 
-        $(".prev-button").click(function() {
+        $(".prev-button-hot").click(function() {
             if (begin > 1) {
-                $(".slide[idx=" + begin + "]").addClass("hide");
-                $(".slide[idx=" + --begin + "]").removeClass("hide");
-            } else if (currentState === "secondSet") {
-                resetClassToBegin();
+                $(".slidehot[idx=" + end + "]").addClass("hide");
+                $(".slidehot[idx=" + --begin + "]").removeClass("hide");
+                end = begin + 4;
+            } else {
+                resetClassToEnd();
             }
             clearInterval(interval);
             timer();
         });
 
-        $(".next-button").click(function() {
+        $(".next-button-hot").click(function() {
             if (end < length) {
-                $(".slide[idx=" + end + "]").addClass("hide");
-                $(".slide[idx=" + ++end + "]").removeClass("hide");
-            } else if (currentState === "firstSet") {
-                resetClassToEnd();
+                $(".slidehot[idx=" + begin + "]").addClass("hide");
+                $(".slidehot[idx=" + ++end + "]").removeClass("hide");
+                begin = end - 4;
+            } else {
+                resetClassToBegin();
             }
             clearInterval(interval);
             timer();
@@ -262,32 +244,99 @@ while ($row = mysqli_fetch_assoc($result_product)) {
 
         var timer = function() {
             interval = setInterval(function() {
-                $(".next-button").click();
+                $(".next-button-hot").click();
             }, 3000);
         };
 
         var resetClassToBegin = function() {
             for (var i = 1; i <= 5; i++) {
-                $(".slide[idx=" + i + "]").removeClass("hide");
+                $(".slidehot[idx=" + i + "]").removeClass("hide");
             }
             for (var i = 6; i <= length; i++) {
-                $(".slide[idx=" + i + "]").addClass("hide");
+                $(".slidehot[idx=" + i + "]").addClass("hide");
             }
             begin = 1;
             end = 5;
-            currentState = "firstSet"; // Cập nhật trạng thái
+            currentState = "firstSet";
         }
 
         var resetClassToEnd = function() {
             for (var i = 1; i <= 5; i++) {
-                $(".slide[idx=" + i + "]").addClass("hide");
+                $(".slidehot[idx=" + i + "]").addClass("hide");
+            }
+            for (var i = length - 4; i <= length; i++) {
+                $(".slidehot[idx=" + i + "]").removeClass("hide");
+            }
+            begin = length - 4;
+            end = length;
+            currentState = "secondSet";
+        }
+
+        timer();
+    });
+
+
+
+    $(document).ready(function() {
+        var length = $(".slidesale").length;
+        console.log(length);
+
+        var begin = 1;
+        var end = 5;
+        var currentState = "firstSet";
+
+        $(".prev-button-sale").click(function() {
+            if (begin > 1) {
+                $(".slidesale[idx=" + end + "]").addClass("hide");
+                $(".slidesale[idx=" + --begin + "]").removeClass("hide");
+                end = begin + 4;
+            } else {
+                resetClassToEnd();
+            }
+            clearInterval(interval);
+            timer();
+        });
+
+        $(".next-button-sale").click(function() {
+            if (end < length) {
+                $(".slidesale[idx=" + begin + "]").addClass("hide");
+                $(".slidesale[idx=" + ++end + "]").removeClass("hide");
+                begin = end - 4;
+            } else {
+                resetClassToBegin();
+            }
+            clearInterval(interval);
+            timer();
+        });
+
+        var timer = function() {
+            interval = setInterval(function() {
+                $(".next-button-sale").click();
+            }, 3000);
+        };
+
+        var resetClassToBegin = function() {
+            for (var i = 1; i <= 5; i++) {
+                $(".slidesale[idx=" + i + "]").removeClass("hide");
             }
             for (var i = 6; i <= length; i++) {
-                $(".slide[idx=" + i + "]").removeClass("hide");
+                $(".slidesale[idx=" + i + "]").addClass("hide");
             }
-            begin = 6;
+            begin = 1;
+            end = 5;
+            currentState = "firstSet";
+        }
+
+        var resetClassToEnd = function() {
+            for (var i = 1; i <= 5; i++) {
+                $(".slidesale[idx=" + i + "]").addClass("hide");
+            }
+            for (var i = length - 4; i <= length; i++) {
+                $(".slidesale[idx=" + i + "]").removeClass("hide");
+            }
+            begin = length - 4;
             end = length;
-            currentState = "secondSet"; // Cập nhật trạng thái
+            currentState = "secondSet";
         }
 
         timer();

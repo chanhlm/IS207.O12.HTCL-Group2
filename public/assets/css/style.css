@@ -104,6 +104,13 @@ section .hot-deal .hot-deal-content{
 
 }
 
+section .sale .sale-content{
+    background-color: var(--while-color);
+    height: 300px;
+    border: 1px solid var(--while-color);
+
+}
+
 
 section .sale,
 section .hot-deal{
