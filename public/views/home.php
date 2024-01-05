@@ -1,11 +1,11 @@
 <?php
-$sql_product = "SELECT * FROM products, promotion WHERE products.PRODUCT_ID = promotion.PRODUCT_ID";
+$sql_product = "SELECT DISTINCT * FROM products";
 $result_product = mysqli_query($connect, $sql_product);
 
 $products = array();
 
 while ($row = mysqli_fetch_assoc($result_product)) {
-    $sql_promotion = "SELECT * from PROMOTION, CODE_DISCOUNT where PROMOTION.PROMOTION_CODE = CODE_DISCOUNT.CODE_ID and PROMOTION.PRODUCT_ID = '" . $row["PRODUCT_ID"] . "'";
+    $sql_promotion = "SELECT DISTINCT * from PROMOTION, CODE_DISCOUNT where PROMOTION.PROMOTION_CODE = CODE_DISCOUNT.CODE_ID and PROMOTION.PRODUCT_ID = '" . $row["PRODUCT_ID"] . "'";
     $result_promotion = mysqli_query($connect, $sql_promotion);
 
     while ($row_promotion = mysqli_fetch_assoc($result_promotion)) {
@@ -312,7 +312,7 @@ sale-deal {
         var timer = function() {
             interval = setInterval(function() {
                 $(".next-button-sale").click();
-            }, 3000);
+            }, 3500);
         };
 
         var resetClassToBegin = function() {

@@ -90,7 +90,13 @@ if (isset($_GET['product'])) {
             if ($currentDate >= $startDate && $currentDate <= $endDate) {
                 // Calculate the discounted price for the current promotion
                 $discountedPrice = $salePrice * (1 - $codePercent / 100);
+                // if ($discountedPrice < 0) {
+                //     $discountedPrice = $salePrice;
+                // }
+
                 $formattedDiscountedPrice = number_format($discountedPrice, 0, ',', '.');
+
+                
 
                 // Store information about the current promotion in the array
                 $promotions[] = array(
@@ -446,6 +452,7 @@ if (isset($_GET['product'])) {
                 productQuantity: productQuantity,
                 productDiscountedPrice: productDiscountedPrice
             });
+            alert('Thêm sản phẩm vào giỏ hàng thành công!');
         }
 
         localStorage.setItem('cart', JSON.stringify(cart));
