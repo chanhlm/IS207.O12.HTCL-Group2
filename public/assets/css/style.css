@@ -137,9 +137,11 @@ section .hot-deal .hot-deal-content{
 
 section .hot-deal .product,
 section .sale .product{
-    background-color: #ccc;
-    margin: 20px 40px 80px 40px;
-    width: 20%;
+    background-color: #ffffff;
+    margin: 20px 40px 40px 40px;
+    border: 1px solid #ccc;
+    /* width: 20%; */
+    padding: 5px;
 }
 
 section .hot-deal .slide-btn,
