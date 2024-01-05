@@ -70,6 +70,10 @@ include_once "./libraries/connectDB.php";
     elseif ($tam == 'order-detail') {
         include('./public/views/order-detail.php');
     }
+    elseif ($tam == 'info') {
+        include('./public/views/info.php');
+    }
+
     else {
         include('./public/views/home.php');
     }

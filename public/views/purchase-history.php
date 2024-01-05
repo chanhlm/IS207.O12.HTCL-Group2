@@ -14,7 +14,7 @@ $result_order = mysqli_query($connect, $sql_order);
       <nav>
         <button>
           <span style="background-color:#c6c6c6;">
-            <a href="#">
+            <a href="href="./index.php?page=purchase-history">
               <i class="fa-solid fa-bag-shopping"></i>
               <span>Lịch sử mua hàng</span>
             </a>
