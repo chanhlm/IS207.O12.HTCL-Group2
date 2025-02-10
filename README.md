@@ -1,25 +1,24 @@
-# Cửa Hàng Điện Máy
+# Electronics Store - ELECTRO TECH
 
-## Thông tin môn học
-* **Môn học:** Phát triển ứng dụng web
-* **Lớp:** IS207.O12.HTCL
-* **Giảng viên:** 
-  * Mai Xuân Hùng
-  * Phạm Nguyễn Thanh Bình
+## Course Information  
+* **Course:** Web Application Development  
+* **Class:** IS207.O12.HTCL  
+* **Lecturers:**  
+  * Mai Xuân Hùng  
+  * Phạm Nguyễn Thanh Bình  
 
-## Thông tin nhóm
-STT | MSSV | Họ tên 
---- | -------|------
-1 | 21521882 | Lê Minh Chánh (nhóm trưởng)
-2 | 21520596 | Trần Thị Kim Anh
-3 | 21521586 | Lê Thị Lệ Trúc
+## Group Information  
+| No. | Student ID | Name |  
+|---- | ---------- | ---- |  
+| 1 | 21521882 | Lê Minh Chánh (Team Leader) |  
+| 2 | 21520596 | Trần Thị Kim Anh |  
+| 3 | 21521586 | Lê Thị Lệ Trúc |  
 
-## Mô tả
-Website bán điện máy với các chức năng mua bán, quản lý sản phẩm, kho, khách hàng, hóa đơn, và thống kê báo cáo.
-Thông tin chi tiết được trình bày trong file báo cáo [Report.pdf](https://github.com/chanhlm/IS207.O12.HTCL-Group2/blob/main/Report.pdf)  
+## Description  
+An e-commerce website for electronics, featuring product management, inventory tracking, customer management, invoicing, and reporting.  
+Detailed information is provided in the report file: [Report.pdf](https://github.com/chanhlm/IS207.O12.HTCL-Group2/blob/main/Report.pdf)  
 
-
-## Công nghệ sử dụng
-- **HTML, CSS, JavaScript**: Tạo giao diện và tương tác người dùng.
-- **PHP**: Xử lý logic server.
-- **MySQL**: Quản lý cơ sở dữ liệu.
+## Technologies Used  
+- **HTML, CSS, JavaScript**: Frontend design and user interaction.  
+- **Pure PHP **: Server-side logic processing (no frameworks used). 
+- **MySQL**: Database management.  
