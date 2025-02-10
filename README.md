@@ -16,6 +16,8 @@ STT | MSSV | Họ tên
 
 ## Mô tả
 Website bán điện máy với các chức năng mua bán, quản lý sản phẩm, kho, khách hàng, hóa đơn, và thống kê báo cáo.
+Thông tin chi tiết đượct trình bày trong file báo cáo [Report.pdf](https://github.com/chanhlm/IS207.O12.HTCL-Group2/blob/main/Report.pdf)  
+
 
 ## Công nghệ sử dụng
 - **HTML, CSS, JavaScript**: Tạo giao diện và tương tác người dùng.
