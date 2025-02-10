@@ -13,6 +13,7 @@
 | 1 | 21521882 | Lê Minh Chánh (Team Leader) |  
 | 2 | 21520596 | Trần Thị Kim Anh |  
 | 3 | 21521586 | Lê Thị Lệ Trúc |  
+| 4 | 21520224 | Trần Ngọc Như Hảo |
 
 ## Description  
 An e-commerce website for electronics, featuring product management, inventory tracking, customer management, invoicing, and reporting.  
